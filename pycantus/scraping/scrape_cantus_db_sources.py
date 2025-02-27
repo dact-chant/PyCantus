@@ -76,7 +76,7 @@ class SourceData:
             'indexing_notes',
             'liturgical_occasions',
             'indexing_date',
-            'drupal_path',      # We (mis)use this one for URL.
+            'srclink',      # We (mis)use this one for URL.
             'cursus',      # This one is not in CantusCorpus and scrape_hymnologica yet.
             'image_link',  # This one is not in CantusCorpus and scrape_hymnologica yet.
             'n_cantus_chants',    # This one is not in CantusCorpus and scrape_hymnologica yet.
@@ -208,7 +208,7 @@ class _AbstractSourceScraper:
         # Add the link -- which is a relatively good de facto unique ID for sources,
         # since the sigla are done inconsistently anyway -- to the source data,
         # so that it carries its own origin.
-        source_data.drupal_path = source_url
+        source_data.srclink = source_url
 
         # Cache result
         self._sources_url_cache[source_url] = source_data

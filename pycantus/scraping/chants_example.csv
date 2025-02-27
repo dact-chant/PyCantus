@@ -1,0 +1,10 @@
+id,corpus_id,incipit,cantus_id,mode,finalis,differentia,siglum,position,folio,sequence,marginalia,cao_concordances,feast_id,genre_id,office_id,source_id,melody_id,drupal_path,full_text,full_text_manuscript,volpiano,notes,dataset_name,dataset_idx,image_link
+,,Nobilitatem sui generis vitae,203262,8,,,I-BV 19,1.2,063r,,,,feast_1193,genre_a,office_m,https://cantusdatabase.org/source/691955,,,,,,,,,
+,,Ascendit in caelos alleluia,001492,6,,,CH-SGs 391,7M,072,,,,feast_0091,genre_a,office_v2,http://cantus.uwaterloo.ca/source/123718,,,Ascendit in caelos alleluia sedet ad dexteram patris alleluia,,,,,,http://www.e-codices.unifr.ch/en/csg/0391/072
+,,Vir domini Samson virtutum,a07248,3,,,"E-E E-E, L. III. 4.",1.1,45r,,,,feast_1509,genre_a,,http://musicahispanica.eu/source/20203,,,Vir domini Samson virtutum pollens insignibus ecce corporis liber ex gastulo feliciter excedite mundo quem paradisi caele hodie cum laudibus in gloria susceperunt,,,,,,
+,,Salvator mundi salva nos qui per ,004690,,,,F-Pn : Ms Lat 00903,,071r,,,,feast_0752,genre_a,,https://musmed.eu/source/10022,,,Salvator mundi salva nos qui per crucem et sanguinem redemisti nos auxiliare nobis te deprecamur deus noster,,,,,,https://gallica.bnf.fr/ark:/12148/btv1b10506538t/f158.item.
+,,Salvator mundi*,004690,,,,CZ-Pu (Praha) VI E 13,3.,386,,,,feast_0577,genre_a,office_m,http://cantusbohemiae.cz/source/13209,,,Salvator mundi*,,,,,,
+,,Salvator mundi salva nos qui per ,004690,7,,,P-BRs (Braga) Arquivo da Sé Ms. 028,2.1,168r,,,,feast_0577,genre_a,office_m,http://pemdatabase.eu/source/48438,,,,,,,,,http://pemdatabase.eu/image/86075
+,,Salvator mundi salva nos qui per ,004690,,,,A-KN Fragm. 19 Antiphonarium,1.3,001r,,,,feast_0577,genre_a,,http://austriamanus.org/source/22,,,Salvator mundi salva nos qui per crucem et sanguinem redemi[sti nos auxiliare nobis te deprecamur deus noster],,,,,,https://austriamanus.org/image/2773
+,,Natus est nobis deus*,003856,*,,,PL-KIk 1,M,025r,,,,feast_1230,genre_a,office_v2,http://cantusplanus.pl/source/35981,,,-,,,,,,
+,,Natus est nobis deus*,003856,*,,,PL-KIk 1,M,025r,,,,feast_1230,genre_a,office_v2,https://cantus.sk/source/32301,,,-,,,,,,

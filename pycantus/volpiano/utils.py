@@ -465,3 +465,27 @@ def get_range(volpiano: str) -> (int, int):
     min_step, max_step = min(steps), max(steps)
     return min_step - final_step, max_step - final_step
 
+
+def default_normalize_volpiano(volpiano: str) -> str:
+    '''Normalize a volpiano string in the default way for research focusing
+    on the melody as a sequence of pitches. It applies the following volpiano
+    cleaning steps:
+
+    - Discard differentiae
+    - Normalize liquescents
+    - Normalize flats: omit notes, apply only once
+    - Remove all non-note characters.
+
+    :param volpiano: The volpiano string to normalize.
+
+    :return: The normalized volpiano string.
+    '''
+    # Discard differentiae
+    volpiano = discard_differentia(volpiano)
+    # Normalize liquescents
+    volpiano = normalize_liquescents(volpiano)
+    # Normalize accidentals: omit notes, apply only once
+    volpiano = expand_accidentals(volpiano, omit_notes=True, apply_once_only=True)
+    # Remove all non-note characters
+    volpiano = clean_volpiano(volpiano, keep_bars=False, keep_boundaries=False)
+    return volpiano

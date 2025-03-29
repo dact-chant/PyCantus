@@ -56,8 +56,14 @@ def main(args):
     chants = pd.read_csv(args.input_csv)
     logging.info('Loaded {0} chants from {1}'.format(len(chants), args.input_csv))
 
-    # Get list of values for the 'source_id' field
-    source_urls = chants['source_id'].unique()
+    # Get list of values for the 'source_id' or 'srclink' field
+    try:
+        source_urls = chants['srclink'].unique()
+    except:
+        try:
+            source_urls = chants['source_id'].unique()
+        except:
+            raise ValueError('No source_id or srclink filed in chants file.')
     logging.info('Found {0} unique source URLs'.format(len(source_urls)))
 
     #if args.default_to_old_cantus:

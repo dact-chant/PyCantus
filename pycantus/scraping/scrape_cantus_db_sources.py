@@ -751,6 +751,81 @@ class FontesCantusBohemiaeScraper(_AbstractSourceScraper):
         #     'cursus' -> no cursus in FCB
 
         return source
+    
+
+class HungarianChantScraper(_AbstractSourceScraper):
+
+    def __init__(self, **kwargs):
+        super().__init__(**kwargs)
+        # We set these URLS
+        self.DB_URL = 'https://hun-chant.eu'
+        self._set_derived_drupal_db_urls()
+        self._force_http = True
+
+    def source_data_from_source_soup(self, soup: BeautifulSoup) -> SourceData:
+        """Get the SourceData from the given source page soup."""
+        container = soup.find(id='main')
+        if not container:
+            raise ValueError('Source does not contain the data container section!?')
+        
+        source = SourceData()
+
+        # self._fields = [
+        #     'title',
+        title_container = soup.find('h1', class_='title')
+        title = title_container.text
+        source.title = title
+
+        #     'siglum',
+        archive_siglum = title.split()[0]
+
+        shelfmark_container = container.find('div', class_='field field-name-field-shelf-mark field-type-text field-label-above')
+        if not shelfmark_container:
+            raise ValueError('Source data must have shelfmark!')
+        shelfmark = shelfmark_container.find('div', class_='field-item').text
+
+        siglum = archive_siglum + ' ' + shelfmark
+        source.siglum = siglum
+
+        #     'description',
+        #     'rism',
+        #     'date',
+        # We ignore this for now.
+
+        #     'century',
+        century_container = container.find('div', class_='field field-name-field-century field-type-taxonomy-term-reference field-label-above')
+        if not century_container:
+            self.handle_missing_important_field('century')
+        century_text = century_container.find('div', class_='field-item').find('a').text
+        source.century = century_text
+
+        #     'provenance',
+        # Look for provenance (country)
+        provenance_country_container = container.find('div', class_='field field-name-field-provenance-country- field-type-taxonomy-term-reference field-label-above')
+        # Look for provenance (place) - more specific, better
+        provenance_place_container = container.find('div', class_='field field-name-field-provenance-location- field-type-text field-label-above')
+        # Store
+        if provenance_place_container:
+            provenance = provenance_place_container.find('div', class_='field-item').text
+            source.provenance = provenance
+        elif provenance_country_container:
+            provenance = provenance_country_container.find('div', class_='field-item').text
+            source.provenance = provenance
+        else:
+            self.handle_missing_important_field('provenance')
+
+        # The rest we can ignore for now.
+        #     'provenance_detail',
+        #     'segment',
+        #     'summary',
+        #     'indexing_notes',
+        #     'liturgical_occasions',
+        #     'indexing_date',
+        #     'drupal_path'
+
+        #     'cursus' -> no cursus in HunChant
+
+        return source
 
 
 class MusicaHispanicaScraper(_AbstractSourceScraper):
@@ -890,6 +965,7 @@ class UniversalSourceScraper(_AbstractSourceScraper):
     - Fontes Cantus Bohemiae (cantusbohemiae.cz)
     - Musica Hispanica (musicahispanica.eu)
     - Austrimanus (austriamanus.org)
+    - Hungarian Chant Database (hun-chant.eu)
 
     Must be used via URL, not via just the source ID, because the source ID itself
     does not carry information about which database to look into. Different databases
@@ -907,6 +983,7 @@ class UniversalSourceScraper(_AbstractSourceScraper):
             'fcb': FontesCantusBohemiaeScraper(**kwargs),
             'musica_hispanica': MusicaHispanicaScraper(**kwargs),
             'austriamanus': AustriaManusScraper(**kwargs),
+            'hun-chant' : HungarianChantScraper(**kwargs)
         }
 
     def _select_scraper_by_url(self, url: str):
@@ -926,6 +1003,8 @@ class UniversalSourceScraper(_AbstractSourceScraper):
             return self.scrapers['musica_hispanica']
         elif 'austriamanus.org' in url:
             return self.scrapers['austriamanus']
+        elif 'hun-chant.eu' in url:
+            return self.scrapers['hun-chant']
         else:
             raise NotImplementedError('No scraper implemented yet for url: {}'.format(url))
 

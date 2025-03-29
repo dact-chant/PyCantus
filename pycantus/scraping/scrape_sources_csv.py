@@ -10,7 +10,7 @@ import time
 
 import pandas as pd
 
-from scrape_cantus_db_sources import UniversalSourceScraper
+from db_scrapers import UniversalSourceScraper
 
 __version__ = "0.0.2"
 __author__ = "Jan Hajic jr."

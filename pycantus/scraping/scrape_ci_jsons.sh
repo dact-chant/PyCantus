@@ -4,13 +4,12 @@
 # ./scrape_ci_jsons.sh FILE_WITH_CIDS TARGET_DIR SLEEP_TIME FORCE_REFRESH
 
 
-# URL that serves Cantus Index JSON dumps. Have to add the Cantus ID field with a 3-character prefix,
-# so e.g. for Cantus ID 003511, the url would be ${CID_URL_PREFIX}/003/003511/all.json
+# URL that serves Cantus Index JSON dumps.
 CID_URL_PREFIX=https://cantusindex.org/json-cid
 
 # URL on which to ask for Cantus Index to refresh its CSV file.
-REFRESH_URL_SUFFIX='?c=1&refresh=1'
-REFRESH_URL_PREFIX=https://cantusindex.org/ci
+REFRESH_URL_SUFFIX='?nocache=$(date +%s)'
+REFRESH_URL_PREFIX=https://cantusindex.org/json-cid
 
 # List of chants to scrape in cantuscorpus-like CSV format. First column is Cantus ID.
 FILE_WITH_CIDS=../all_ci_introits_list.csv

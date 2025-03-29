@@ -17,7 +17,7 @@ GENRE_NAME=$1
 echo "Submitting SLURM scripts for genre: $GENRE_NAME"
 
 # Make sure the genre subdirectory exists.
-_TARGET_DIR_ROOT_NAME='scraper_slurm_scripts'
+_TARGET_DIR_ROOT_NAME='scrapers_by_genre/scraper_slurm_scripts'
 TARGET_DIR=${_TARGET_DIR_ROOT_NAME}__${GENRE_NAME}
 if [ ! -d $TARGET_DIR ]; then
   echo "ERROR: $TARGET_DIR does not exist"

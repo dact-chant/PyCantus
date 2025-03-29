@@ -44,7 +44,7 @@ if [ ! -f $FILE_WITH_CIDS ]; then
 fi
 
 # Check that the genre directory does not exist yet.
-_TARGET_DIR_ROOT_NAME='scraper_slurm_scripts'
+_TARGET_DIR_ROOT_NAME='scrapers_by_genre/scraper_slurm_scripts'
 TARGET_DIR=${_TARGET_DIR_ROOT_NAME}__${GENRE_NAME}
 if [ -d $TARGET_DIR ]; then
   echo "ERROR: $TARGET_DIR already exists"
@@ -99,8 +99,8 @@ for ((i=0; i<N_CHUNKS; i++)); do
   echo "#!/usr/bin/env bash" > $SLURM_SCRIPT
   echo "#SBATCH --job-name=ci_scrape_${GENRE_NAME}_${i}" >> $SLURM_SCRIPT
   echo "#SBATCH --partition=cpu-troja" >> $SLURM_SCRIPT
-  echo "#SBATCH --output=log-cid-scrape-wrapper.%x.%j.out" >> $SLURM_SCRIPT
-  echo "#SBATCH --error=log-cid-scrape-wrapper.%x.%j.err" >> $SLURM_SCRIPT
+  echo "#SBATCH --output=wrapper_logs/log-cid-scrape-wrapper.%x.%j.out" >> $SLURM_SCRIPT
+  echo "#SBATCH --error=wrapper_logs/log-cid-scrape-wrapper.%x.%j.err" >> $SLURM_SCRIPT
   echo "#SBATCH --time=24:00:00" >> $SLURM_SCRIPT
   echo "#SBATCH --mem=1G" >> $SLURM_SCRIPT
   echo "" >> $SLURM_SCRIPT

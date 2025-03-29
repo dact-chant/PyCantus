@@ -1,0 +1,18 @@
+id,name,description
+office_?,?,uncertain
+office_c,C,Compline
+office_ca,CA,Chapter
+office_d,D,Day Hours
+office_e,E,"Antiphons for the Magnificat or Benedictus (""in evangelio"")"
+office_h,H,Antiphons based on texts from the Historia
+office_l,L,Lauds
+office_m,M,Matins
+office_mi,MI,Mass
+office_n,N,None
+office_p,P,Prime
+office_r,R,Memorial
+office_s,S,Sext
+office_t,T,Terce
+office_v,V,First Vespers
+office_v2,V2,Second Vespers
+office_x,X,"Supplemental, paraliturgical, rarely-used, or chants that do not fit into the usual categories or that are unclear in their usage"

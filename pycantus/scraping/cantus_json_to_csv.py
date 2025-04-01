@@ -8,7 +8,7 @@ required fields:
 
     incipit
     siglum
-    srclink 
+    srclink
     chantlink
     folio
     db
@@ -60,6 +60,7 @@ CSV_KEYS = [
     'notes',
     'dataset_name',
     'dataset_idx',
+    'db',               # This field is not among CantusCorpus v0.2 CSV fields.
     'image_link',       # This field is not among CantusCorpus v0.2 CSV fields.
 ]
 
@@ -104,6 +105,7 @@ JSON_KEYS2CSV_KEYS = {
     'image': 'image_link',
     'srclink': 'srclink',
     'chantlink':'chantlink',
+    'db' : 'db'
 }
 CSV_KEYS2JSON_KEYS = {v: k for k, v in JSON_KEYS2CSV_KEYS.items() }
 CSV_KEYS2JSON_KEYS['feast_code'] = 'feast'
@@ -142,7 +144,7 @@ def office2office_id(office: str):
 
 # For current state of data we decided to use CI feast codes (column 1)
 FEAST_MAP_CSV2JSON = load_mapping(
-    path_to_file=os.path.join(os.path.dirname(__file__), 'static', 'feast.csv'),
+    path_to_file=os.path.join(os.path.dirname(__file__), 'static', 'feast_CI.csv'),
     from_column=1, to_column=0
 )
 FEAST_MAP_JSON2CSV = {v: k for k, v in FEAST_MAP_CSV2JSON.items()}
@@ -201,6 +203,7 @@ def convert_json_data_to_csv_data(json_data,
     logging.debug(pprint.pformat(json_data))
 
     chants = json_data['chants']
+
     if isinstance(chants, dict): # case where chants is dict with num keys
         chants = list(chants.values())
 
@@ -381,6 +384,14 @@ def main(args):
     if args.input_json:
         with open(args.input_json) as input_json:
             json_data = json.load(input_json)
+            _EXTERNAL_CSV_FIELDS = {}
+            if args.treat_filenames_as_cid:
+                cantus_id = input_json[:-5]    # the '.json' suffix is an invariant now
+                _EXTERNAL_CSV_FIELDS = {'cantus_id': cantus_id}
+
+            csv_data = convert_json_data_to_csv_data(json_data,
+                                                     required_nonnul_csv_fields=_REQUIRED_NONNULL_CSV_KEYS,
+                                                     external_csv_fields=_EXTERNAL_CSV_FIELDS)
 
     elif args.input_dir:
         input_jsons = os.listdir(args.input_dir)
@@ -422,8 +433,8 @@ def main(args):
                 continue
 
     logging.info('Put {} items into CSVs.'.format(len(csv_data)))
-    logging.info('First CSV row:')
-    logging.info(csv_data[0])
+    #logging.info('First CSV row:')
+    #logging.info(csv_data[0])
 
     # csv_data = convert_json_data_to_csv_data(json_data,
     #                                          required_nonnul_csv_fields=REQUIRED_NONNULL_CSV_KEYS)

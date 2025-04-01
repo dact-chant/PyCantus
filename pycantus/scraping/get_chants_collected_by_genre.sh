@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Run prepare_slurm_scripts.sh for all genre
+# Run collect_slurm_scripts.sh for all genre
 
 
 # Define genre file

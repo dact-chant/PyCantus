@@ -81,8 +81,6 @@ def main(args):
     scraper = UniversalSourceScraper(require_century=args.require_century, require_provenance=args.require_provenance)
     logging.info('Scraper required fields: {}'.format(scraper.required_fields))
 
-    # DEBUG
-    print(scraper.scrapers['cantus'].required_fields)
 
     sources = []
     for i, source_url in enumerate(source_urls):

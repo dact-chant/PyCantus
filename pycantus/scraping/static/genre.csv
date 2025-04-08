@@ -1,116 +1,117 @@
-id,name,description,mass_or_office
-genre_?,[?],"Unknown, ambiguous, unidentifiable, illegible","['Mass', 'Office']"
-genre_a,A,Antiphon,['Office']
-genre_acc,ACC,Ad accedentes,['Mass']
-genre_accv,ACCV,Ad accedentes verse,['Mass']
-genre_ag,Ag,Agnus dei,['Mass']
-genre_al,Al,Alleluia,['Mass']
-genre_all,ALL,Alleluaticus,['Mass']
-genre_allv,ALLV,Alleluaticus verse,['Mass']
-genre_alv,AlV,Alleluia verse,['Mass']
-genre_ant,ANT,Antiphon (Hispanic rite),['Mass/Office']
-genre_antv,ANTV,Antiphon verse (Hispanic rite),['Mass/Office']
-genre_ap,AP,Processuinal antiphon,['Mass/Office']
-genre_av,AV,Antiphon verse,['Office']
-genre_bd,BD,Benedicamus domino,"['Mass', 'Office']"
-genre_bnmt,BNMT,Benedictiones (matutinum),['Office']
-genre_bnmtv,BNMTV,Benedictiones (matutinum) verse,['Office']
-genre_bnof,BNOF,Benedictiones (office),['Office']
-genre_bnofv,BNOFV,Benedictiones (office) verse,['Office']
-genre_bns,BNS,Benedictiones (mass),['Mass']
-genre_bnsv,BNSV,Benedictiones (mass) verse,['Mass']
-genre_ca,Ca,Canticle,"['Mass', 'Office']"
-genre_cah,CaH,Canticle (Hispanic rite),['Mass/Office']
-genre_cap,Cap,Capitulum,['Office']
-genre_cav,CaV,Canticle verse,"['Mass', 'Office']"
-genre_cavh,CaVH,Canticle verse (Hispanic rite),"['Mass', 'Office']"
-genere_cfp,CFP,Ad confractionem panis,['Mass']
-genere_cfpv,CFPV,Ad confractionem panis verse,['Mass']
-genre_clm,CLM,Clamores (mass),['Mass']
-genre_clmo,CLMO,Clamores (office),['Office']
-genre_clmov,CLMOV,Clamores (office) verse,['Office']
-genre_clmv,CLMV,Clamores (mass) verse,['Mass']
-genre_cm,Cm,Communion,['Mass']
-genre_cmr,CmR,Versus ad repetendum for the communion,['Mass']
-genre_cmv,CmV,Communion verse,['Mass']
-genre_cn,Cn,"Cantio, Cantiones (paraliturgical sacred songs with poetic and often strophic Latin or vernacular texts)",['Mass/Office']
-genre_cnv,CnV,"Cantio Verse (strophe of paraliturgical sacred poetic text) ",
-genre_cr,Cr,Credo,['Mass']
-genre_d,D,Dramatic element (used for items of liturgical drama that are not otherwise rubricked),"['Mass', 'Office']"
-genre_g,[G],Mass chant (a generic code used in the earliest Cantus indices),['Mass']
-genre_gl,Gl,Gloria,['Mass']
-genre_gr,Gr,Gradual,['Mass']
-genre_grc,GRC,Graecus,['Mass']
-genre_grv,GrV,Gradual verse,['Mass']
-genre_gv,[GV],Verse for a Mass chant (a generic code used in the earliest Cantus indices),['Mass']
-genre_h,H,Hymn,['Office']
-genre_hv,HV,Hymn verse,['Office']
-genre_i,I,Invitatory antiphon,['Office']
-genre_ig,Ig,Ingressa (for the Beneventan liturgy),['Office']
-genre_in,In,Introit,['Mass']
-genre_inr,InR,Versus ad repetendum for the introit,['Mass']
-genre_inv,InV,Introit verse,['Mass']
-genre_ip,IP,Invitatory psalm (when fully written out and notated),['Office']
-genre_ite,Ite,Ite missa est,['Mass']
-genre_ky,Ky,Kyrie,['Mass']
-genre_l,L,Lesson (when fully written out and notated),['Mass']
-genre_ldmt,LDMT,Laudes (matutinum),['Office']
-genre_ldmtv,LDMTV,Laudes (matutinum) verse,['Office']
-genre_ldof,LDOF,Laudes (office),['Office']
-genre_ldofv,LDOFV,Laudes (office) verse,['Office']
-genre_lds,LDS,Laudes (mass),['Mass']
-genre_ldsv,LDSV,Laudes (mass) verse,['Mass']
-genre_li,Li,Litany (and litany verses if listed together in the same record),['Office']
-genre_liv,LiV,Litany verse,"['Mass', 'Office']"
-genre_m,[M],"""Miscellaneous"" (a descriptor used in the earliest versions of Cantus for the Te Deum, Versus in Triduo, prosulae - to be replaced by Va=Varia)","['Mass', 'Office']"
-genre_mo,[MO],Mass Ordinary  (a generic code used in the earliest Cantus indices),['Mass']
-genre_msr,MSR,Miserationes,['Office']
-genre_msrv,MSRV,Miserationes verse,['Office']
-genre_mt,MT,Matutinarium,['Office']
-genre_mtv,MTV,Matutinarium verse,['Office']
-genre_of,Of,Offertory,['Mass']
-genre_ofv,OfV,Offertory verse,['Mass']
-genre_or,Or,Oratio / Prayer (when written out and notated),
-genre_pac,PAC,Ad pacem,['Mass']
-genre_pacv,PACV,Ad pacem verse,['Mass']
-genre_pn,Pn,Pater noster (when written out and notated),"['Mass', 'Office']"
-genre_pr,Pr,Prefatio (when written out and notated),['Mass']
-genre_prcs,PRCS,Preces (Old Hispanic),"['Mass', 'Office']"
-genre_prcsv,PRCSV,Verse for the Preces (Old Hispanic),"['Mass', 'Office']"
-genre_prlg,PRLG,Praelegendum,['Mass']
-genre_prlgv,PRLGV,Praelegendum verse,['Mass']
-genre_ps,PS,Psalm,['Office']
-genre_psa,Psa,Prosa,
-genre_psl,Psl,Prosula (a type of trope - Tp),['Mass/Office']
-genre_psld,PSLD,Psallendo,['Office']
-genre_psldv,PSLDV,Psallendo verse,['Office']
-genre_pslm,PSLM,Psalmo,['Mass']
-genre_pslmv,PSLMV,Psalmo verse,['Mass']
-genre_r,R,Responsory,['Office']
-genre_rs,RS,Responsory (Hispanic rite),['Mass/Office']
-genre_rsv,RSV,Responsory verse (Hispanic rite),['Mass/Office']
-genre_sa,Sa,Sanctus,['Mass']
-genre_scr,SCR,Sacrificium,['Mass']
-genre_scrv,SCRV,Sacrificium verse,['Mass']
-genre_snct,SNCT,Ad sanctus,['Mass']
-genre_snctv,SNCTV,Ad sanctus verse,['Mass']
-genre_sno,SNO,Sono,['Office']
-genre_snov,SNOV,Sono verse,['Office']
-genre_sq,Sq,Sequence,['Mass']
-genre_sqv,SqV,Sequence verse,['Mass']
-genre_tc,Tc,Tract,['Mass']
-genre_tcv,TcV,Tract verse,['Mass']
-genre_tp,Tp,"Trope (broadly); see also specific types of tropes, such as Psl (prosula) and TpBD (troped Benedicamus domino)",['Mass']
-genre_tobd,TpBD,Troped Benedicamus domino,['Mass/Office']
-genre_tpite,TpIte,Troped Ite missa est ,['Mass']
-genre_trn,TRN,Threno,['Mass']
-genre_trnv,TRNV,Threno verse,['Mass']
-genre_v,V,Responsory verse,['Office']
-genre_va,Va,Varia,"['Mass', 'Office']"
-genre_vahw,VaHW,Varia within Holy Week,"['Mass', 'Office']"
-genre_var,VAR, Varia (Hispanic rite),['Mass/Office']
-genre_varv,VARV, Varia verse (Hispanic rite),['Mass/Office']
-genre_vpr,VPR,Vespertinus,['Office']
-genre_vprv,VPRV,Vespertinus verse,['Office']
-genre_vrs,VRS,"Versus (Hispanic rite, applied to a number of quite different types of pieces in the sources, including single verses of Scripture not attached to any parent chant as well as more lengthy poetic texts; seebRandel, Index, xvii)",['Office']
-genre_w,W,Versicle,['Office']
+genre_name,description,rite,mass_or_office
+[?],Unknowable / Ambiguous,,
+[G],"Mass chant (a generic code used in the earliest Cantus inventories, to be reassigned)",Franco-Roman,Mass
+[GV],"Verse of a Mass chant (a generic code used in the earliest Cantus inventories, to be reassigned)",Franco-Roman,Mass
+[M],"Miscellaneous (a generic code used in the earliest Cantus inventories, to be reassigned)",Franco-Roman,
+[MO],"Mass Ordinary (a generic code used in the earliest Cantus inventories, to be reassigned)",Franco-Roman,Mass
+A,Antiphon,Franco-Roman,Mass/Office
+ACC,Ad accedentes,Hispanic,Mass
+ACCV,Ad accedentes verse,Hispanic,Mass
+Ag,Agnus dei,Franco-Roman,Mass
+Al,Alleluia,Franco-Roman,Mass
+ALL,Alleluiaticus,Hispanic,Mass
+ALLV,Alleluiaticus verse,Hispanic,Mass
+AlV,Alleluia verse,Franco-Roman,Mass
+ANT,Antiphon (Hispanic rite),Hispanic,Mass/Office
+ANTV,Antiphon verse (Hispanic rite),Hispanic,Mass/Office
+AP,Processional antiphon,Franco-Roman,Mass/Office
+AV,Antiphon verse,Franco-Roman,Office
+BD,Benedicamus domino,Franco-Roman,Mass/Office
+BNMT,Benedictiones (matutinum),Hispanic,Office
+BNMTV,Benedictiones (matutinum) verse,Hispanic,Office
+BNOF,Benedictiones (office),Hispanic,Office
+BNOFV,Benedictiones (office) verse,Hispanic,Office
+BNS,Benedictiones (mass),Hispanic,Mass
+BNSV,Benedictiones (mass) verse,Hispanic,Mass
+Ca,Canticle,Franco-Roman,Mass/Office
+CaH,Canticle (Hispanic rite),Hispanic,Mass/Office
+Cap,Capitulum,Franco-Roman,Office
+CaV,Canticle verse,Franco-Roman,Mass/Office
+CaVH,Canticle verse (Hispanic rite),Hispanic,Mass/Office
+CFP,Ad confractionem panis,Hispanic,Mass
+CFPV,Ad confractionem panis verse,Hispanic,Mass
+CLM,Clamores (mass),Hispanic,Mass
+CLMO,Clamores (office),Hispanic,Office
+CLMOV,Clamores (office) verse,Hispanic,Office
+CLMV,Clamores (mass) verse,Hispanic,Mass
+Cm,Communion,Franco-Roman,Mass
+CmR,Versus ad repetendum for the communion,Franco-Roman,Mass
+CmV,Communion verse,Franco-Roman,Mass
+Cn,"Cantio, Cantiones (paraliturgical sacred songs with poetic and often strophic Latin or vernacular texts)",Franco-Roman,Mass/Office
+CnV,Cantio Verse (strophe of paraliturgical sacred poetic text),,
+Cr,Credo,Franco-Roman,Mass
+D,Dramatic element (used for items of liturgical drama that are not otherwise rubricked),Franco-Roman,Office
+Gl,Gloria,Franco-Roman,Mass
+Gr,Gradual,Franco-Roman,Mass
+GRC,Graecus,Hispanic,Mass
+GrV,Gradual verse,Franco-Roman,Mass
+H,Hymn (and hymn verses if listed together in the same record),Franco-Roman,Office
+HV,Hymn verse,Franco-Roman,Office
+HYMN,"Hymn (Hispanic rite, but to be merged with Franco-Roman rite) - work in progress",Hispanic,
+I,Invitatory antiphon,Franco-Roman,Office
+Ig,Ingressa (for the Beneventan Liturgy),Franco-Roman,Office
+In,Introit,Franco-Roman,Mass
+InR,Versus ad repetendum for the Introit,Franco-Roman,Mass
+InV,Introit verse,Franco-Roman,Mass
+IP,Invitatory psalm (when written out and notated),Franco-Roman,Office
+Ite,Ite missa est,Franco-Roman,Mass
+Ky,Kyrie,Franco-Roman,Mass
+L,Lesson (when written out and notated),Franco-Roman,Mass/Office
+LDMT,Laudes (matutinum),Hispanic,Office
+LDMTV,Laudes (matutinum) verse,Hispanic,Office
+LDOF,Laudes (office),Hispanic,Office
+LDOFV,Laudes (office) verse,Hispanic,Office
+LDS,Laudes (mass),Hispanic,Mass
+LDSV,Laudes (mass) verse,Hispanic,Mass
+Li,Litany (and litany verses if listed together in the same record),Franco-Roman,Mass/Office
+LiV,Litany verse,Franco-Roman,Mass/Office
+MSR,Miserationes,Hispanic,Office
+MSRV,Miserationes verse,Hispanic,Office
+MT,Matutinarium,Hispanic,Office
+MTV,Matutinarium verse,Hispanic,Office
+Of,Offertory,Franco-Roman,Mass
+OfV,Offertory verse,Franco-Roman,Mass
+Or,Oratio / Prayer (when written out and notated),Franco-Roman,
+PAC,Ad pacem,Hispanic,Mass
+PACV,Ad pacem verse,Hispanic,Mass
+Pn,Pater noster (when written out and notated),Franco-Roman,Mass
+Pr,Prefatio (when written out and notated),Franco-Roman,Mass
+PRCS,Preces,Hispanic,Office
+PRCSV,Preces verse,Hispanic,Office
+PRLG,Praelegendum,Hispanic,Mass
+PRLGV,Praelegendum verse,Hispanic,Mass
+PS,Psalm (when written out and notated),Franco-Roman,Mass/Office
+Psa,Prosa,,
+Psl,Prosula (a type of trope - Tp),Franco-Roman,Mass/Office
+PSLD,Psallendo,Hispanic,Office
+PSLDV,Psallendo verse,Hispanic,Office
+PSLM,Psalmo,Hispanic,Mass
+PSLMV,Psalmo verse,Hispanic,Mass
+R,Responsory,Franco-Roman,Office
+RS,Responsory (Hispanic rite),Hispanic,Mass/Office
+RSV,Responsory verse (Hispanic rite),Hispanic,Mass/Office
+Sa,Sanctus,Franco-Roman,Mass
+SCR,Sacrificium,Hispanic,Mass
+SCRV,Sacrificium verse,Hispanic,Mass
+SNCT,Ad sanctus,Hispanic,Mass
+SNCTV,Ad sanctus verse,Hispanic,Mass
+SNO,Sono,Hispanic,Office
+SNOV,Sono verse,Hispanic,Office
+Sq,Sequence,Franco-Roman,Mass
+SqV,Sequence verse,Franco-Roman,Mass
+Tc,Tract,Franco-Roman,Mass
+TcV,Tract verse,Franco-Roman,Mass
+Tp,"Trope (broadly); see also specific types of tropes, such as Psl (prosula) and TpBD (troped Benedicamus domino)",Franco-Roman,Mass/Office
+TpBD,Troped Benedicamus domino,Franco-Roman,Mass/Office
+TpIte,Troped Ite missa est,Franco-Roman,Mass
+TRN,Threno,Hispanic,Mass
+TRNV,Threno verse,Hispanic,Mass
+V,Responsory verse,Franco-Roman,Office
+Va,Varia,Franco-Roman,Mass/Office
+VaHW,Varia within Holy Week,Franco-Roman,Mass/Office
+VAR,Varia (Hispanic rite),Hispanic,Mass/Office
+VARV,Varia verse (Hispanic rite),Hispanic,Mass/Office
+VPR,Vespertinus,Hispanic,Office
+VPRV,Vespertinus verse,Hispanic,Office
+VRS,"Versus (Hispanic rite, applied to a number of quite different types of pieces in the sources, including single verses of Scripture not attached to any parent chant as well as more lengthy poetic texts; seebRandel, Index, xvii)",Hispanic,Office
+W,Versicle,Franco-Roman,Office

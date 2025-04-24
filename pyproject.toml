@@ -3,23 +3,24 @@ requires = ["hatchling"]
 build-backend = "hatchling.build"
 
 [project]
-name = "PyCantus"
+name = "pycantus"
 version = "0.0.1"
 dependencies = [
   "pandas==2.2.2",
+  "requests==2.31.0"
 ]
 requires-python = ">=3.10"
 authors = [
   {name = "Tim Eipert", email = "tim.eipert@uni-wuerzburg.de"},
   {name = "Jan Hajic jr.", email = "hajicj@ufal.mff.cuni.cz"},
   {name = "Vojtech Lanz", email = "lanz@ufal.mff.cuni.cz"},
-  {name = "Anna Dvorakova", email = ""},
+  {name = "Anna Dvorakova", email = "anna.dvorakova332@student.cuni.cz"},
 ]
 maintainers = [
   {name = "Tim Eipert", email = "tim.eipert@uni-wuerzburg.de"},
   {name = "Jan Hajic jr.", email = "hajicj@ufal.mff.cuni.cz"},
   {name = "Vojtech Lanz", email = "lanz@ufal.mff.cuni.cz"},
-  {name = "Anna Dvorakova", email = ""},
+  {name = "Anna Dvorakova", email = "anna.dvorakova332@student.cuni.cz"},
 ]
 description = "PyCantus: A Python library designed to enhance accessibility of Gregorian chants for both coders and non-coders."
 readme = "README.md"
@@ -45,3 +46,6 @@ tests = [
 Homepage = "https://github.com/dact-chant/PyCantus"
 Documentation = "https://github.com/dact-chant/PyCantus/tree/main/docs"
 Repository = "https://github.com/dact-chant/PyCantus.git"
+
+[tool.setuptools.packages.find]
+include = ["pycantus"]

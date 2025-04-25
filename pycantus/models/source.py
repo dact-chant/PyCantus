@@ -11,8 +11,10 @@ class Source():
     pycantus Source class
         - represents one source entry in database
     """
-    MANDATORY_SOURCES_FIELDS = ['title', 'srclink', 'siglum']
-    OPTIONAL_SOURCES_FIELDS = ['century', 'provenance']
+    MANDATORY_SOURCES_FIELDS = {'title', 'srclink', 'siglum'}
+    OPTIONAL_SOURCES_FIELDS = {'century', 'provenance'}
+    EXPORT_FIELDS = ['title', 'siglum','century', 'provenance', 'srclink',]
+    NON_EXPORT_FIELD = ['locked']
 
     def __init__(self,
                  title,
@@ -39,34 +41,23 @@ class Source():
     def __str__(self):
         return self.siglum
 
-
+    @property
     def to_csv_row(self):
         """
         Returns data of class as standardized csv row
         """
-        csv_row = ""
-        for attr_name, attr_value in self.__dict__.items():
-            if attr_name == 'locked':
-                continue
+        csv_row = []
+        for attr_name in self.EXPORT_FIELDS:
+            attr_value = self.__getattribute__(attr_name)
             if attr_value is not None:
-                csv_row = csv_row + attr_value + ','
+                csv_row.append(attr_value)
             else:
-                csv_row += ','
-
-        return csv_row
+                csv_row.append('')
+        return ','.join(csv_row)
     
+    @property
     def header(self) -> str:
         """
         Returns the header for the CSV file, which includes all mandatory and optional fields.
         """
-        csv_row = ""
-        for attr_name, attr_value in self.__dict__.items():
-            if attr_name == 'locked':
-                continue
-            if attr_value is not None:
-                csv_row = csv_row + attr_name + ','
-            else:
-                csv_row += ','
-
-        return csv_row
-        
+        return ','.join(self.EXPORT_FIELDS)

@@ -16,11 +16,11 @@ __version__ = "0.0.1"
 __author__ = "Anna Dvorakova"
 
 
-MANDATORY_CHANTS_FIELDS = ['cantus_id', 'srclink', 'feast_code', 'incipit', 'siglum','chantlink', 'folio', 'db']
-OPTIONAL_CHANTS_FIELDS = ['sequence', 'feast', 'genre', 'office', 'position', 'melody_id', 'image', 'mode',
-                          'full_text', 'melody', 'century', 'rite']
-MANDATORY_SOURCES_FIELDS = ['title', 'srclink', 'siglum']
-OPTIONAL_SOURCES_FIELDS = ['century', 'provenance']
+MANDATORY_CHANTS_FIELDS = {'cantus_id', 'srclink', 'incipit', 'siglum','chantlink', 'folio', 'db'}
+OPTIONAL_CHANTS_FIELDS = {'sequence', 'feast', 'genre', 'office', 'position', 'melody_id', 'image', 'mode',
+                          'full_text', 'melody', 'century', 'rite'}
+MANDATORY_SOURCES_FIELDS = {'title', 'srclink', 'siglum'}
+OPTIONAL_SOURCES_FIELDS = {'century', 'provenance'}
 
 
 class CsvLoader():

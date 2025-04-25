@@ -107,4 +107,4 @@ the `genre_dir/chunk_${i}/jsons` directories via `collect_slurm_results.sh`.
 After that we might want to get information about sources of collected chants which can be done via running `scrape_source_csv.py`.
 
 ----------------------------
-Example of 
+Example of workflow:

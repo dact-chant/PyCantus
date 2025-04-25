@@ -55,10 +55,13 @@ class Chant():
         All filed are str type.
         (Fields marked with an asterisk (*) are obligatory and must be included in every record. Other fields are optional but recommended when data is available.)
     """
-    MANDATORY_CHANTS_FIELDS = ['cantus_id', 'incipit', 'srclink', 'feast_code', 'siglum','chantlink', 'folio', 'db']
-    OPTIONAL_CHANTS_FIELDS = ['sequence', 'feast', 'genre', 'office', 'position', 'melody_id', 'image', 'mode',
-                               'full_text', 'melody', 'century']
-    
+    MANDATORY_CHANTS_FIELDS = {'cantus_id', 'incipit', 'srclink', 'siglum','chantlink', 'folio', 'db'}
+    OPTIONAL_CHANTS_FIELDS = {'sequence', 'feast', 'genre', 'office', 'position', 'melody_id', 'image', 'mode',
+                               'full_text', 'melody', 'century'}
+    NON_EXPORT_FIELDS = ['locked', 'rite']
+    EXPORT_FIELDS = ['cantus_id', 'incipit', 'siglum', 'srclink', 'chantlink', 'folio', 'db', 'sequence', 'feast', 'genre',
+                     'office', 'position', 'melody_id', 'image', 'mode', 'full_text', 'melody', 'century']
+
     def __init__(self, 
                  cantus_id : str,
                  incipit : str,
@@ -116,15 +119,7 @@ class Chant():
         """
         Returns the header for the CSV file, which includes all mandatory and optional fields.
         """
-        csv_row = ""
-        for attr_name, attr_value in self.__dict__.items():
-            if attr_name != 'locked':
-                if attr_value is not None:
-                    csv_row = csv_row + attr_name + ','
-                else:
-                    csv_row += ','
-
-        return csv_row
+        return ','.join(self.EXPORT_FIELDS)
 
 
     def __str__(self) -> str:
@@ -135,12 +130,11 @@ class Chant():
         """
         Returns data of class as standardized csv row
         """
-        csv_row = ""
-        for attr_name, attr_value in self.__dict__.items():
-            if attr_name != 'locked':
-                if attr_value is not None:
-                    csv_row = csv_row + attr_value + ','
-                else:
-                    csv_row += ','
-
-        return csv_row
+        csv_row = []
+        for attr_name in self.EXPORT_FIELDS:
+            attr_value = self.__getattribute__(attr_name)
+            if attr_value is not None:
+                csv_row.append(attr_value)
+            else:
+                csv_row.append('')
+        return ','.join(csv_row)

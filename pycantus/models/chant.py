@@ -110,7 +110,7 @@ class Chant():
 
     # setter
     def __setattr__(self, name, value):
-        if getattr(self, "locked", False): # name != "locked" and  
+        if name != "locked" and getattr(self, "locked", False):
             raise AttributeError(f"Cannot modify '{name}' because the object is locked.")
         super().__setattr__(name, value)
 

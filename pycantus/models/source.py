@@ -3,18 +3,21 @@ This module contains Source class, which represents a single source entry from s
 It provides methods for creating, modifying, and exporting source data in a standardized format.
 """
 
-__version__ = "0.0.1"
+__version__ = "0.0.3"
 __author__ = "Anna Dvorakova"
+
+
+MANDATORY_SOURCES_FIELDS = {'title', 'srclink', 'siglum'}
+OPTIONAL_SOURCES_FIELDS = {'century', 'provenance'}
+EXPORT_FIELDS = ['title', 'siglum','century', 'provenance', 'srclink',]
+NON_EXPORT_FIELD = ['locked']
+
 
 class Source():
     """
     pycantus Source class
         - represents one source entry in database
     """
-    MANDATORY_SOURCES_FIELDS = {'title', 'srclink', 'siglum'}
-    OPTIONAL_SOURCES_FIELDS = {'century', 'provenance'}
-    EXPORT_FIELDS = ['title', 'siglum','century', 'provenance', 'srclink',]
-    NON_EXPORT_FIELD = ['locked']
 
     def __init__(self,
                  title,
@@ -47,7 +50,7 @@ class Source():
         Returns data of class as standardized csv row
         """
         csv_row = []
-        for attr_name in self.EXPORT_FIELDS:
+        for attr_name in EXPORT_FIELDS:
             attr_value = self.__getattribute__(attr_name)
             if attr_value is not None:
                 csv_row.append(attr_value)
@@ -55,9 +58,9 @@ class Source():
                 csv_row.append('')
         return ','.join(csv_row)
     
-    @property
-    def header(self) -> str:
+    @staticmethod
+    def header() -> str:
         """
         Returns the header for the CSV file, which includes all mandatory and optional fields.
         """
-        return ','.join(self.EXPORT_FIELDS)
+        return ','.join(EXPORT_FIELDS)

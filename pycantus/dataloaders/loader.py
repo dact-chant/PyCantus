@@ -179,4 +179,5 @@ class CsvLoader():
         else:
             sources = []
 
+        print("Data loaded!")
         return chants, sources

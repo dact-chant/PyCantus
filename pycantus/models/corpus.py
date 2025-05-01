@@ -10,7 +10,7 @@ from pycantus.models.source import Source
 from pycantus.dataloaders.loader import CsvLoader
 
 
-__version__ = "0.0.1"
+__version__ = "0.0.3"
 __author__ = "Anna Dvorakova"
 
 

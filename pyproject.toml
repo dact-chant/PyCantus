@@ -4,17 +4,17 @@ build-backend = "hatchling.build"
 
 [project]
 name = "pycantus"
-version = "0.0.2"
+version = "0.0.3"
 dependencies = [
   "pandas==2.2.2",
   "requests==2.31.0"
 ]
 requires-python = ">=3.10"
 authors = [
+  {name = "Anna Dvorakova", email = "anna.dvorakova332@student.cuni.cz"},
   {name = "Tim Eipert", email = "tim.eipert@uni-wuerzburg.de"},
   {name = "Jan Hajic jr.", email = "hajicj@ufal.mff.cuni.cz"},
   {name = "Vojtech Lanz", email = "lanz@ufal.mff.cuni.cz"},
-  {name = "Anna Dvorakova", email = "anna.dvorakova332@student.cuni.cz"},
 ]
 maintainers = [
   {name = "Tim Eipert", email = "tim.eipert@uni-wuerzburg.de"},
@@ -49,3 +49,6 @@ Repository = "https://github.com/dact-chant/PyCantus.git"
 
 [tool.setuptools.packages.find]
 include = ["pycantus"]
+
+[pypi]
+username=__token__

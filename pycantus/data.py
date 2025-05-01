@@ -12,7 +12,7 @@ import pycantus.static as static
 from pycantus.models.corpus import Corpus
 
 
-__version__ = "0.0.1"
+__version__ = "0.0.3"
 __author__ = "Anna Dvorakova"
 
 
@@ -27,7 +27,7 @@ def _load_available_datasets() -> dict:
 AVAILABLE_DATASETS = _load_available_datasets()
 
 
-def load_dataset(name_or_chant_filepath, source_filepath=None, **corpus_kwargs): # -> Corpus
+def load_dataset(name_or_chant_filepath, source_filepath=None, is_editable=False, **corpus_kwargs): # -> Corpus
     """ 
     Returns a Corpus object based on the name of dataset or filepath provided.
     If the name is in the available datasets, it will load that dataset.
@@ -40,11 +40,11 @@ def load_dataset(name_or_chant_filepath, source_filepath=None, **corpus_kwargs):
         # We know we are being asked for a pre-defined corpus.
         dataset_name = name_or_chant_filepath  
         dataset_metadata = AVAILABLE_DATASETS[dataset_name]
-        corpus = Corpus(**dataset_metadata)
+        corpus = Corpus(**dataset_metadata, is_editable=is_editable)
 
     else:
         # We know to expect a custom CSV
         csv_chant_file_path = name_or_chant_filepath
-        corpus = Corpus(csv_chant_file_path, source_filepath, **corpus_kwargs)
+        corpus = Corpus(csv_chant_file_path, source_filepath, is_editable=is_editable, **corpus_kwargs)
 
     return corpus

@@ -36,7 +36,7 @@ class Corpus():
         self.sources_fallback_url = sources_fallback_url
         self.other_download_parameters = other_parameters
         self.is_editable = is_editable
-        
+
         loader = CsvLoader(self.chants_filepath, self.sources_filepath, 
                            self.chants_fallback_url, self.sources_fallback_url, 
                            other_parameters)
@@ -87,22 +87,14 @@ class Corpus():
         """
         Returns proper csv header for chants export to csv
         """
-        if len(self._chants) == 0:
-            raise ValueError('No chants in the corpus.')
-
-        first_chant = self._chants[0]
-        return first_chant.header
+        return Chant.header()
 
     @property
     def csv_sources_header(self) -> str:
         """
         Returns proper csv header for sources export to csv
         """
-        if len(self._sources) == 0:
-            raise ValueError('No sources in the corpus.')
-
-        first_source = self._sources[0]
-        return first_source.header
+        return Source.header()
 
     def all_cids_list(self) -> [str]:
         """
@@ -146,3 +138,6 @@ class Corpus():
     # office
     # genre
     # feast
+
+    # somehow have: "isin" for substrings or for lists ... 
+

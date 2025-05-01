@@ -96,15 +96,15 @@ class Corpus():
         """
         return Source.header()
 
-    def all_cids_list(self) -> [str]:
-        """
-        """
-        pass
+    #def all_cids_list(self) -> [str]:
+    #    """
+    #    """
+    #    pass
     
-    def all_srclinks_list(self) -> [str]:
-        """
-        """
-        pass
+    #def all_srclinks_list(self) -> [str]:
+    #    """
+    #    """
+    #    pass
 
     def export_csv(self, chants_filepath : str, sources_filepath):
         """ 

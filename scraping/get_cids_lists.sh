@@ -11,8 +11,10 @@ CSV_FILE="static/genre.csv"
 FOLDER_NAME="cids_lists_by_genre"
 
 # Extract the second column, remove duplicates, and iterate over them
-cut -d',' -f2 "$CSV_FILE" | tail -n +2 | sort -u | while read -r genre; do
+cut -d',' -f1 "$CSV_FILE" | tail -n +2 | sort -u | while read -r genre; do
     FILE_PATH="${FOLDER_NAME}/${genre}.txt"
+    
+    echo "$genre"
 
     # Check if file already exists
     if [ ! -f "$FILE_PATH" ]; then

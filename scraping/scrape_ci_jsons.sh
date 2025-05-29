@@ -8,7 +8,7 @@
 CID_URL_PREFIX=https://cantusindex.org/json-cid
 
 # URL on which to ask for Cantus Index to refresh its CSV file.
-REFRESH_URL_SUFFIX='?nocache=$(date +%s)'
+REFRESH_URL_SUFFIX="?nocache=$(date +%s)"
 REFRESH_URL_PREFIX=https://cantusindex.org/json-cid
 
 # List of chants to scrape in cantuscorpus-like CSV format. First column is Cantus ID.

@@ -15,6 +15,8 @@ fi
 GENRE_NAME=$1
 
 OUTPUT_DIR='chants_by_genre'
+mkdir -p $OUTPUT_DIR
+
 # Make sure the genre subdirectory exists.
 _TARGET_DIR_ROOT_NAME='scrapers_by_genre/scraper_slurm_scripts'
 TARGET_DIR=${_TARGET_DIR_ROOT_NAME}__${GENRE_NAME}
@@ -34,7 +36,7 @@ N_JSONS=`ls ${TARGET_DIR}/all_jsons | wc -l`
 echo "Genre $GENRE_NAME: Collected $N_JSONS JSONs"
 
 # Run the cantus_json_to_csv.py script to create the CantusCorpus CSV file.
-# This script is one directory above this script.
+
 CANTUS_JSON_TO_CSV_SCRIPT=cantus_json_to_csv.py
 if [ ! -f $CANTUS_JSON_TO_CSV_SCRIPT ]; then
   echo "ERROR: $CANTUS_JSON_TO_CSV_SCRIPT does not exist"

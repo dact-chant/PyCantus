@@ -33,6 +33,14 @@ for CHUNK_DIR in `ls ${TARGET_DIR} | grep chunk`; do
     echo "ERROR: $SCRIPT does not exist"
     exit 3
   fi
+  chmod +x $SCRIPT
+  # create it log files just in case
+  _CONF_STDOUT_LOG='log-scrape-ci-jsons.out'
+  _CONF_STDERR_LOG='log-scrape-ci-jsons.err'
+  touch ${TARGET_DIR}/${CHUNK_DIR}/${_CONF_STDOUT_LOG}
+  touch ${TARGET_DIR}/${CHUNK_DIR}/${_CONF_STDERR_LOG}
+
+
   echo "Submitting SLURM wrapper: $SCRIPT"
   sbatch $SCRIPT
 done
@@ -40,3 +48,4 @@ done
 # Check how many jobs are running.
 squeue -u $USER
 
+ 

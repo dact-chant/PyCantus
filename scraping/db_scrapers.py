@@ -127,8 +127,8 @@ class _AbstractSourceScraper:
     def __init__(self,
                  require_title=True,
                  require_siglum=True,
-                 require_provenance=True,
-                 require_century=True):
+                 require_provenance=False,
+                 require_century=False):
         # We can set these URLS in the abstract parent class because all the sites
         # that we use are just differently styled copies of the Cantus Drupal site.
         self.DB_URL = ''
@@ -703,18 +703,21 @@ class FontesCantusBohemiaeScraper(_AbstractSourceScraper):
         source.title = title
 
         #     'siglum',
-        archive_container = container.find('div', class_='field-name-field-archive')
-        if not archive_container:
-            raise ValueError('Source data must have archive!')
-        archive = archive_container.find('div', class_='field-item').find('a').text
-        if not archive:
-            raise ValueError('Source data must have archive! Found container, but text empty.')
-        archive_siglum = archive.split()[0]
-
         shelfmark_container = container.find('div', class_='field-name-field-shelf-mark')
         if not shelfmark_container:
             raise ValueError('Source data must have shelfmark!')
         shelfmark = shelfmark_container.find('div', class_='field-item').text
+
+        archive_container = container.find('div', class_='field-name-field-archive')
+        if archive_container:
+            #raise ValueError('Source data must have archive!')
+            archive = archive_container.find('div', class_='field-item').find('a').text
+            if not archive:
+                raise ValueError('Source data must have archive! Found container, but text empty.')
+            archive_siglum = archive.split()[0]
+        else:
+            archive_siglum = ''
+        
 
         siglum = archive_siglum + ' ' + shelfmark
         source.siglum = siglum

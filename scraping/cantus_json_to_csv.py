@@ -8,7 +8,7 @@ required fields:
 
     incipit
     siglum
-    srclink
+    srclink 
     chantlink
     folio
     db
@@ -144,7 +144,7 @@ def office2office_id(office: str):
 
 # For current state of data we decided to use CI feast codes (column 1)
 FEAST_MAP_CSV2JSON = load_mapping(
-    path_to_file=os.path.join(os.path.dirname(__file__), 'static', 'feast_CI.csv'),
+    path_to_file=os.path.join(os.path.dirname(__file__), 'static', 'feast.csv'),
     from_column=1, to_column=0
 )
 FEAST_MAP_JSON2CSV = {v: k for k, v in FEAST_MAP_CSV2JSON.items()}
@@ -429,11 +429,14 @@ def main(args):
             #    logging.error('Could not decode file with json.decoder: {}'.format(input_path))
             #    continue
             except Exception as e:
-                logging.error('Could not process file, skipping: {}\n{}'.format(input_path, e))
+                if current_json_data == []:
+                    logging.error('Could not process file, EMPTY file, skipping: {}\n{}'.format(input_path, e))
+                else:
+                    logging.error('Could not process file, skipping: {}\n{}'.format(input_path, e))
                 continue
 
     logging.info('Put {} items into CSVs.'.format(len(csv_data)))
-    #logging.info('First CSV row:')
+    logging.info('First CSV row:')
     #logging.info(csv_data[0])
 
     # csv_data = convert_json_data_to_csv_data(json_data,

@@ -10,7 +10,9 @@ CSV_FILE="static/genre.csv"
 FOLDER_NAME="cids_lists_by_genre"
 
 # Extract the second column, remove duplicates, and iterate over them
-cut -d',' -f2 "$CSV_FILE" | tail -n +2 | sort -u | while read -r genre; do
+cut -d',' -f1 "$CSV_FILE" | tail -n +2 | sort -u | while read -r genre; do
+    echo "$genre"
+
     FILE_PATH="${FOLDER_NAME}/${genre}.txt"
     DIR_NAME="$scraper_slurm_scripts__$genre"
 

@@ -38,7 +38,7 @@ class Chant():
         - represents one chnat entry in database
 
     Attributes:
-        siglum (*): Abbreviation for the source manuscript or collection (e.g., "A-ABC Fragm. 1").
+        siglum (*): Abbreviation for the source manuscript or collection (e.g., "A-ABC Fragm. 1"). Use RISM whenever possible.
         srclink (*): URL link to the source in the external database (e.g., "https://yourdatabase.org/source/123").
         chantlink (*): URL link directly to the chant entry in the external database (e.g., "https://yourdatabase.org/chant/45678").
         folio (*): Folio information for the chant (e.g., "001v").

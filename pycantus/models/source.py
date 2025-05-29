@@ -17,6 +17,14 @@ class Source():
     """
     pycantus Source class
         - represents one source entry in database
+
+    Attributes:
+        title(*): Name of the source (can be same as siglum)
+        srclink(*): URL link to the source in the external database (e.g., "https://yourdatabase.org/source/123").
+        siglum(*): Abbreviation for the source manuscript or collection (e.g., "A-ABC Fragm. 1"). Use RISM whenever possible.
+        century: century of source origin
+        provenance: name of the place of source origin
+
     """
 
     def __init__(self,

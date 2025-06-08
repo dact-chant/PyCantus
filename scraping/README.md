@@ -21,49 +21,21 @@ refreshes!
 The issue is that the refresh takes quite a bit of time, because it takes
 some 20-odd requests (at least!) from the Cantus Index server to the individual
 database servers. So, the process needs to be paralellized, and also sensitive
-to the infrastructure -- it takes roughly days to scrape the entire Cantus Index,
-and we cannot block it -- and all the component databases -- for other people!
+to the infrastructure - it takes roughly days to scrape the entire Cantus Index,
+and we cannot block it - and all the component databases - for other people!
 
 
 Sizes and timing
 ----------------
 
-Cantus Index says it has a total of 59529 Cantus IDs.
-If downloading each takes 10 seconds, that's 595290 seconds, or nearly 10,000 hours.
+Cantus Index says it has at least total of 59529 Cantus IDs.
+If downloading each takes 10 seconds, that's 595290 seconds at least, or nearly 10,000 hours.
 Paralellizing to 100 processes is still 100 hours, or 4 days.
 This is way too much to just run without some watching and management.
 In order to do that, we will proceed by **genre**. This way, we will get
 meaningful subsets.
 
 The lists of Cantus IDs will be stored in the ```cid_lists_by_genre``` directory.
-
-If we go by priority of chant genres, from core to periphery:
-
-1. A: Antiphons (13344)
-2. R: Responsories (5990)
-3. In: Introits (425)
-4. Gr: Graduals (254)
-5. Al: Alleluias (1125)
-6. Tc: Tracts (153)
-7. Of: Offertories (321)
-8. Cm: Communions (386)
-
-But there are also responsory verses, verses for mass repertoire (introits, graduals, 
-alleluias, offertories, communions).
-
-9. V: Responsory verses (9544)
-10. InV: Introit verses (842)
-11. GrV: Gradual verses (347)
-12. AlV: Alleluia verses (107)
-13. TcV: Tract verses (421)
-14. OfV: Offertory verses (415)
-15. CmV: Communion verses (751)
-
-And then there are Versus ad Repetendum genres for many of the mass genres,
-and many, many other genres (but those will be mostly peripheral).
-For instance: there are 729 Invitatories (I)!
-
-A complete table is in the ```genre_counts.txt``` file. (TODO)
 
 
 Workflow
@@ -89,8 +61,8 @@ The inner step is done by the `scrape_ci_jsons.sh` script.
 
 Because of the long time this all will take to complete, we will split it into
 human-manageable chunks by chant genre. This splitting is a bit more complex.
-We use the SLURM cluster at UFAL. 
-
+We use the SLURM cluster.  
+  
 For each chant genre, a separate chunking
 is performed. For a genre, the `prepare_slurm_script.sh` script is run to generate
 a SLURM wrapper for the individual chunks, each again in their own `chunk_${i}`
@@ -106,5 +78,31 @@ the `genre_dir/chunk_${i}/jsons` directories via `collect_slurm_results.sh`.
 
 After that we might want to get information about sources of collected chants which can be done via running `scrape_source_csv.py`.
 
-----------------------------
-Example of workflow:
+----------------------------  
+
+**Example of particular workflow steps:**
+1) run `get_cids_lists.sh` 
+    - calls `scrape_cid_values.py` for each genre from `static/genre.csv` (first column is expected to be CI abreviation of genre)
+    - outputs GENRE.txt list of CIDs into cantus_ids_list_by_genre directory
+
+2) run `get_scripts_prep_by_genre.sh`
+    - calls `prepare_slurm_script.sh` for all genre from `static/genre.csv`
+    - that creates diectory with scraping scripts for each genre in `static/genre.csv`
+
+3) check that `wrapper_logs` folder in same directory as `run_slurm_scripts.sh` exists
+
+4) run `run_slurm_scripts.sh` for each genre (to somehow reasonably use resources, some genre are quite exhaustive)
+    - runs all `scrape_ci_json.sh` by prepared chunks of CIDs in proper `slurm_wrapper.sh` runs
+
+5) run `get_collected_by_genre.sh`
+    - runs `collect_scrape_results.sh` for each genre in `static/genre.csv`
+    - that joins all collected json files into one `all_jsons` directory
+    - and then runs `cantus_json_to_csv.py` script to create CSV CantusCorpus style file from that collected json records
+    - do not get scared when 
+------  
+
+6) run `scrape_sources_csv.py` for all those CSV files whose sources info you want to collect (with correct arguments) 
+    - possibly concatenate all genre files into one big file and collect sources on that one  
+  
+  
+Finally, do not forget that after collecting all the data, some cleaning (e.g. looking for duplicates etc.) might be needed.

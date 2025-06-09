@@ -76,7 +76,19 @@ from the directory containing this README.
 Finally, after the jobs finish, the JSONs can be collected from 
 the `genre_dir/chunk_${i}/jsons` directories via `collect_slurm_results.sh`.
 
-After that we might want to get information about sources of collected chants which can be done via running `scrape_source_csv.py`.
+After that we might want to get information about sources of collected chants which can be done via running `scrape_source_csv.py`.  
+
+We have scrapers ready for those source databases:
+- Cantus Database (https://cantusdatabase.org/)
+- MMMO Database (https://musmed.eu/)
+- Slovak Early Music Database (https://cantus.sk/)
+- Cantus Fontes Bohemiae (https://cantusbohemiae.cz)
+- Cantus Planus in Polonia (https://cantusplanus.pl/)
+- Portuguese Early Music Database (https://pemdatabase.eu/)
+- Spanish Early Music Manuscripts Database (https://musicahispanica.eu)
+- Hungarian Chant Database (https://hun-chant.eu/)
+- Medieval Music Manuscripts from Austrian Monasteries (https://austriamanus.org/)
+- Codicologica et Hymnologica Bohemica Liturgica (https://hymnologica.cz/)
 
 ----------------------------  
 

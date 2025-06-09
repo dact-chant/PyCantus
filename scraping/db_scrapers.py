@@ -233,7 +233,7 @@ class _AbstractSourceScraper:
 class CantusSKScraper(_AbstractSourceScraper):
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
-        self.DB_URL = 'http://cantus.sk'
+        self.DB_URL = 'https://cantus.sk'
         self._set_derived_drupal_db_urls()
         self._force_http = True
 
@@ -282,7 +282,7 @@ class CantusSKScraper(_AbstractSourceScraper):
 class IspanPLScraper(_AbstractSourceScraper):
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
-        self.DB_URL = 'http://cantusplanus.pl' #'http://cantus.ispan.pl'
+        self.DB_URL = 'https://cantusplanus.pl' #'http://cantus.ispan.pl'
         self._set_derived_drupal_db_urls()
         self._force_http = True
 
@@ -684,7 +684,7 @@ class FontesCantusBohemiaeScraper(_AbstractSourceScraper):
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
         # We set these URLS
-        self.DB_URL = 'http://cantusbohemiae.cz'
+        self.DB_URL = 'https://cantusbohemiae.cz'
         self._set_derived_drupal_db_urls()
         self._force_http = True
 
@@ -835,7 +835,7 @@ class MusicaHispanicaScraper(_AbstractSourceScraper):
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
-        self.DB_URL = 'http://musicahispanica.eu'
+        self.DB_URL = 'https://musicahispanica.eu'
         self._set_derived_drupal_db_urls()
         self._force_http = True
 
@@ -950,6 +950,52 @@ class AustriaManusScraper(_AbstractSourceScraper):
         return source
 
 
+class HymnologicaScraper(_AbstractSourceScraper):
+
+    def __init__(self, **kwargs):
+        super().__init__(**kwargs)
+        self.DB_URL = 'https://hymnologica.cz'
+        #self._set_derived_drupal_db_urls()
+        #self._force_http = True
+
+    def source_data_from_source_soup(self, soup: BeautifulSoup) -> SourceData:
+        """Extract the SourceData from the given source page soup."""
+        source = SourceData()
+        # 'title',
+        source.title = soup.find('h1', class_='page-header').text
+
+        # Searching only in the container section element speeds us up.
+        container_section = soup.find(id='block-system-main')
+        if not container_section:
+            raise ValueError('Cound not find container section in source!')
+
+        # 'siglum'
+        siglum_div = container_section.find('div', class_='field-name-field-siglum')
+        if not siglum_div:
+            raise ValueError('Required value not found: siglum')
+        source.siglum = siglum_div.find(
+            'div', class_='field-item').text
+        
+        # 'provenance'
+        provenance_container = container_section.find('div', class_='field-name-field-provenance')
+        if not provenance_container:
+            self.handle_missing_important_field('provenance')
+        else:
+            source.provenance = provenance_container.find('div', class_='field-item').text
+
+        # 'century'
+        century_container = container_section.find('div', class_='field-name-field-century')
+        if not century_container:
+            self.handle_missing_important_field('century')
+        else:
+            # century is a link
+            source.century = century_container.find('div', class_='field-item').find('a').text
+
+        # 'cursus' - Hymnologica does not annotate cursus
+
+        return source
+
+
 
 class UniversalSourceScraper(_AbstractSourceScraper):
     """The Universal Scraper wraps all the other implemented database scrapers.
@@ -969,6 +1015,7 @@ class UniversalSourceScraper(_AbstractSourceScraper):
     - Musica Hispanica (musicahispanica.eu)
     - Austrimanus (austriamanus.org)
     - Hungarian Chant Database (hun-chant.eu)
+    - Hymnologica (hymnologica.cz)
 
     Must be used via URL, not via just the source ID, because the source ID itself
     does not carry information about which database to look into. Different databases
@@ -986,7 +1033,8 @@ class UniversalSourceScraper(_AbstractSourceScraper):
             'fcb': FontesCantusBohemiaeScraper(**kwargs),
             'musica_hispanica': MusicaHispanicaScraper(**kwargs),
             'austriamanus': AustriaManusScraper(**kwargs),
-            'hun-chant' : HungarianChantScraper(**kwargs)
+            'hun-chant' : HungarianChantScraper(**kwargs),
+            'hymnologica' : HymnologicaScraper(**kwargs)
         }
 
     def _select_scraper_by_url(self, url: str):
@@ -1008,6 +1056,8 @@ class UniversalSourceScraper(_AbstractSourceScraper):
             return self.scrapers['austriamanus']
         elif 'hun-chant.eu' in url:
             return self.scrapers['hun-chant']
+        elif 'hymnologica' in url:
+            return self.scrapers['hymnologica']
         else:
             raise NotImplementedError('No scraper implemented yet for url: {}'.format(url))
 

@@ -297,10 +297,16 @@ class IspanPLScraper(_AbstractSourceScraper):
             title = title_container.text
             source.title = title
 
-        siglum_container = container.find('div', class_='field-name-field-shelf-mark')
-        if siglum_container:
-            siglum = siglum_container.find('div', class_='field-item').text
-            source.siglum = siglum
+        #   'siglum'
+        shelfmark_container = container.find('div', class_='field-name-field-shelf-mark')
+        if shelfmark_container:
+            shelfmark = shelfmark_container.find('div', class_='field-item').text
+            # To get reasonable RISM style siglum we wanna add first token (Country-Archive, e.g. Pl-PE) from title 
+            try:
+                siglum = title.split()[0] + " " + shelfmark
+                source.siglum = siglum
+            except:
+                source.siglum = shelfmark
         else:
             raise ValueError('Source data must have siglum!')
 
@@ -618,11 +624,11 @@ class PemDBScraper(_AbstractSourceScraper):
         source.title = title
 
         #     'siglum',
-        siglum_container = container.find('div', class_='field field--name-field-shelfmark field--type-string field--label-inline clearfix') #'field-name-field-siglum')
+        siglum_container = container.find('div', class_='field--name-field-siglum')
         if not siglum_container:
             raise ValueError('Source data must have siglum!')
         siglum = siglum_container.find('div', class_='field__item').text
-        source.siglum = siglum
+        source.siglum = siglum.strip()
 
         #     'description',
         #     'rism',

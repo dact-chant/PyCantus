@@ -8,9 +8,10 @@ import os
 from importlib import resources as impresources
 
 import pycantus.static as static
+from pycantus.models.melody import Melody
 
 
-__version__ = "0.0.3"
+__version__ = "0.0.4"
 __author__ = "Anna Dvorakova"
 
 @staticmethod
@@ -26,8 +27,8 @@ GENRE_TO_RITE = get_rite_dict()
 
 MANDATORY_CHANTS_FIELDS = {'cantus_id', 'incipit', 'srclink', 'siglum','chantlink', 'folio', 'db'}
 OPTIONAL_CHANTS_FIELDS = {'sequence', 'feast', 'genre', 'office', 'position', 'melody_id', 'image', 'mode',
-                               'full_text', 'melody', 'century'}
-NON_EXPORT_FIELDS = ['locked', 'rite']
+                               'full_text', 'melody', 'century', 'rite'}
+NON_EXPORT_FIELDS = ['locked', 'rite', '_has_melody', 'melody_object']
 EXPORT_FIELDS = ['cantus_id', 'incipit', 'siglum', 'srclink', 'chantlink', 'folio', 'db', 'sequence', 'feast', 'genre',
                      'office', 'position', 'melody_id', 'image', 'mode', 'full_text', 'melody', 'century']
 
@@ -57,10 +58,14 @@ class Chant():
         century: Number identifying the century of the source. If multiple centuries apply, the lowest number should be used. (e.g., "12").
         db (*): Code for the database providing the data, used for identification within CI (e.g., "DBcode").
 
-        rite: not yet in CI, but possibly to be (so we wanna be ready)
+        rite: not yet in CI, but possibly to be (so we want to be ready)
 
-        All filed are str type.
+        All these filed are str type.
         (Fields marked with an asterisk (*) are obligatory and must be included in every record. Other fields are optional but recommended when data is available.)
+    Functional attributes:
+        locked: Indicates if the object is locked for editing. If True, no attributes can be modified.
+        _has_melody: True if the chant has a melody, False otherwise.
+        melody_object: If the chant has a melody, in this should be an instance of the Melody class representing the chant's melody.
     """
     
 
@@ -83,7 +88,7 @@ class Chant():
                  full_text=None,
                  melody=None,
                  century=None,
-                 rite=None
+                 rite=None,
                 ):
         self.locked = False  # Indicates if the object is locked for editing
         self.cantus_id = cantus_id
@@ -109,6 +114,13 @@ class Chant():
             self.rite = rite
         else: # add rite based on the genre
             self. rite = GENRE_TO_RITE.get(genre, None)
+        
+        if self.melody is not None:
+            self._has_melody = True
+        else:
+            self._has_melody = False
+
+        self.melody_object = None
 
     # setter
     def __setattr__(self, name, value):
@@ -125,7 +137,7 @@ class Chant():
 
 
     def __str__(self) -> str:
-        return str(self.cantus_id)
+        return str(self.chantlink) + ' : ' + str(self.cantus_id)
     
     @property
     def to_csv_row(self) -> str:
@@ -140,3 +152,11 @@ class Chant():
             else:
                 csv_row.append('')
         return ','.join(csv_row)
+    
+    def create_melody(self):
+        """
+        Creates a Melody object for the chant if it has a melody.
+        Expectes volpiano to be provided.
+        """
+        if self._has_melody:
+            self.melody_object = Melody(self.melody, self.chantlink, self.cantus_id)

@@ -10,7 +10,7 @@ from pycantus.models.source import Source
 from pycantus.dataloaders.loader import CsvLoader
 
 
-__version__ = "0.0.3"
+__version__ = "0.0.4"
 __author__ = "Anna Dvorakova"
 
 
@@ -44,6 +44,7 @@ class Corpus():
 
         self._chants = chants
         self._sources = sources
+        self._melodies = []
 
         if not self.is_editable:
             self._lock_chants()
@@ -59,6 +60,11 @@ class Corpus():
         """ Sets all sources to locked. """
         for s in self._sources:
             s.locked = True
+    
+    def _lock_melodies(self):
+        """ Sets all sources to locked. """
+        for m in self._melodies:
+            m.locked = True
 
     @property #getter
     def chants(self):
@@ -82,6 +88,10 @@ class Corpus():
         else:
             raise PermissionError('Corpus is not editable, cannot replace sources list.')
     
+    @property #getter
+    def melodies(self):
+        return self._melodies
+    
     @property
     def csv_chants_header(self) -> str:
         """
@@ -95,16 +105,6 @@ class Corpus():
         Returns proper csv header for sources export to csv
         """
         return Source.header()
-
-    #def all_cids_list(self) -> [str]:
-    #    """
-    #    """
-    #    pass
-    
-    #def all_srclinks_list(self) -> [str]:
-    #    """
-    #    """
-    #    pass
 
     def export_csv(self, chants_filepath : str, sources_filepath):
         """ 
@@ -131,13 +131,62 @@ class Corpus():
                 print(f"Error exporting sources file : {e}")
 
 
+    def drop_duplicate_chants(self):
+        """
+        Discards all chants that have the same chantlink as another chant.
+        Keeps the last occurrence of each chant.
+        """
+        chantlinks = [ch.chantlink for ch in self._chants]
+        i = 0
+        for chant in self._chants:
+            if chantlinks.count(chantlinks[i]) > 1:
+                self._chants.remove(chant)
+            i += 1
 
-    # Filtration methods
+    def drop_duplicate_sources(self):
+        """
+        Discards all sources that have the same srclink as another source.
+        Keeps the first occurrence of each source.
+        """
+        pass 
 
-    # srclink
-    # office
-    # genre
-    # feast
 
-    # somehow have: "isin" for substrings or for lists ... 
+    def merge_with(self, to_be_merged, keep_duplicates=True):
+        """
+        Merges the current corpus with another corpus.
+        If keep_duplicates is True, it keeps all chants, sources and possibly melodies from both corpora.
+        """
+        pass
+    
+    def create_melodies(self):
+        """
+        Creates Melody objects for all chants in the corpus that has melody encoded
+        and stores them in _melodies list - locks if corpus is not editable.
+        This method should be called after the chants are loaded.
+        """
+        self._melodies = []
+        for chant in self._chants:
+            chant.create_melody()
+            self._melodies.append(chant.melody_object)
+        if not self.is_editable:
+            self._lock_melodies()
+
+    def keep_melodic_chants(self):
+        """
+        Keeps only chants that have a melody in the corpus.
+        """
+        self._chants = [ch for ch in self._chants if ch._has_melody]
+        # Just in case, we also need to create melodies again
+        self.create_melodies()
+    
+    def discard_empty_sources(self):
+        """
+        Discards all sources that have no chants in corpus.
+        """
+        sources_in_chant_data = {ch.srclink for ch in self._chants}
+        self._sources = [s for s in self._sources if s.srclink in sources_in_chant_data]
+
+
+    def filter_chants(self, filter_file : str):
+        pass
 

@@ -44,21 +44,23 @@ class Melody():
     def __str__(self) -> str:
         return self.volpiano
     
-    def clean_volpiano(self, keep_boundaries=False,
+    def clean_volpiano(self, keep_boundaries=False, allowed_chars=None,
                        neume_boundary=' ', syllable_boundary=' ', word_boundary=' ',
                        keep_bars=False, allowed_bars='345', bar='|'):
         """
         Extracts only the allowed characters (and optionally boundaries) from a volpiano string.
         """
-        self.volpiano = clean_volpiano(self.volpiano, keep_boundaries, neume_boundary, syllable_boundary, word_boundary,
-                                       keep_bars, allowed_bars, bar)
+        self.volpiano = clean_volpiano(volpiano=self.volpiano, keep_boundaries=keep_boundaries, allowed_bars=allowed_bars, 
+                                       neume_boundary=neume_boundary, syllable_boundary=syllable_boundary, 
+                                       word_boundary=word_boundary, keep_bars=keep_bars, allowed_chars=allowed_chars, bar=bar)
     
     def expand_accidentals(self, omit_notes=False, barlines='3456', apply_once_only=False):
         """
         Expand all accidentals in a volpiano string by adding the accidental
         to all other notes in the scope.
         """
-        self.volpiano = expand_accidentals(self.volpiano, omit_notes, barlines, apply_once_only)
+        self.volpiano = expand_accidentals(volpiano=self.volpiano, omit_notes=omit_notes, 
+                                           barlines=barlines, apply_once_only=apply_once_only)
     
     def normalize_liquescents(self):
         """Treat all liquescences as normal notes."""

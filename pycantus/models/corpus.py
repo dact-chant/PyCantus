@@ -8,6 +8,7 @@ import pandas as pd
 from pycantus.models.chant import Chant
 from pycantus.models.source import Source
 from pycantus.dataloaders.loader import CsvLoader
+from pycantus.filtration.filter import Filter
 
 
 __version__ = "0.0.4"
@@ -141,14 +142,21 @@ class Corpus():
         for chant in self._chants:
             if chantlinks.count(chantlinks[i]) > 1:
                 self._chants.remove(chant)
+                chantlinks.remove(chantlinks[i])
             i += 1
 
     def drop_duplicate_sources(self):
         """
         Discards all sources that have the same srclink as another source.
-        Keeps the first occurrence of each source.
+        Keeps the last occurrence of each source.
         """
-        pass 
+        srclinks = [s.srclink for s in self._sources]
+        i = 0
+        for source in self._sources:
+            if srclinks.count(srclinks[i]) > 1:
+                self._sources.remove(source)
+                srclinks.remove(srclinks[i])
+            i += 1
 
 
     def merge_with(self, to_be_merged, keep_duplicates=True):
@@ -187,6 +195,13 @@ class Corpus():
         self._sources = [s for s in self._sources if s.srclink in sources_in_chant_data]
 
 
-    def filter_chants(self, filter_file : str):
-        pass
+    def apply_filter(self, filter : Filter):
+        """
+        Applies the given filter on its data.
+        """
+        self._chants, self._sources, self._melodies = filter.apply(self._chants, self._sources, self._melodies)
+        print('Discarding empty sources after filtration...')
+        self.discard_empty_sources()
+        print('Number of chants after filtration:', len(self._chants), '\nNumber of sources after filtration:', len(self._sources))
+        
 

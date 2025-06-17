@@ -6,13 +6,14 @@ import pandas as pd
 import os
 import requests
 from importlib import resources as impresources
+import re
 
 from pycantus.models.chant import Chant
 from pycantus.models.source import Source
 import pycantus.dataset_files as dataset_files
 
 
-__version__ = "0.0.1"
+__version__ = "0.0.3"
 __author__ = "Anna Dvorakova"
 
 
@@ -20,8 +21,38 @@ MANDATORY_CHANTS_FIELDS = {'cantus_id', 'srclink', 'incipit', 'siglum','chantlin
 OPTIONAL_CHANTS_FIELDS = {'sequence', 'feast', 'genre', 'office', 'position', 'melody_id', 'image', 'mode',
                           'full_text', 'melody', 'century', 'rite'}
 MANDATORY_SOURCES_FIELDS = {'title', 'srclink', 'siglum'}
-OPTIONAL_SOURCES_FIELDS = {'century', 'provenance'}
+OPTIONAL_SOURCES_FIELDS = {'century', 'provenance', 'numeric_century'}
 
+def get_numerical_century(century : str) -> int:
+    try:
+        two_digits_pattern = r'(?<!\d)\d{2}(?!\d)'
+        two_digits_match = re.findall(two_digits_pattern, century)
+        if len(two_digits_match) == 1:
+            return int(two_digits_match[0])
+        elif len(two_digits_match) > 1: 
+            # take first anyway
+            return int(two_digits_match[0])
+        
+        one_digit_pattern = r'(?<!\d)\d{1}(?!\d)'
+        one_digit_match = re.findall(one_digit_pattern, century)
+        if len(one_digit_match) == 1:
+            return int(one_digit_match[0])
+        
+        four_digits_pattern = r'(?<!\d)\d{4}(?!\d)'
+        four_digits_match = re.findall(four_digits_pattern, century)
+        if four_digits_match is not None:
+            if len(four_digits_match) == 1:
+                return int(four_digits_match[0][0:2])+1
+            elif len(four_digits_match) > 1: 
+                # take first anyway
+                return int(four_digits_match[0][0:2])+1
+            else:
+                print('PROBLEM:', century)
+        else:
+            print('PROBLEM:', century)
+    except: # probably nan coming
+        return None
+    
 
 class CsvLoader():
     """
@@ -99,7 +130,6 @@ class CsvLoader():
                 for field in OPTIONAL_CHANTS_FIELDS:
                     if field in row.index and pd.notna(row[field]):
                         optional_params[field] = row[field]
-                
                 # Create Chant object and add to list
                 chant = Chant(**mandatory_params, **optional_params)
                 chants.append(chant)
@@ -129,7 +159,12 @@ class CsvLoader():
                 for field in OPTIONAL_SOURCES_FIELDS:
                     if field in row.index and pd.notna(row[field]):
                         optional_params[field] = row[field]
-                
+                # Handle numeric_century if needed
+                if 'numeric_century' not in row.index: 
+                    if 'century' in row.index and pd.notna(row['century']):
+                        optional_params['numeric_century'] = get_numerical_century(row['century'])
+                    else:
+                        optional_params['numeric_century'] = None
                 # Create Chant object and add to list
                 source = Source(**mandatory_params, **optional_params)
                 sources.append(source)

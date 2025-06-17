@@ -9,7 +9,7 @@ __author__ = "Anna Dvorakova"
 
 MANDATORY_SOURCES_FIELDS = {'title', 'srclink', 'siglum'}
 OPTIONAL_SOURCES_FIELDS = {'century', 'provenance'}
-EXPORT_FIELDS = ['title', 'siglum','century', 'provenance', 'srclink',]
+EXPORT_FIELDS = ['title', 'siglum','century', 'provenance', 'srclink', 'numeric_century']
 NON_EXPORT_FIELD = ['locked']
 
 
@@ -31,6 +31,7 @@ class Source():
                  title,
                  srclink, 
                  siglum,
+                 numeric_century=None,
                  century=None,
                  provenance=None):
         """
@@ -39,6 +40,7 @@ class Source():
         self.title = title
         self.srclink = srclink
         self.siglum = siglum
+        self.numeric_century = numeric_century
         self.century = century
         self.provenance = provenance
     
@@ -61,6 +63,7 @@ class Source():
         for attr_name in EXPORT_FIELDS:
             attr_value = self.__getattribute__(attr_name)
             if attr_value is not None:
+                attr_value = str(attr_value)
                 csv_row.append(attr_value)
             else:
                 csv_row.append('')

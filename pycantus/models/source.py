@@ -64,6 +64,8 @@ class Source():
             attr_value = self.__getattribute__(attr_name)
             if attr_value is not None:
                 attr_value = str(attr_value)
+                if ',' in attr_value:
+                    attr_value = f'"{attr_value}"'  # Enclose in quotes if it contains a comma
                 csv_row.append(attr_value)
             else:
                 csv_row.append('')

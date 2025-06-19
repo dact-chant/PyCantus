@@ -1,0 +1,117 @@
+genre_name,description,rite,mass_or_office
+[?],Unknowable / Ambiguous,,
+[G],"Mass chant (a generic code used in the earliest Cantus inventories, to be reassigned)",Franco-Roman,Mass
+[GV],"Verse of a Mass chant (a generic code used in the earliest Cantus inventories, to be reassigned)",Franco-Roman,Mass
+[M],"Miscellaneous (a generic code used in the earliest Cantus inventories, to be reassigned)",Franco-Roman,
+[MO],"Mass Ordinary (a generic code used in the earliest Cantus inventories, to be reassigned)",Franco-Roman,Mass
+A,Antiphon,Franco-Roman,Mass/Office
+ACC,Ad accedentes,Hispanic,Mass
+ACCV,Ad accedentes verse,Hispanic,Mass
+Ag,Agnus dei,Franco-Roman,Mass
+Al,Alleluia,Franco-Roman,Mass
+ALL,Alleluiaticus,Hispanic,Mass
+ALLV,Alleluiaticus verse,Hispanic,Mass
+AlV,Alleluia verse,Franco-Roman,Mass
+ANT,Antiphon (Hispanic rite),Hispanic,Mass/Office
+ANTV,Antiphon verse (Hispanic rite),Hispanic,Mass/Office
+AP,Processional antiphon,Franco-Roman,Mass/Office
+AV,Antiphon verse,Franco-Roman,Office
+BD,Benedicamus domino,Franco-Roman,Mass/Office
+BNMT,Benedictiones (matutinum),Hispanic,Office
+BNMTV,Benedictiones (matutinum) verse,Hispanic,Office
+BNOF,Benedictiones (office),Hispanic,Office
+BNOFV,Benedictiones (office) verse,Hispanic,Office
+BNS,Benedictiones (mass),Hispanic,Mass
+BNSV,Benedictiones (mass) verse,Hispanic,Mass
+Ca,Canticle,Franco-Roman,Mass/Office
+CaH,Canticle (Hispanic rite),Hispanic,Mass/Office
+Cap,Capitulum,Franco-Roman,Office
+CaV,Canticle verse,Franco-Roman,Mass/Office
+CaVH,Canticle verse (Hispanic rite),Hispanic,Mass/Office
+CFP,Ad confractionem panis,Hispanic,Mass
+CFPV,Ad confractionem panis verse,Hispanic,Mass
+CLM,Clamores (mass),Hispanic,Mass
+CLMO,Clamores (office),Hispanic,Office
+CLMOV,Clamores (office) verse,Hispanic,Office
+CLMV,Clamores (mass) verse,Hispanic,Mass
+Cm,Communion,Franco-Roman,Mass
+CmR,Versus ad repetendum for the communion,Franco-Roman,Mass
+CmV,Communion verse,Franco-Roman,Mass
+Cn,"Cantio, Cantiones (paraliturgical sacred songs with poetic and often strophic Latin or vernacular texts)",Franco-Roman,Mass/Office
+CnV,Cantio Verse (strophe of paraliturgical sacred poetic text),,
+Cr,Credo,Franco-Roman,Mass
+D,Dramatic element (used for items of liturgical drama that are not otherwise rubricked),Franco-Roman,Office
+Gl,Gloria,Franco-Roman,Mass
+Gr,Gradual,Franco-Roman,Mass
+GRC,Graecus,Hispanic,Mass
+GrV,Gradual verse,Franco-Roman,Mass
+H,Hymn (and hymn verses if listed together in the same record),Franco-Roman,Office
+HV,Hymn verse,Franco-Roman,Office
+HYMN,"Hymn (Hispanic rite, but to be merged with Franco-Roman rite) - work in progress",Hispanic,
+I,Invitatory antiphon,Franco-Roman,Office
+Ig,Ingressa (for the Beneventan Liturgy),Franco-Roman,Office
+In,Introit,Franco-Roman,Mass
+InR,Versus ad repetendum for the Introit,Franco-Roman,Mass
+InV,Introit verse,Franco-Roman,Mass
+IP,Invitatory psalm (when written out and notated),Franco-Roman,Office
+Ite,Ite missa est,Franco-Roman,Mass
+Ky,Kyrie,Franco-Roman,Mass
+L,Lesson (when written out and notated),Franco-Roman,Mass/Office
+LDMT,Laudes (matutinum),Hispanic,Office
+LDMTV,Laudes (matutinum) verse,Hispanic,Office
+LDOF,Laudes (office),Hispanic,Office
+LDOFV,Laudes (office) verse,Hispanic,Office
+LDS,Laudes (mass),Hispanic,Mass
+LDSV,Laudes (mass) verse,Hispanic,Mass
+Li,Litany (and litany verses if listed together in the same record),Franco-Roman,Mass/Office
+LiV,Litany verse,Franco-Roman,Mass/Office
+MSR,Miserationes,Hispanic,Office
+MSRV,Miserationes verse,Hispanic,Office
+MT,Matutinarium,Hispanic,Office
+MTV,Matutinarium verse,Hispanic,Office
+Of,Offertory,Franco-Roman,Mass
+OfV,Offertory verse,Franco-Roman,Mass
+Or,Oratio / Prayer (when written out and notated),Franco-Roman,
+PAC,Ad pacem,Hispanic,Mass
+PACV,Ad pacem verse,Hispanic,Mass
+Pn,Pater noster (when written out and notated),Franco-Roman,Mass
+Pr,Prefatio (when written out and notated),Franco-Roman,Mass
+PRCS,Preces,Hispanic,Office
+PRCSV,Preces verse,Hispanic,Office
+PRLG,Praelegendum,Hispanic,Mass
+PRLGV,Praelegendum verse,Hispanic,Mass
+PS,Psalm (when written out and notated),Franco-Roman,Mass/Office
+Psa,Prosa,,
+Psl,Prosula (a type of trope - Tp),Franco-Roman,Mass/Office
+PSLD,Psallendo,Hispanic,Office
+PSLDV,Psallendo verse,Hispanic,Office
+PSLM,Psalmo,Hispanic,Mass
+PSLMV,Psalmo verse,Hispanic,Mass
+R,Responsory,Franco-Roman,Office
+RS,Responsory (Hispanic rite),Hispanic,Mass/Office
+RSV,Responsory verse (Hispanic rite),Hispanic,Mass/Office
+Sa,Sanctus,Franco-Roman,Mass
+SCR,Sacrificium,Hispanic,Mass
+SCRV,Sacrificium verse,Hispanic,Mass
+SNCT,Ad sanctus,Hispanic,Mass
+SNCTV,Ad sanctus verse,Hispanic,Mass
+SNO,Sono,Hispanic,Office
+SNOV,Sono verse,Hispanic,Office
+Sq,Sequence,Franco-Roman,Mass
+SqV,Sequence verse,Franco-Roman,Mass
+Tc,Tract,Franco-Roman,Mass
+TcV,Tract verse,Franco-Roman,Mass
+Tp,"Trope (broadly); see also specific types of tropes, such as Psl (prosula) and TpBD (troped Benedicamus domino)",Franco-Roman,Mass/Office
+TpBD,Troped Benedicamus domino,Franco-Roman,Mass/Office
+TpIte,Troped Ite missa est,Franco-Roman,Mass
+TRN,Threno,Hispanic,Mass
+TRNV,Threno verse,Hispanic,Mass
+V,Responsory verse,Franco-Roman,Office
+Va,Varia,Franco-Roman,Mass/Office
+VaHW,Varia within Holy Week,Franco-Roman,Mass/Office
+VAR,Varia (Hispanic rite),Hispanic,Mass/Office
+VARV,Varia verse (Hispanic rite),Hispanic,Mass/Office
+VPR,Vespertinus,Hispanic,Office
+VPRV,Vespertinus verse,Hispanic,Office
+VRS,"Versus (Hispanic rite, applied to a number of quite different types of pieces in the sources, including single verses of Scripture not attached to any parent chant as well as more lengthy poetic texts; seebRandel, Index, xvii)",Hispanic,Office
+W,Versicle,Franco-Roman,Office

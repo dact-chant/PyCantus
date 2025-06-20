@@ -110,9 +110,9 @@ The Cantus network of databases is never done: more chants are indexed every wee
 will diminish over time as a representant of digital chant scholarship materials. For this purpose, we release
 not only the dataset but also the tools to re-build it
 
-The database network was scraped using its JSON API genre-by-genre and converted to easy-to-use CSV files.  
-Source metadata was scraped from front-ends of individual databases and again joined into a CSV file.  
-A description of scraping procedures with code can be found in the `scraping/` directory provided together with CantusCorpus 1.0.
+The database network was scraped using its JSON API genre-by-genre and converted to easy-to-use CSV files. Source metadata was scraped from front-ends of individual databases and again joined into a CSV file. 
+
+A description of scraping procedures with code can be found in the `scraping/` directory provided together with CantusCorpus 1.0. Because a refreshing mechanism has to be called to get up-to-date information for each CantusID, which triggers a Cantus Index query across all its component databases, the scraping process takes a relatively long time, and therefore needed to be parallelized. We worked with a SLURM cluster for this; for scraping on other parallel computing infrastructure, the scripts that distribute Cantus IDs to jobs and then combine them back will have to be adapted accordingly.
 
 After scraping, we performed the following data cleaning steps:
 - Join all chant files by genre into one file

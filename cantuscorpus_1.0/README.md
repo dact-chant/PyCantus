@@ -1,29 +1,26 @@
 CantusCorpus 1.0
 ========================
 
-Here we present a dataset of plainchant intended for computational research.  
-It has two parts:
-- chants
-- sources
+CantusCorpus 1.0 is a large dataset of Gregorian chant data intended for computational research.
+The dataset consists of all chants that are searchable through Cantus Index, combining data from 10 individual
+chant databases. Primarily these are catalogue records: which chants appear in which manuscripts.
+What allows us to identify multiple instances of a chant across different manuscripts
+is the **CantusID** mechanism, established from the long history of the Cantus Database.
+Thus, CantusCorpus 1.0 has two components: **chants**, and **sources** (manuscripts).
 
-The dataset consists of chants from Cantus Index. The database network was scraped using its JSON API genre-by-genre and converted to easy-to-use CSV files.  
-Source metadata was scraped from individual databases and again joined into a CSV file.  
-A description of scraping procedures with code can be found in the `scraping` directory.  
+CantusCorpus lies inherently downstream of the Cantus Database and the whole Cantus Index network
+of compatbile chant databases: we do not revisit anyone's editorial decisions. However, the value
+of this dataset is that the sum of all the editorial decisions made over the databases' decades of existence
+are being made available as a dataset for computational research, together with the PyCantus library
+that makes handling this dataset (almost) easy.
 
-After scraping, we did some basic cleaning.  
+## Licence
 
-Main steps taken:
-- Join all chant files by genre into one file
-- Discard duplicates in chantlinks
-- genre standardisation based on the genre list in CI from which those records were from (issues only around Tp...)
-- discard data (from chants and sources), where for sources we cannot collect additional info
-- Add a numerical century in sources
-- inspecting duplicate sources - discarding and unifying duplicates
+The CantusCorpus is released under a CC BY-NC-SA 4.0 license, just like the Cantus Index itself.
 
-Details on that can be found in the `get_dataset_from_scrapes.ipynb`.  
-____________________
 
-## About the dataset
+## Dataset contents
+
 Summary | |
 ----- | -----: |
 Cantus Index was scraped on | 20th May 2025
@@ -98,5 +95,23 @@ Databases in the list of *Other Cantus Index databases* are not analysed because
 
 <br/>
 
-## Licence
-The CantusCorpus is released under a CC BY-NC-SA 4.0 license, just like the Cantus Index itself.
+
+## Obtaining the data
+
+The database network was scraped using its JSON API genre-by-genre and converted to easy-to-use CSV files.  
+Source metadata was scraped from individual databases and again joined into a CSV file.  
+A description of scraping procedures with code can be found in the `scraping` directory.  
+
+After scraping, we did some basic cleaning.  
+
+Main steps taken:
+- Join all chant files by genre into one file
+- Discard duplicates in chantlinks
+- genre standardisation based on the genre list in CI from which those records were from (issues only around Tp...)
+- discard data (from chants and sources), where for sources we cannot collect additional info
+- Add a numerical century in sources
+- inspecting duplicate sources - discarding and unifying duplicates
+
+Details on that can be found in the `get_dataset_from_scrapes.ipynb`.  
+____________________
+

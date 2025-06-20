@@ -88,6 +88,14 @@ Field | Description
 
 Fields marked with (*) are required and thus should be present in all records of CantusCorpus 1.0.
 
+We decided to collect these sources' metadata partly because we see how they can be useful for computational chant research, but also because of their support among source databases. Here we present an overview of what is supported by what database.  
+
+
+![Genre distribution plot](img/source_metadata_support.png "")
+*Overview of support for different source metadata among CI databases*
+
+Databases in the list of *Other Cantus Index databases* are not analysed because they are not (at least currently) included in our scraping process, which is because their entries are not accessible via the Cantus Index JSON API. 
+
 <br/>
 
 ## Licence

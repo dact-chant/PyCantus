@@ -176,7 +176,8 @@ class Corpus():
         self._melodies = []
         for chant in self._chants:
             chant.create_melody()
-            self._melodies.append(chant.melody_object)
+            if chant.melody_object is not None:
+                self._melodies.append(chant.melody_object)
         if not self.is_editable:
             self._lock_melodies()
 
@@ -188,7 +189,7 @@ class Corpus():
         # Just in case, we also need to create melodies again
         self.create_melodies()
     
-    def discard_empty_sources(self):
+    def drop_empty_sources(self):
         """
         Discards all sources that have no chants in corpus.
         """

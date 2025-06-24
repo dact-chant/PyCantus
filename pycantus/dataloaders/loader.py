@@ -1,3 +1,4 @@
+#!/usr/bin/env python
 """
 This module contains the CsvLoader class, which is responsible for loading chants and sources from CSV files.
 It provides methods to download the files if they are not found, and to load the data into Chant and Source objects.
@@ -18,6 +19,11 @@ __author__ = "Anna Dvorakova"
 
 
 def get_numerical_century(century : str) -> int:
+    """
+    Extracts the numerical century from a string representation of a century.
+    E.g. for '12th century' -> 12
+         for '1345 - 1390'  -> 14
+    """
     try:
         two_digits_pattern = r'(?<!\d)\d{2}(?!\d)'
         two_digits_match = re.findall(two_digits_pattern, century)
@@ -193,7 +199,7 @@ class CsvLoader():
         # Sources
         if self.sources_filename is not None:
             try:
-                sources = pd.read_csv(self.sources_filename)
+                sources = pd.read_csv(self.sources_filename, dtype={'num_century': 'Int64'})
 
                 missing_fields = [field for field in MANDATORY_SOURCES_FIELDS if field not in sources.columns]
                 if missing_fields:

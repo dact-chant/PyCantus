@@ -7,7 +7,8 @@ name = "pycantus"
 version = "0.0.3"
 dependencies = [
   "pandas==2.2.2",
-  "requests==2.31.0"
+  "requests==2.31.0",
+  "PyYAML==6.0.2"
 ]
 requires-python = ">=3.10"
 authors = [
@@ -50,5 +51,5 @@ Repository = "https://github.com/dact-chant/PyCantus.git"
 [tool.setuptools.packages.find]
 include = ["pycantus"]
 
-[pypi]
-username=__token__
+# [pypi]
+# username=__token__

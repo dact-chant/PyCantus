@@ -1,10 +1,10 @@
+#!/usr/bin/env python
 """
 This module is responsible for loading datasets and possibly their metadata.
 It provides a function to load a dataset based on its name or file path.
 It loads available datasets from a JSON file from library static.
 """
 
-import importlib
 import json
 from importlib import resources as impresources
 
@@ -12,7 +12,7 @@ import pycantus.static as static
 from pycantus.models.corpus import Corpus
 
 
-__version__ = "0.0.3"
+__version__ = "0.0.4"
 __author__ = "Anna Dvorakova"
 
 
@@ -48,3 +48,12 @@ def load_dataset(name_or_chant_filepath, source_filepath=None, is_editable=False
         corpus = Corpus(csv_chant_file_path, source_filepath, is_editable=is_editable, **corpus_kwargs)
 
     return corpus
+
+def list_available_datasets():
+    """
+    Lists all available dataset of current PyCantus based on 
+    static/available_datsets.json file.
+    """
+    print('List of available datasets:')
+    for dataset, dataset_metadata in AVAILABLE_DATASETS.items():
+        print(f"\t{dataset}: {dataset_metadata['name']} ({dataset_metadata['description']})")

@@ -1,35 +1,80 @@
-,title,siglum,description,rism,date,century,provenance,provenance_detail,segment,summary,indexing_notes,liturgical_occasions,indexing_date,srclink,cursus,image_link,n_cantus_chants,n_cantus_melodies
-0,"Istanbul, Topkapı Sarayı Müzesi, Deissmann 42 (The Istanbul Antiphoner)",TR-Itks Deissmann 42,,,,,Esztergom,,,,,,,https://cantusdatabase.org/source/123706,Secular,,,
-1,"Linz, Oberösterreichische Landesbibliothek, 290 (olim 183; olim Gamma p 19)",A-LIb 290 (olim 183; olim Gamma p 19),,,,12th century,Kremsmünster,,,,,,,https://cantusdatabase.org/source/123617,Monastic,,,
-2,"Wien, Österreichische Nationalbibliothek, 1799**",A-Wn 1799**,,,,13th century,Rein,,,,,,,https://cantusdatabase.org/source/123667,Monastic,,,
-3,"Halifax (Canada), St. Mary’s University - Patrick Power Library, M2149.L4 1554",CDN-Hsmu M2149.L4 1554,,,,16th century (1550-1575),Salzinnes,,,,,,,https://cantusdatabase.org/source/123723,Monastic,,,
-4,"Köln, Erzbischöfliche Diözesan- und Dombibliothek, 1161",D-KNd 1161,,,,12th century,Köln,,,,,,,https://cantusdatabase.org/source/601861,Monastic,,,
-5,"Paris, Bibliothèque nationale, NAL 1411",F-Pn NAL 1411,,,,12th century (2nd half),Milan,,,,,,,https://cantusdatabase.org/source/123677,Monastic,,,
-6,"Wroclaw, Biblioteka Uniwersytecka, I F 401",PL-WRu I F 401,,,,13th century (1275-1300),Lubiąż,,,,,,,https://cantusdatabase.org/source/589069,Monastic,,,
-7,"Zutphen, Stadsarchief en Stedelijke Bibliotheek, 6",NL-ZUa 6,,,,15th century,Zutphen,,,,,,,https://cantusdatabase.org/source/123648,,,,
-8,"Toledo, Catedral - Archivo y Biblioteca Capitulares, 44.2",E-Tc 44.2,,,,11th century (1075-1100),Toledo,,,,,,,https://cantusdatabase.org/source/123639,Secular,,,
-9,"Arras, Bibliothèque municipale, 465 (CGM 893)",F-AS 465 (CGM 893),,,,14th century,Arras,,,,,,,https://cantusdatabase.org/source/123593,Monastic,,,
-10,"Valenciennes, Bibliothèque municipale, 114",F-VAL 114,,,,12th century,Saint-Amand,,,,,,,https://cantusdatabase.org/source/123642,Monastic,,,
-11,"Lucca, Biblioteca Capitolare Feliniana e Biblioteca Arcivescovile, 601",I-Lc 601,,,,12th century,Pozzeveri,,,,,,,https://cantusdatabase.org/source/123680,Monastic,,,
-12,"Paris, Bibliothèque nationale, Latin 15181",F-Pn Latin 15181,,,,14th century,Paris,,,,,,,https://cantusdatabase.org/source/123631,Secular,,,
-13,"Cambrai, Bibliothèque municipale, Impr. XVI C 4",F-CA Impr. XVI C 4,,,,16th century (1500-1525),Cambrai,,,,,,,https://cantusdatabase.org/source/123602,Secular,,,
-14,"Paris, Bibliothèque nationale, Latin 1085",F-Pn Latin 1085,,,,10th century (975-1000),St. Martial,,,,,,,https://cantusdatabase.org/source/123663,,,,
-15,F-Pn : Lat. 909,F-Pn Lat. 909,,,,11th century,St Martial de Limoges,,,,,,,http://musmed.eu/source/13026,,,,
-16,"Toledo, Catedral - Archivo y Biblioteca Capitulares, 44.1",E-Tc 44.1,,,,11th century (1000-1025),Tavèrnoles,,,,,,,https://cantusdatabase.org/source/123638,Secular,,,
-17,"Graz, Universitätsbibliothek, 30 (olim 38/9 f.)",A-Gu 30 (olim 38/9 f.),,,,14th century,St-Lambrecht,,,,,,,https://cantusdatabase.org/source/123611,Monastic,,,
-18,"Sankt Florian, Augustiner-Chorherrenstift - Bibliothek und Musikarchiv, XI 480",A-SF XI 480,,,,14th century,St-Florian,,,,,,,https://cantusdatabase.org/source/123658,Secular,,,
-19,"Vorau, Stiftsbibliothek, 287 (olim XXIX)",A-VOR 287 (olim XXIX),,,,14th century,Vorau,,,,,,,https://cantusdatabase.org/source/123643,Secular,,,
-20,"Wien, Diözesanarchiv, D-4",A-Wda D-4,,,,15th century,Kirnberg,,,,,,,https://cantusdatabase.org/source/123649,,,,
-21,"Sankt-Gallen, Stiftsbibliothek, 388",CH-SGs 388,,,,12th century,St. Gallen,,,,,,,https://cantusdatabase.org/source/123750,,,,
-22,"Fulda, Hessische Landesbibliothek, Aa 55",D-FUl Aa 55,,,,14th century,Rasdorf,,,,,,,https://cantusdatabase.org/source/123685,Secular,,,
-23,"Karlsruhe, Badische Landesbibliothek - Musiksammlung, Aug. LX",D-KA Aug. LX,,,,12th century,Zwiefalten,,,,,,,https://cantusdatabase.org/source/123612,Monastic,,,
-24,"Wolfenbüttel, Herzog August Bibliothek, Cod. Guelf. 28 Helmst. (Heinemann-Nr. 31)",D-W Cod. Guelf. 28 Helmst. (Heinemann-Nr. 31),,,,16th century (1500-1525),Hilwartshausen,,,,,,,https://cantusdatabase.org/source/123716,Secular,,,
-25,"København (Copenhagen), Det kongelige Bibliotek Slotsholmen, Gl. Kgl. S. 3449 8o [13] XIII",DK-Kk Gl. Kgl. S. 3449 8o [13] XIII,,,,16th century (1575-1600),Augsburg,,,,,,,https://cantusdatabase.org/source/123701,Secular,,,
-26,"Cambrai, Bibliothèque municipale, 38 (olim 40)",F-CA 38 (olim 40),,,,13th century (1225-1250),Cambrai,,,,,,,https://cantusdatabase.org/source/123601,Secular,,,
-27,"Budapest, Egyetemi Könyvtár (University Library), lat. 121",H-Bu lat. 121,,,,14th century,Franciscan,,,,,,,https://cantusdatabase.org/source/123599,Secular,,,
-28,"Naples, Biblioteca Nazionale Vittorio Emanuele III, vi. E. 20",I-Nn vi. E. 20,,,,13th century,Italy,,,,,,,https://cantusdatabase.org/source/123674,Secular,,,
-29," Print (Multiple Copies), MA Impr. 1537 (Münster Antiphoner)",Cantus MA Impr. 1537,,,,16th century (1525-1550),Muenster,,,,,,,https://cantusdatabase.org/source/123724,Secular,,,
-30,"Kielce, Biblioteka Kapituły Katedralnej, Ms. 1",PL-KIk Ms. 1,,,,14th century (1350-1375),Kielce,,,,,,,https://cantusdatabase.org/source/123736,Secular,,,
-31,"Kraków, Klastor OO. Karmelitów na Piasku (Carmelite Convent), Ms.1 (rkp. Perg. 12)",PL-Kkar Ms.1 (rkp. Perg. 12),,,,,Kraków,,,,,,,https://cantusdatabase.org/source/123686,Secular,,,
-32,"Wroclaw, Biblioteka Uniwersytecka, Ms. R 503",PL-WRu Ms. R 503,,,,14th century (2nd half),Wrocław,,,,,,,https://cantusdatabase.org/source/123756,Secular,,,
-33,"Ljubljana, Nadškofijski arhiv (Archiepiscopal Archives), 19 (olim 18)",SI-Lna 19 (olim 18),,,,,Kranj,,,,,,,https://cantusdatabase.org/source/123659,Secular,,,
+title,siglum,century,provenance,srclink,cursus,num_century
+"Graz, Universitätsbibliothek, 29 (olim 38/8 f.)",A-Gu 29 (olim 38/8 f.),14th century,St-Lambrecht,https://cantusdatabase.org/source/123610,Monastic,14
+"Graz, Universitätsbibliothek, 30 (olim 38/9 f.)",A-Gu 30 (olim 38/9 f.),14th century,St-Lambrecht,https://cantusdatabase.org/source/123611,Monastic,14
+"Linz, Oberösterreichische Landesbibliothek, 290 (olim 183; olim Gamma p 19)",A-LIb 290 (olim 183; olim Gamma p 19),12th century,Kremsmünster,https://cantusdatabase.org/source/123617,Monastic,12
+"Wien, Österreichische Nationalbibliothek, Cod. 1890",A-Wn Cod. 1890,12th century,Southern Germany / Austria,https://cantusdatabase.org/source/123713,Monastic,12
+"Einsiedeln, Stiftsbibliothek, 611",CH-E 611,14th century,Einsiedeln,https://cantusdatabase.org/source/123606,Monastic,14
+CZ-Pu (Praha) XIV C 20,CZ-Pu XIV C 20,14th century,St George's Convent in Prague,https://cantusbohemiae.cz/source/9137,,14
+"Prague, Národní knihovna České republiky (National Library), VI.E.4c",CZ-Pu VI.E.4c,12th century (2nd half),"Prague, St. George Monastery",https://cantusdatabase.org/source/123727,Monastic,12
+"Prague, Národní knihovna České republiky (National Library), XIV.B.13",CZ-Pu XIV.B.13,14th century,"Prague, St. George Monastery",https://cantusdatabase.org/source/123730,,14
+"Karlsruhe, Badische Landesbibliothek - Musiksammlung, Aug. LX",D-KA Aug. LX,12th century,Zwiefalten,https://cantusdatabase.org/source/123612,Monastic,12
+"Stuttgart, Württembergische Landesbibliothek, HB.I.55",D-Sl HB.I.55,12th century,Weingarten,https://cantusdatabase.org/source/123637,Monastic,12
+F-Pn : Lat. 17436,F-Pn Lat. 17436,9th century,Abbaye Saint-Corneille de Compiègne,http://musmed.eu/source/13502,Romanum,9
+"Klosterneuburg, Augustiner-Chorherrenstift - Bibliothek, CCl 1010",A-KN CCl 1010,12th century,Klosterneuburg,https://cantusdatabase.org/source/123653,Secular,12
+"Klosterneuburg, Augustiner-Chorherrenstift - Bibliothek, CCl 1011",A-KN CCl 1011,14th century,Klosterneuburg,https://cantusdatabase.org/source/123654,Secular,14
+"Klosterneuburg, Augustiner-Chorherrenstift - Bibliothek, CCl 1013",A-KN CCl 1013,12th century,Klosterneuburg,https://cantusdatabase.org/source/123614,Secular,12
+"Klosterneuburg, Augustiner-Chorherrenstift - Bibliothek, CCl 1015",A-KN CCl 1015,14th century,Klosterneuburg,https://cantusdatabase.org/source/123655,Secular,14
+"Klosterneuburg, Augustiner-Chorherrenstift - Bibliothek, CCl 1017",A-KN CCl 1017,13th century,Klosterneuburg,https://cantusdatabase.org/source/123615,Secular,13
+"Kremsmünster, Benediktiner-Stift Kremsmünster - Musikarchiv, Schachtel VI/258",A-KR Schachtel VI/258,13th century (2nd half),St. Pölten,https://cantusdatabase.org/source/123660,Secular,13
+"Sankt Florian, Augustiner-Chorherrenstift - Bibliothek und Musikarchiv, XI 480",A-SF XI 480,14th century,St-Florian,https://cantusdatabase.org/source/123658,Secular,14
+"Wien, Diözesanarchiv, D-4",A-Wda D-4,15th century,Kirnberg,https://cantusdatabase.org/source/123649,,15
+"Wien, Österreichische Nationalbibliothek, Cod. 1799**",A-Wn Cod. 1799**,13th century,Rein,https://cantusdatabase.org/source/123667,Monastic,13
+"Sydney, University of Sydney - Fisher Library - Rare Books & Special Collections, Add. Ms. 413 (olim Add. Ms. Fol.1)",AUS-Sfl Add. Ms. 413 (olim Add. Ms. Fol.1),16th century (2nd half),Spain,https://cantusdatabase.org/source/669163,Secular,16
+"Tongeren, Onze-Lieve-Vrouw-Kerk (Our Lady's Church), 63 (olim V)",B-TOb 63 (olim V),14th century (1375-1400),Tongeren,https://cantusdatabase.org/source/123664,Secular,14
+"Tongeren, Onze-Lieve-Vrouw-Kerk (Our Lady's Church), 64 (olim IV)",B-TOb 64 (olim IV),14th century (1375-1400),Tongeren,https://cantusdatabase.org/source/123665,Secular,14
+"Halifax (Canada), St. Mary’s University - Patrick Power Library, M2149.L4 1554",CDN-Hsmu M2149.L4 1554,16th century (1550-1575),Salzinnes,https://cantusdatabase.org/source/123723,Monastic,16
+"Fribourg, Bibliothèque des Cordeliers, Ms. 2",CH-Fco Ms. 2,,Franciscan,https://cantusdatabase.org/source/123672,Secular,
+"Sankt-Gallen, Stiftsbibliothek, 388",CH-SGs 388,12th century,St. Gallen,https://cantusdatabase.org/source/123750,,12
+"Sankt-Gallen, Stiftsbibliothek, 390 (Hartker Antiphoner - Winter Volume)",CH-SGs 390,10th century (975-1000),St. Gallen,https://cantusdatabase.org/source/123717,Monastic,11
+CZ-Pn (Praha) XII A 24,CZ-Pn XII A 24,15th century,Pilsen,https://cantusbohemiae.cz/source/33177,,15
+CZ-Pn (Praha) XV A 10,CZ-Pn XV A 10,14th century,,https://cantusbohemiae.cz/source/28509,,14
+"Prague, Strahovská knihovna (Library of the Royal Canonry of Premonstratensians at Strahov), DE I 7 (Breviarium Strigoniense)",CZ-Pst DE I 7,13th century,Esztergom,https://cantusdatabase.org/source/649450,Secular,13
+CZ-Pu (Praha) VI G 11,CZ-Pu VI G 11,13th century,St George's Convent in Prague,https://cantusbohemiae.cz/source/28488,,13
+"Aachen (Aix-la-Chapelle), Domarchiv, G 20",D-AAm G 20,13th century (2nd half),Aachen,https://cantusdatabase.org/source/123714,Secular,13
+"Berlin, Staatsbibliothek Preussischer Kulturbesitz, Mus. 40047",D-B Mus. 40047,11th century,Quedlinburg,https://cantusdatabase.org/source/123688,Secular,11
+D-B Theol. Lat. Qu. 149 Breviarium monasticum,D-B Theol. Lat. Qu. 149,,Lubiń,https://cantusplanus.pl/source/22868,,
+"Köln, Erzbischöfliche Diözesan- und Dombibliothek, 1161",D-KNd 1161,12th century,Köln,https://cantusdatabase.org/source/601861,Monastic,12
+"Köln, Erzbischöfliche Diözesan- und Dombibliothek, 215",D-KNd 215,12th century,Würzburg,https://cantusdatabase.org/source/123741,Monastic,12
+"Mainz, Bischöfliches Dom- und Diözesanmuseum, A",D-MZb A,15th century (1425-1450),Mainz,https://cantusdatabase.org/source/123620,Secular,15
+"München, Franziskanerkloster St. Anna - Bibliothek, 12o Cmm 1",D-Ma 12o Cmm 1,13th century (1225-1250),Italy,https://cantusdatabase.org/source/123673,Secular,13
+"München, Bayerische Staatsbibliothek, Clm 4303",D-Mbs Clm 4303,,Augsburg,https://cantusdatabase.org/source/123681,Monastic,
+"München, Bayerische Staatsbibliothek, Clm 4306",D-Mbs Clm 4306,16th century (1500-1525),Augsburg,https://cantusdatabase.org/source/123684,Monastic,16
+D-Sl : Cod.Bibl.fol.065,D-Sl Cod.Bibl.fol.065,9th century,Allemagne,http://musmed.eu/source/14387,,9
+"Wolfenbüttel, Herzog August Bibliothek, Cod. Guelf. 29 Helmst. (Heinemann-Nr. 32)",D-W Cod. Guelf. 29 Helmst. (Heinemann-Nr. 32),16th century,Hilwartshausen,https://cantusdatabase.org/source/123715,Secular,16
+"København (Copenhagen), Det kongelige Bibliotek Slotsholmen, Gl. Kgl. S. 3449 8o [01] I",DK-Kk Gl. Kgl. S. 3449 8o [01] I,16th century (1575-1600),Augsburg,https://cantusdatabase.org/source/123689,Secular,16
+"E-BAR, Archivo Diocesano de Barbastro, Antifonario s.s.","E-BAR, s.s.",15th century,Barbastro,https://musicahispanica.eu/source/27599,cathedral,15
+E-Bbc (Barcelona) M 1327,E-Bbc M 1327,15th century,Convento de las clarisas de la Santísima Trinidad (Valencia),https://musicahispanica.eu/source/20238,,15
+E-Bbc (Barcelona) M 705,E-Bbc M 705,14th century,Sant Cugat (Barcelona),https://musicahispanica.eu/source/20228,,14
+E-Bbc (Barcelona) M 888,E-Bbc M 888,15th century,Monasterio no identificado de la Orden de los Cartujos,https://musicahispanica.eu/source/20232,,15
+E-Bbc (Barcelona) Ms. 2545,E-Bbc Ms. 2545,15th century,Cataluña o sur de Francia (?),https://musicahispanica.eu/source/20248,,15
+E-Bbc (Barcelona) Ms. 619,E-Bbc Ms. 619,14th century,Catedral de Vic (Barcelona),https://musicahispanica.eu/source/20245,,14
+E-Gs (Girona) ms. 45,"E-Gs ms. 45 (olim Sant Feliu, 20)",12th century,Colegiata de Sant Feliu de Girona,https://musicahispanica.eu/source/22303,,12
+E-H (Huesca) Ms. 2,E-H Ms. 2,12th century,Auch,https://musicahispanica.eu/source/22495,cathedral,12
+E-H (Huesca) Ms. 7,E-H Ms. 7 (ant. 5),13th century,Huesca,https://musicahispanica.eu/source/20425,cathedral,13
+E-PAMan (Pamplona) Partitura n. 116,E-PAMan Partitura n. 116,12th century,,https://musicahispanica.eu/source/126590,,12
+E-SI (Santo Domingo de Silos) MS 9,E-SI MS 9,13th century,Monasterio de San Salvador de Celanova (Ourense),https://musicahispanica.eu/source/19722,Monastic,13
+"Toledo, Catedral - Archivo y Biblioteca Capitulares, 44.1",E-Tc 44.1,11th century (1000-1025),Tavèrnoles,https://cantusdatabase.org/source/123638,Secular,11
+"Toledo, Catedral - Archivo y Biblioteca Capitulares, 44.2",E-Tc 44.2,11th century (1075-1100),Toledo,https://cantusdatabase.org/source/123639,Secular,11
+E-VI (Vic) Mss. 113-114,E-VI Mss. 113-114,14th century,,https://musicahispanica.eu/source/22951,,14
+"Albi, Bibliothèque municipale Rochegude, 44",F-AI 44,,Albi,https://cantusdatabase.org/source/123679,,
+"Arras, Bibliothèque municipale, 465 (CGM 893)",F-AS 465 (CGM 893),14th century,Arras,https://cantusdatabase.org/source/123593,Monastic,14
+"Cambrai, Bibliothèque municipale, 38 (olim 40)",F-CA 38 (olim 40),13th century (1225-1250),Cambrai,https://cantusdatabase.org/source/123601,Secular,13
+"Cambrai, Bibliothèque municipale, Impr. XVI C 4",F-CA Impr. XVI C 4,16th century (1500-1525),Cambrai,https://cantusdatabase.org/source/123602,Secular,16
+F-Collection privée : Mont-Renaud,F-Collection privée Mont-Renaud,10th century,"France, Château du Mont-Renaud",http://musmed.eu/source/9475,,10
+"Paris, Bibliothèque nationale, Latin 1085",F-Pn Latin 1085,10th century (975-1000),St. Martial,https://cantusdatabase.org/source/123663,,11
+"Paris, Bibliothèque nationale, Latin 1090",F-Pn Latin 1090,12th century (1175-1200),Marseille,https://cantusdatabase.org/source/123627,Secular,12
+"Paris, Bibliothèque nationale, Latin 12044",F-Pn Latin 12044,12th century,St-Maur-des-Fossés,https://cantusdatabase.org/source/123628,Monastic,12
+"Paris, Bibliothèque nationale, Latin 1240",F-Pn Latin 1240,10th century,St-Martial,https://cantusdatabase.org/source/123629,,10
+"Paris, Bibliothèque nationale, Latin 15181",F-Pn Latin 15181,14th century,Paris,https://cantusdatabase.org/source/123631,Secular,14
+F-Pn : Lat. 17296,F-Pn Lat. 17296,12th century,Abbaye royale de Saint-Denis,http://musmed.eu/source/13486,Monastic,12
+F-Pn : Lat. 17991,F-Pn Lat. 17991,11th century,Jacobins de la rue Saint-Jacques,http://musmed.eu/source/13509,Romanum,11
+F-Pn : NAL 1236,F-Pn NAL 1236,12th century,"France, Nevers, Cathédrale de Nevers",http://musmed.eu/source/13535,Romanum,12
+"Paris, Bibliothèque nationale, NAL 1411",F-Pn NAL 1411,12th century (2nd half),Milan,https://cantusdatabase.org/source/123677,Monastic,12
+"Paris, Bibliothèque nationale, NAL 1535",F-Pn NAL 1535,13th century,Sens,https://cantusdatabase.org/source/123633,Secular,13
+"Tours, Bibliothèque municipale, 149",F-TOm 149,13th century,Tours,https://cantusdatabase.org/source/123640,Secular,13
+"Valenciennes, Bibliothèque municipale, 114",F-VAL 114,12th century,Saint-Amand,https://cantusdatabase.org/source/123642,Monastic,12
+GB-Lbl (London) Add MS 30848,GB-Lbl Add MS 30848,11th century,Santo Domingo de Silos,https://musicahispanica.eu/source/74655,Monastic,11
+GB-Lbl (London) Add MS 30850,GB-Lbl Add MS 30850,11th century,Ascribed to Santo Domingo de Silos (see 'Description' above),https://musicahispanica.eu/source/20199,Monastic,11
+"Oxford, Bodleian Library, MS. Canon. Liturg. 202",GB-Ob MS. Canon. Liturg. 202,13th century,Germany,https://cantusdatabase.org/source/123687,,13
+"Oxford, Bodleian Library, MS. Laud Misc. 284",GB-Ob MS. Laud Misc. 284,12th century,Würzburg,https://cantusdatabase.org/source/123707,Secular,12
+"Worcester, Cathedral - Music Library, F. 160 (olim 1247) (with hymnal)",GB-WO F. 160 (olim 1247) (with hymnal),13th century (1225-1250),Worcester,https://cantusdatabase.org/source/123647,Monastic,13

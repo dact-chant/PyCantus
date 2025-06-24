@@ -1,17 +1,4 @@
-{
-    "cantuscorpus-v0.2" :
-        {
-            "name" : "Cantus Corpus",
-            "description" : "",
-            "chants_fallback_url" : "https://chantmapper.owx.cz/static/help_sample_files/sample_chants_chantmapper.csv",
-            "sources_fallback_url" : "https://chantmapper.owx.cz/static/help_sample_files/sample_sources_chantmapper.csv",
-            "chants_filepath" : "cantuscorpus-v0.2/chants.csv",
-            "sources_filepath" : "cantuscorpus-v0.2/sources.csv",
-            "other_parameters" : "available_dataset",
-            "sumcheck" : "" 
-
-        },
-        
+{       
     "sample_dataset" :
         {
             "name" : "Sample Dataset",

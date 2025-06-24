@@ -8,20 +8,14 @@ import requests
 from importlib import resources as impresources
 import re
 
-from pycantus.models.chant import Chant
-from pycantus.models.source import Source
+from pycantus.models.chant import Chant, MANDATORY_CHANTS_FIELDS, OPTIONAL_CHANTS_FIELDS
+from pycantus.models.source import Source, MANDATORY_SOURCES_FIELDS, OPTIONAL_SOURCES_FIELDS
 import pycantus.dataset_files as dataset_files
 
 
 __version__ = "0.0.3"
 __author__ = "Anna Dvorakova"
 
-
-MANDATORY_CHANTS_FIELDS = {'cantus_id', 'srclink', 'incipit', 'siglum','chantlink', 'folio', 'db'}
-OPTIONAL_CHANTS_FIELDS = {'sequence', 'feast', 'genre', 'office', 'position', 'melody_id', 'image', 'mode',
-                          'full_text', 'melody', 'century', 'rite'}
-MANDATORY_SOURCES_FIELDS = {'title', 'srclink', 'siglum'}
-OPTIONAL_SOURCES_FIELDS = {'century', 'provenance', 'numeric_century'}
 
 def get_numerical_century(century : str) -> int:
     try:

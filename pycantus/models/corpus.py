@@ -197,11 +197,11 @@ class Corpus():
 
     def apply_filter(self, filter : Filter):
         """
-        Applies the given filter on its data.
+        Applies the given filter on its data in "in place" way.
         """
         self._chants, self._sources, self._melodies = filter.apply(self._chants, self._sources, self._melodies)
-        print('Discarding empty sources after filtration...')
-        self.discard_empty_sources()
-        print('Number of chants after filtration:', len(self._chants), '\nNumber of sources after filtration:', len(self._sources))
+        #print('Discarding empty sources after filtration...')
+        #self.discard_empty_sources()
+        #print('Number of chants after filtration:', len(self._chants), '\nNumber of sources after filtration:', len(self._sources))
         
 

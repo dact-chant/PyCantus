@@ -29,7 +29,7 @@ MANDATORY_CHANTS_FIELDS = {'cantus_id', 'incipit', 'srclink', 'siglum','chantlin
 OPTIONAL_CHANTS_FIELDS = {'sequence', 'feast', 'genre', 'office', 'position', 'melody_id', 'image', 'mode',
                                'full_text', 'melody', 'century', 'rite'}
 NON_EXPORT_FIELDS = ['locked', 'rite', '_has_melody', 'melody_object']
-EXPORT_FIELDS = ['cantus_id', 'incipit', 'siglum', 'srclink', 'chantlink', 'folio', 'db', 'sequence', 'feast', 'genre',
+EXPORT_CHANTS_FIELDS = ['cantus_id', 'incipit', 'siglum', 'srclink', 'chantlink', 'folio', 'db', 'sequence', 'feast', 'genre',
                      'office', 'position', 'melody_id', 'image', 'mode', 'full_text', 'melody', 'century']
 
 
@@ -133,7 +133,7 @@ class Chant():
         """
         Returns the header for the CSV file, which includes all mandatory and optional fields.
         """
-        return ','.join(EXPORT_FIELDS)
+        return ','.join(EXPORT_CHANTS_FIELDS)
 
 
     def __str__(self) -> str:
@@ -145,7 +145,7 @@ class Chant():
         Returns data of class as standardized csv row
         """
         csv_row = []
-        for attr_name in EXPORT_FIELDS:
+        for attr_name in EXPORT_CHANTS_FIELDS:
             attr_value = self.__getattribute__(attr_name)
             if attr_value is not None:
                 csv_row.append(attr_value)

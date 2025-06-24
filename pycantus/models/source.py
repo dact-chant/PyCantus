@@ -8,8 +8,8 @@ __author__ = "Anna Dvorakova"
 
 
 MANDATORY_SOURCES_FIELDS = {'title', 'srclink', 'siglum'}
-OPTIONAL_SOURCES_FIELDS = {'century', 'provenance'}
-EXPORT_FIELDS = ['title', 'siglum','century', 'provenance', 'srclink', 'numeric_century']
+OPTIONAL_SOURCES_FIELDS = {'century', 'provenance', 'numeric_century'}
+EXPORT_SOURCES_FIELDS = ['title', 'siglum','century', 'provenance', 'srclink', 'numeric_century']
 NON_EXPORT_FIELD = ['locked']
 
 

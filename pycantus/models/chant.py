@@ -1,3 +1,4 @@
+#!/usr/bin/env python
 """
 This module contains the Chant class, which represents a single chant entry from some database.
 It provides methods for creating, modifying, and exporting chant data in a standardized format.
@@ -28,7 +29,7 @@ GENRE_TO_RITE = get_rite_dict()
 MANDATORY_CHANTS_FIELDS = {'cantus_id', 'incipit', 'srclink', 'siglum','chantlink', 'folio', 'db'}
 OPTIONAL_CHANTS_FIELDS = {'sequence', 'feast', 'genre', 'office', 'position', 'melody_id', 'image', 'mode',
                                'full_text', 'melody', 'century', 'rite'}
-NON_EXPORT_FIELDS = ['locked', 'rite', '_has_melody', 'melody_object']
+NON_EXPORT_CHATN_FIELDS = ['locked', 'rite', '_has_melody', 'melody_object']
 EXPORT_CHANTS_FIELDS = ['cantus_id', 'incipit', 'siglum', 'srclink', 'chantlink', 'folio', 'db', 'sequence', 'feast', 'genre',
                      'office', 'position', 'melody_id', 'image', 'mode', 'full_text', 'melody', 'century']
 

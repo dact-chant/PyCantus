@@ -1,6 +1,4 @@
-
-
-
+#!/usr/bin/env python
 def hello_pycantus():
     message = """
     *********************************************

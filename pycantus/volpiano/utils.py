@@ -1,9 +1,4 @@
-# -*- coding: utf-8 -*-
-# -----------------------------------------------------------------------------
-# Author: Bas Cornelissen, Jan Hajič
-# Copyright © 2019 Bas Cornelissen, 2023 Jan Hajič
-# License: MIT
-# -----------------------------------------------------------------------------
+#!/usr/bin/env python
 """
 Volpiano utilities
 ==================

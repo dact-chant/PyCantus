@@ -1,3 +1,4 @@
+#!/usr/bin/env python
 """
 This module defines the base class for filters used in the PyCantus library.
 It provides a structure for creating and applying filters to chant data.

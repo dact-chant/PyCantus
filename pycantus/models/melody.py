@@ -1,3 +1,4 @@
+#!/usr/bin/env python
 """
 This module contains the Melody class, which represents a single chant melody.
 It is linked to a specific chant via chantlink.

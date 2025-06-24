@@ -1,3 +1,4 @@
+#!/usr/bin/env python
 """
 This module contains Source class, which represents a single source entry from some database.
 It provides methods for creating, modifying, and exporting source data in a standardized format.
@@ -10,7 +11,7 @@ __author__ = "Anna Dvorakova"
 MANDATORY_SOURCES_FIELDS = {'title', 'srclink', 'siglum'}
 OPTIONAL_SOURCES_FIELDS = {'century', 'provenance', 'numeric_century'}
 EXPORT_SOURCES_FIELDS = ['title', 'siglum','century', 'provenance', 'srclink', 'numeric_century']
-NON_EXPORT_FIELD = ['locked']
+NON_EXPORT_SOURCES_FIELDS = ['locked']
 
 
 class Source():
@@ -60,7 +61,7 @@ class Source():
         Returns data of class as standardized csv row
         """
         csv_row = []
-        for attr_name in EXPORT_FIELDS:
+        for attr_name in EXPORT_SOURCES_FIELDS:
             attr_value = self.__getattribute__(attr_name)
             if attr_value is not None:
                 attr_value = str(attr_value)
@@ -76,4 +77,4 @@ class Source():
         """
         Returns the header for the CSV file, which includes all mandatory and optional fields.
         """
-        return ','.join(EXPORT_FIELDS)
+        return ','.join(EXPORT_SOURCES_FIELDS)

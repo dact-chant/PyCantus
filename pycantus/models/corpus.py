@@ -1,3 +1,4 @@
+#!/usr/bin/env python
 """
 This module contains the Corpus class, which represents a collection of chants and sources.
 It provides methods for loading, filtering, and exporting data related to the chants and sources.

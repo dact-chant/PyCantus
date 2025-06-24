@@ -28,12 +28,12 @@ class Filter:
         self.filters_include = defaultdict(list)
         self.filters_exclude = defaultdict(list)
     
-    def add_value_include(self, field : str, values : list[str]):
+    def add_value_include(self, field : str, values : list[str] | list[int] | int | str):
         """
         Add a value to the filter for a specific field to be included.
         """
         if not isinstance(values, list):
-            raise TypeError(f"Argument 'values' must be of type list.")
+            values = [values]
         
         if field not in EXPORT_CHANTS_FIELDS and field not in EXPORT_SOURCES_FIELDS:
             raise ValueError(f"Field '{field}' is not a valid chant or source field.")
@@ -41,12 +41,12 @@ class Filter:
         self.filters_include[field] += values
         self.filters_include[field] = list(set(self.filters_include[field])) # discard dupliates
             
-    def add_value_exclude(self, field : str, values : list[str]):
+    def add_value_exclude(self, field : str, values : list[str] | list[int] | int | str):
         """
         Add a value to the filter for a specific field to be excluded.
         """
         if not isinstance(values, list):
-            raise TypeError(f"Argument 'values' must be of type list.")
+            values = [values]
         
         if field not in EXPORT_CHANTS_FIELDS and field not in EXPORT_SOURCES_FIELDS:
             raise ValueError(f"Field '{field}' is not a valid chant or source field.")

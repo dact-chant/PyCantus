@@ -1,6 +1,9 @@
 #!/usr/bin/env python
-"""This is a script that scrapes information about sources from the Cantus database
-URLs such as https://cantus.uwaterloo.ca/source/123610."""
+"""
+This is a list of class definitions that scrapes information about sources from specific
+databases of Cantus Index - each has its specific scraper class.
+"""
+
 from __future__ import print_function, unicode_literals
 
 import argparse

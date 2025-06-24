@@ -1,7 +1,9 @@
 #!/usr/bin/env python
-"""This is a script that scrapes source information for all sources mentioned in
-a CantusCorpus-format chants CSV file. Relies on the 'drupal_path' field of the
-CSV file."""
+"""
+This is a script that scrapes source information for all sources mentioned in
+a CantusCorpus-format chants CSV file. Relies on the 'srclink' field of the
+CSV file.
+"""
 
 import argparse
 import logging

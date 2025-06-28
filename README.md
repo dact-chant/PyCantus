@@ -6,9 +6,8 @@ PyCantus is envisioned as a Python API to the Cantus family of databases that ma
 
 At the heart of the library is the Cantus Database and Cantus Index data model. The two elementary objects in this model are a `Chant`, and a `Source`.
 
-* A `Source` is a physical manuscript or print that contains Gregorian chant. Primarily, this will be a liturgical book such as an antiphonary, gradual, or other sources. Fragments are, in principle, also sources. (Note: tonaries may get special handling.)
-
-* A `Chant` is one instance of a chant in a source. Typically it has a text, a melody (which is not necessarily transcribed), and a Cantus ID assigned, and it should link to a source in which it is found. It should align with the Cantus API: `https://github.com/dact-chant/cantus-index/blob/main/README.md`
+* A `Chant` is one instance of a chant in a source. Typically it has a text, a melody (which is not necessarily transcribed), and a Cantus ID assigned, and it should link to a source in which it is found. In principle it uses fields from the API defined by Cantus Index: `https://github.com/dact-chant/cantus-index/blob/main/README.md`; the exact data model is documented in the module.
+* A `Source` is a physical manuscript or print that contains Gregorian chant. Primarily, this will be a liturgical book such as an antiphonary, gradual, or other types of books. Fragments are also sources. Provenance (geographical and institutional) and century of origin metadata are carried by source records.
 
 ## Tutorial
 

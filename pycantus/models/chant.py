@@ -160,4 +160,4 @@ class Chant():
         Expectes volpiano to be provided.
         """
         if self._has_melody:
-            self.melody_object = Melody(self.melody, self.chantlink, self.cantus_id)
+            self.melody_object = Melody(self.melody, self.chantlink, self.cantus_id, self.mode)

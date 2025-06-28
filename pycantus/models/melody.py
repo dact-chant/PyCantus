@@ -28,10 +28,11 @@ class Melody():
         locked (bool): Indicates if the object is locked for editing.
     """
     
-    def __init__(self, volpiano : str, chantlink : str, cantus_id : str):
+    def __init__(self, volpiano : str, chantlink : str, cantus_id : str, mode : str):
         self.locked = False  # Indicates if the object is locked for editing
         self.raw_volpiano = volpiano
         self.volpiano = volpiano
+        self.mode = mode
         self.chantlink = chantlink
         self.cantus_id = cantus_id
 

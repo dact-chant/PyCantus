@@ -9,8 +9,8 @@ __author__ = "Anna Dvorakova"
 
 
 MANDATORY_SOURCES_FIELDS = {'title', 'srclink', 'siglum'}
-OPTIONAL_SOURCES_FIELDS = {'century', 'provenance', 'numeric_century'}
-EXPORT_SOURCES_FIELDS = ['title', 'siglum','century', 'provenance', 'srclink', 'numeric_century']
+OPTIONAL_SOURCES_FIELDS = {'century', 'provenance', 'numeric_century', 'cursus'}
+EXPORT_SOURCES_FIELDS = ['title', 'siglum','century', 'provenance', 'srclink', 'numeric_century', 'cursus']
 NON_EXPORT_SOURCES_FIELDS = ['locked']
 
 
@@ -25,7 +25,7 @@ class Source():
         siglum(*): Abbreviation for the source manuscript or collection (e.g., "A-ABC Fragm. 1"). Use RISM whenever possible.
         century: century of source origin
         provenance: name of the place of source origin
-
+        cursus
     """
 
     def __init__(self,
@@ -34,7 +34,8 @@ class Source():
                  siglum,
                  numeric_century=None,
                  century=None,
-                 provenance=None):
+                 provenance=None,
+                 cursus=None):
         """
         """
         self.locked = False # Indicates if the object is locked for editing
@@ -44,6 +45,7 @@ class Source():
         self.numeric_century = numeric_century
         self.century = century
         self.provenance = provenance
+        self.cursus = cursus
     
     # setter
     def __setattr__(self, name, value):

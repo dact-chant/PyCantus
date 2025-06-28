@@ -30,6 +30,8 @@ class Corpus():
                  sources_fallback_url=None,
                  other_parameters=None,
                  is_editable=False,
+                 check_missing_sources=False,
+                 create_missing_sources=False,
                  **kwargs):
         
         self.chants_filepath = chants_filepath
@@ -38,9 +40,11 @@ class Corpus():
         self.sources_fallback_url = sources_fallback_url
         self.other_download_parameters = other_parameters
         self.is_editable = is_editable
+        self.create_missing_sources = create_missing_sources
+        self.check_missing_sources = check_missing_sources
 
-        loader = CsvLoader(self.chants_filepath, self.sources_filepath, 
-                           self.chants_fallback_url, self.sources_fallback_url, 
+        loader = CsvLoader(self.chants_filepath, self.sources_filepath, self.check_missing_sources, 
+                           self.create_missing_sources, self.chants_fallback_url, self.sources_fallback_url, 
                            other_parameters)
         chants, sources = loader.load()
 

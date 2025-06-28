@@ -25,7 +25,7 @@ class Source():
         siglum(*): Abbreviation for the source manuscript or collection (e.g., "A-ABC Fragm. 1"). Use RISM whenever possible.
         century: century of source origin
         provenance: name of the place of source origin
-        cursus
+        cursus: Secular (Cathedral, Roman) or Monastic cursus of the source. 
     """
 
     def __init__(self,

@@ -40,33 +40,34 @@ class Chant():
         - represents one chnat entry in database
 
     Attributes:
-        siglum (*): Abbreviation for the source manuscript or collection (e.g., "A-ABC Fragm. 1"). Use RISM whenever possible.
-        srclink (*): URL link to the source in the external database (e.g., "https://yourdatabase.org/source/123").
-        chantlink (*): URL link directly to the chant entry in the external database (e.g., "https://yourdatabase.org/chant/45678").
-        folio (*): Folio information for the chant (e.g., "001v").
+        siglum*: Abbreviation for the source manuscript or collection (e.g., "A-ABC Fragm. 1"). Use RISM whenever possible.
+        srclink*: URL link to the source in the external database (e.g., "https://yourdatabase.org/source/123").
+        chantlink*: URL link directly to the chant entry in the external database (e.g., "https://yourdatabase.org/chant/45678").
+        folio*: Folio information for the chant (e.g., "001v").
         sequence: The order of the chant on the folio (e.g., "1").
-        incipit (*): The opening words or phrase of the chant (e.g., "Non sufficiens sibi semel aspexisse vis ").
+        incipit*: The opening words or phrase of the chant (e.g., "Non sufficiens sibi semel aspexisse vis ").
         feast: Feast or liturgical occasion associated with the chant (e.g., "Nativitas Mariae").
         genre: Genre of the chant, such as antiphon (A), responsory (R), hymn (H), etc. (e.g., "V").
         office: The office in which the chant is used, such as Matins (M) or Lauds (L) (e.g., "M").
         position: Liturgical position of the chant in the office (e.g., "01").
-        cantus_id (*): The unique Cantus ID associated with the chant (e.g., "007129a").
+        cantus_id*: The unique Cantus ID associated with the chant (e.g., "007129a").
         melody_id: The unique Melody ID associated with the chant (e.g., "001216m1").
         image: URL link to an image of the manuscript page, if available (e.g., "https://yourdatabase.org/image/12345").
         mode: Mode of the chant, if available (e.g., "1").
         full_text: Full text of the chant (e.g., "Non sufficiens sibi semel aspexisse vis amoris multiplicavit in ea inten]tionem inquisitionis").
         melody: Melody encoded in Volpiano, if available (e.g., "1---dH---h7--h--ghgfed--gH---h--h---").
         century: Number identifying the century of the source. If multiple centuries apply, the lowest number should be used. (e.g., "12").
-        db (*): Code for the database providing the data, used for identification within CI (e.g., "DBcode").
+        db*: Code for the database providing the data, used for identification within CI (e.g., "DBcode").
 
-        rite: not yet in CI, but possibly to be (so we want to be ready)
+        rite: (not yet in CI, but possibly to be (so we want to be ready))
 
-        All these filed are str type.
+        All these fields are str type.
         (Fields marked with an asterisk (*) are obligatory and must be included in every record. Other fields are optional but recommended when data is available.)
+
     Functional attributes:
         locked: Indicates if the object is locked for editing. If True, no attributes can be modified.
         _has_melody: True if the chant has a melody, False otherwise.
-        melody_object: If the chant has a melody, in this should be an instance of the Melody class representing the chant's melody.
+        melody_object: If the chant has a melody, this should be an instance of the Melody class representing the chant's melody once created.
     """
     
 

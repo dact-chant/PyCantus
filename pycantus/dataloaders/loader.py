@@ -63,12 +63,15 @@ class CsvLoader():
         - checks for mandatory fields and raises an error if any are missing
         - initialized for particular dataset (provided or custom)
     """
-    def __init__(self, chants_filename : str, sources_filename : str, 
-                 chants_fallback_url=None, sources_fallback_url=None, other_parameters=None):
+    def __init__(self, chants_filename : str, sources_filename : str, check_mising_sources : bool,
+                 create_missing_sources : bool, chants_fallback_url : str =None, 
+                 sources_fallback_url : str =None, other_parameters=None):
         self.chants_filename = chants_filename
         self.sources_filename = sources_filename
         self.chants_fallback_url = chants_fallback_url
         self.sources_fallback_url = sources_fallback_url
+        self.create_missing_sources = create_missing_sources
+        self.check_missing_sources = check_mising_sources
         self.other_parameters = other_parameters
 
         # Make correct paths for available_datasets data files
@@ -106,13 +109,44 @@ class CsvLoader():
             f.write(response.content)
         print("Download complete.")
 
+    def check_sources(self, chant_sources : set[tuple[str]], sources : list[Source]):
+        """
+        Raises exception if some source mentioned in chants does not have 
+        record in sources.
+        """
+        print("Checking presence of sources...")
+        existig_sources_srclinks = [s.srclink for s in sources]
+        for srclink, siglum in chant_sources:
+            if srclink not in existig_sources_srclinks:
+                raise ValueError(f"Source '{srclink} : {siglum}' from chants does not have record in provided sources!")
 
-    def _load_chants(self, chants_f : pd.DataFrame) -> list[Chant]:
+    def add_missing_sources(self, chant_sources : set[tuple[str]], sources : list[Source]) -> list[Source]:
+        """
+        Checks missing Source entries based on chants info and add those
+        in a basic form.
+        """
+        print("Creating missing sources...")
+        new_sources = []
+        existig_sources_srclinks = [s.srclink for s in sources]
+        for srclink, siglum in chant_sources:
+            if srclink not in existig_sources_srclinks:
+                new_sources.append(Source(title=siglum, srclink=srclink, siglum=siglum))
+            
+        print(f"{len(new_sources)} missing sources created!")
+
+        return sources + new_sources
+
+    def _load_chants(self, chants_f : pd.DataFrame) -> tuple[list[Chant], set[str]]:
         """
         Loads chants from a DataFrame and creates Chant objects.
         """
         chants = []
+        chants_sources = set()
         for idx, row in chants_f.iterrows():
+            # Check for missing mandatory fields
+            for field in MANDATORY_CHANTS_FIELDS:
+                if field not in row or pd.isna(row[field]):
+                    raise ValueError(f"Missing mandatory field '{field}' in chants in row {idx+1}")
             try:
                 # Extract mandatory parameters
                 mandatory_params = {
@@ -133,11 +167,13 @@ class CsvLoader():
                 # Create Chant object and add to list
                 chant = Chant(**mandatory_params, **optional_params)
                 chants.append(chant)
+                chants_sources.add((row['srclink'], row['siglum']))
                 
             except Exception as e:
                 print(f"Error processing chants file row {idx+2}: {e}")
+                raise
 
-        return chants
+        return chants, chants_sources
     
 
     def _load_sources(self, sources_f : pd.DataFrame) -> list[Source]:
@@ -146,6 +182,10 @@ class CsvLoader():
         """
         sources = []
         for idx, row in sources_f.iterrows():
+            # Check for missing mandatory fields
+            for field in MANDATORY_SOURCES_FIELDS:
+                if field not in row or pd.isna(row[field]):
+                    raise ValueError(f"Missing mandatory field '{field}' in source in row {idx+1}")
             try:
                 # Extract mandatory parameters
                 mandatory_params = {
@@ -170,7 +210,8 @@ class CsvLoader():
                 sources.append(source)
                 
             except Exception as e:
-                print(f"Error processing sources file row {idx+2}: {e}")
+                print(f"Error processing sources file row {idx+1}: {e}")
+                raise
         
         return sources
     
@@ -189,7 +230,7 @@ class CsvLoader():
             if missing_fields:
                 raise ValueError(f"Missing mandatory fields in CSV: {', '.join(missing_fields)}")
             
-            chants = self._load_chants(chants)
+            chants, chant_sources = self._load_chants(chants)
 
         except FileNotFoundError:
             raise FileNotFoundError(f"CSV file not found: {self.chants_filename}")
@@ -213,6 +254,11 @@ class CsvLoader():
                 raise Exception(f"Error loading CSV {self.sources_filename} file: {e}")       
         else:
             sources = []
+        
+        if self.check_missing_sources:
+            self.check_sources(chant_sources, sources)
+        if self.create_missing_sources:
+            sources = self.add_missing_sources(chant_sources, sources)
 
         print("Data loaded!")
         return chants, sources

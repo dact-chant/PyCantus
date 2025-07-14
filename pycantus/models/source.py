@@ -4,7 +4,7 @@ This module contains Source class, which represents a single source entry from s
 It provides methods for creating, modifying, and exporting source data in a standardized format.
 """
 
-__version__ = "0.0.3"
+__version__ = "0.0.4"
 __author__ = "Anna Dvorakova"
 
 
@@ -16,16 +16,18 @@ NON_EXPORT_SOURCES_FIELDS = ['locked']
 
 class Source():
     """
-    pycantus Source class
-        - represents one source entry in database
+    Represents one source entry in database.
 
     Attributes:
-        title(*): Name of the source (can be same as siglum)
-        srclink(*): URL link to the source in the external database (e.g., "https://yourdatabase.org/source/123").
-        siglum(*): Abbreviation for the source manuscript or collection (e.g., "A-ABC Fragm. 1"). Use RISM whenever possible.
-        century: century of source origin
-        provenance: name of the place of source origin
-        cursus: Secular (Cathedral, Roman) or Monastic cursus of the source. 
+        title (str): \* Name of the source (can be same as siglum)
+        srclink (str): \* URL link to the source in the external database (e.g., "https://yourdatabase.org/source/123").
+        siglum (str): \* Abbreviation for the source manuscript or collection (e.g., "A-ABC Fragm. 1"). Use RISM whenever possible.
+        numeric_century (int): Integer representing the value of century field.
+        century (str): Century of source origin.
+        provenance (str): Name of the place of source origin.
+        cursus (str): Secular (Cathedral, Roman) or Monastic cursus of the source. 
+
+        locked (bool): Indicates whether the object is locked for editing. If True, no attributes can be modified. (functional attribute)
     """
 
     def __init__(self,
@@ -37,6 +39,8 @@ class Source():
                  provenance=None,
                  cursus=None):
         """
+        Initialize the Source. 
+        Args corresponds to class non-functional attributes.
         """
         self.locked = False # Indicates if the object is locked for editing
         self.title = title
@@ -60,7 +64,10 @@ class Source():
     @property
     def to_csv_row(self):
         """
-        Returns data of class as standardized csv row
+        Returns data fields of Source in "to be pasted to the csv export file" form.
+        
+        Returns:
+            str: data of object as standardized csv row
         """
         csv_row = []
         for attr_name in EXPORT_SOURCES_FIELDS:
@@ -77,6 +84,9 @@ class Source():
     @staticmethod
     def header() -> str:
         """
-        Returns the header for the CSV file, which includes all mandatory and optional fields.
+        Constructs proper csv header of sorces, e.g. for export.
+
+        Returns:
+            str: the header for the CSV file, which includes all mandatory and optional fields.
         """
         return ','.join(EXPORT_SOURCES_FIELDS)

@@ -1,7 +1,9 @@
 #!/usr/bin/env python
 """
 This module contains the Melody class, which represents a single chant melody.
+
 It is linked to a specific chant via chantlink.
+
 Right now, it is designed in volpiano-centric way, meaning it holds only the volpiano representation of the chant melody,
 if present. But it can be extended to hold other representations in the future (via new optional parameters).
 
@@ -25,7 +27,9 @@ class Melody():
         chantlink (str): URL link directly to the chant entry in the external database.
         cantus_id (str): The Cantus ID associated with the chant.
         raw_volpiano (str): The original Volpiano string before any processing.
-        locked (bool): Indicates if the object is locked for editing.
+        mode (str): Mode of the melody (e.g., "1").
+
+        locked (bool): Indicates if the object is locked for editing. (functional attribute)
     """
     
     def __init__(self, volpiano : str, chantlink : str, cantus_id : str, mode : str):
@@ -51,6 +55,8 @@ class Melody():
                        keep_bars=False, allowed_bars='345', bar='|'):
         """
         Extracts only the allowed characters (and optionally boundaries) from a volpiano string.
+
+        Edits the self.volpiano attribute.
         """
         self.volpiano = clean_volpiano(volpiano=self.volpiano, keep_boundaries=keep_boundaries, allowed_bars=allowed_bars, 
                                        neume_boundary=neume_boundary, syllable_boundary=syllable_boundary, 
@@ -60,12 +66,16 @@ class Melody():
         """
         Expand all accidentals in a volpiano string by adding the accidental
         to all other notes in the scope.
+
+        Edits the self.volpiano attribute.
         """
         self.volpiano = expand_accidentals(volpiano=self.volpiano, omit_notes=omit_notes, 
                                            barlines=barlines, apply_once_only=apply_once_only)
     
     def normalize_liquescents(self):
-        """Treat all liquescences as normal notes."""
+        """
+        Treat all liquescences as normal notes.
+        """
         self.volpiano = normalize_liquescents(self.volpiano)
     
     def discard_differentia(self, text: str=None):
@@ -77,9 +87,12 @@ class Melody():
     
     def get_range(self) -> tuple[int]:
         """
-        Returns the range of the melody with respect to the last note:
+        Computes the range of the melody with respect to the last note:
         how many steps below and above this last note does the melody reach?
 
         Does NOT work with liquescents.
+
+        Returns:
+            tuple: the range of the melody with respect to the last note
         """
         return get_range(self.volpiano)

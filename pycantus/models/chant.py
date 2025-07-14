@@ -18,7 +18,10 @@ __author__ = "Anna Dvorakova"
 @staticmethod
 def get_rite_dict() -> dict[str]:
     """
-    Returns dictionary of rite based on the genre.
+    Loads data about rites of genres.
+
+    Returns:
+        dict: {genre : rite}
     """
     genre_file = impresources.files(static) / "genre.csv"
     with genre_file.open("rt") as f:
@@ -36,40 +39,37 @@ EXPORT_CHANTS_FIELDS = ['cantus_id', 'incipit', 'siglum', 'srclink', 'chantlink'
 
 class Chant():
     """
-    pycantus Chant class 
-        - represents one chnat entry in database
+    Represents one chnat entry (record of chant occurence) in database.
 
     Attributes:
-        siglum*: Abbreviation for the source manuscript or collection (e.g., "A-ABC Fragm. 1"). Use RISM whenever possible.
-        srclink*: URL link to the source in the external database (e.g., "https://yourdatabase.org/source/123").
-        chantlink*: URL link directly to the chant entry in the external database (e.g., "https://yourdatabase.org/chant/45678").
-        folio*: Folio information for the chant (e.g., "001v").
-        sequence: The order of the chant on the folio (e.g., "1").
-        incipit*: The opening words or phrase of the chant (e.g., "Non sufficiens sibi semel aspexisse vis ").
-        feast: Feast or liturgical occasion associated with the chant (e.g., "Nativitas Mariae").
-        genre: Genre of the chant, such as antiphon (A), responsory (R), hymn (H), etc. (e.g., "V").
-        office: The office in which the chant is used, such as Matins (M) or Lauds (L) (e.g., "M").
-        position: Liturgical position of the chant in the office (e.g., "01").
-        cantus_id*: The unique Cantus ID associated with the chant (e.g., "007129a").
-        melody_id: The unique Melody ID associated with the chant (e.g., "001216m1").
-        image: URL link to an image of the manuscript page, if available (e.g., "https://yourdatabase.org/image/12345").
-        mode: Mode of the chant, if available (e.g., "1").
-        full_text: Full text of the chant (e.g., "Non sufficiens sibi semel aspexisse vis amoris multiplicavit in ea inten]tionem inquisitionis").
-        melody: Melody encoded in Volpiano, if available (e.g., "1---dH---h7--h--ghgfed--gH---h--h---").
-        century: Number identifying the century of the source. If multiple centuries apply, the lowest number should be used. (e.g., "12").
-        db*: Code for the database providing the data, used for identification within CI (e.g., "DBcode").
+        siglum (str): \* Abbreviation for the source manuscript or collection (e.g., "A-ABC Fragm. 1"). Use RISM whenever possible.  
+        srclink (str): \* URL link to the source in the external database (e.g., "https://yourdatabase.org/source/123").  
+        chantlink (str): \* URL link directly to the chant entry in the external database (e.g., "https://yourdatabase.org/chant/45678").  
+        folio (str): \* Folio information for the chant (e.g., "001v").  
+        sequence (str): The order of the chant on the folio (e.g., "1").  
+        incipit (str): \* The opening words or phrase of the chant (e.g., "Non sufficiens sibi semel aspexisse vis ").  
+        feast (str): Feast or liturgical occasion associated with the chant (e.g., "Nativitas Mariae").
+        genre (str): Genre of the chant, such as antiphon (A), responsory (R), hymn (H), etc. (e.g., "V").
+        office (str): The office in which the chant is used, such as Matins (M) or Lauds (L) (e.g., "M").
+        position (str): Liturgical position of the chant in the office (e.g., "01").
+        cantus_id (str): The unique Cantus ID associated with the chant (e.g., "007129a").
+        melody_id (str): The unique Melody ID associated with the chant (e.g., "001216m1").
+        image (str): URL link to an image of the manuscript page, if available (e.g., "https://yourdatabase.org/image/12345").
+        mode (str): Mode of the chant, if available (e.g., "1").
+        full_text (str): Full text of the chant (e.g., "Non sufficiens sibi semel aspexisse vis amoris multiplicavit in ea inten]tionem inquisitionis").
+        melody (str): Melody encoded in Volpiano, if available (e.g., "1---dH---h7--h--ghgfed--gH---h--h---").
+        century (str): Number identifying the century of the source. If multiple centuries apply, the lowest number should be used. (e.g., "12").
+        db (str): \* Code for the database providing the data, used for identification within CI (e.g., "DBcode").
 
-        rite: (not yet in CI, but possibly to be (so we want to be ready))
+        rite (str): (not yet in CI, but possibly to be (so we want to be ready), not in export)
 
-        All these fields are str type.
-        (Fields marked with an asterisk (*) are obligatory and must be included in every record. Other fields are optional but recommended when data is available.)
-
-    Functional attributes:
-        locked: Indicates if the object is locked for editing. If True, no attributes can be modified.
-        _has_melody: True if the chant has a melody, False otherwise.
-        melody_object: If the chant has a melody, this should be an instance of the Melody class representing the chant's melody once created.
-    """
+        locked (bool): Indicates whether the object is locked for editing. If True, no attributes can be modified. (functional attribute)
+        _has_melody (bool): True if the chant has a melody, False otherwise. (functional attribute)
+        melody_object (Melody): If the chant has a melody, this should be an instance of the Melody class representing the chant's melody once created. (functional attribute)
     
+    (Fields marked with an asterisk (*) are obligatory and must be included in every record. 
+    Other fields are optional but recommended when data is available.)
+    """
 
     def __init__(self, 
                  cantus_id : str,
@@ -92,6 +92,10 @@ class Chant():
                  century=None,
                  rite=None,
                 ):
+        """
+        Initialize the Chant. 
+        Args corresponds to class non-functional attributes.
+        """
         self.locked = False  # Indicates if the object is locked for editing
         self.cantus_id = cantus_id
         self.incipit = incipit
@@ -115,15 +119,15 @@ class Chant():
         if rite is not None:
             self.rite = rite
         else: # add rite based on the genre
-            self. rite = GENRE_TO_RITE.get(genre, None)
+            self.rite = GENRE_TO_RITE.get(genre, None)
         
-        if self.melody is not None:
-            self._has_melody = True
-        else:
-            self._has_melody = False
-
+        self._has_melody = False
         self.melody_object = None
 
+        if self.melody is not None:
+            self._has_melody = True
+            self.create_melody()
+            
     # setter
     def __setattr__(self, name, value):
         if name != "locked" and getattr(self, "locked", False):
@@ -133,7 +137,10 @@ class Chant():
     @staticmethod
     def header() -> str:
         """
-        Returns the header for the CSV file, which includes all mandatory and optional fields.
+        Constructs proper csv header of chants, e.g. for export.
+
+        Returns:
+            str: the header for the CSV file, which includes all mandatory and optional fields.
         """
         return ','.join(EXPORT_CHANTS_FIELDS)
 
@@ -144,7 +151,10 @@ class Chant():
     @property
     def to_csv_row(self) -> str:
         """
-        Returns data of class as standardized csv row
+        Returns data fields of Chant in "to be pasted to the csv export file" form.
+        
+        Returns:
+            str: data of object as standardized csv row
         """
         csv_row = []
         for attr_name in EXPORT_CHANTS_FIELDS:

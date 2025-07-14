@@ -14,15 +14,24 @@ from pycantus.models.source import Source, MANDATORY_SOURCES_FIELDS, OPTIONAL_SO
 import pycantus.dataset_files as dataset_files
 
 
-__version__ = "0.0.3"
+__version__ = "0.0.4"
 __author__ = "Anna Dvorakova"
 
 
 def get_numerical_century(century : str) -> int:
     """
     Extracts the numerical century from a string representation of a century.
-    E.g. for '12th century' -> 12
-         for '1345 - 1390'  -> 14
+    Generaly takes the first 'possible to be translated to century' value.
+
+    E.g. 
+        - for '12th century' -> 12
+        - for '1345 - 1421'  -> 14
+
+    Args:
+        century (str): Textual representation of century.
+
+    Returns:
+        int: Integer representing same century as input string.
     """
     try:
         two_digits_pattern = r'(?<!\d)\d{2}(?!\d)'
@@ -56,16 +65,30 @@ def get_numerical_century(century : str) -> int:
 
 class CsvLoader():
     """
-    pycantus CsvLoader class
-        - loads chants and sources from CSV files
-        - downloads files if they are not found
-        - creates Chant and Source objects from the data
-        - checks for mandatory fields and raises an error if any are missing
-        - initialized for particular dataset (provided or custom)
+    CsvLoader for 'pycantus style' CSV files: 
+        - Loads chants and sources from CSV files
+        - Downloads files if they are not found and fallback URLs are provided
+        - Creates Chant and Source objects from the data
+        - Checks for mandatory fields and raises an error if any are missing
+        - Checks 
+        - Is initialized for particular dataset (provided or custom).
+    
+    Attributes:
+        chants_filename (str): path to file with chants
+        sources_filename (str, optional): path to file with sources
+        chants_fallback_url (str, optional): URL for chants file download, is used when loading from filepath fails
+        sources_fallback_url (str, optional): URL for sources file download, is used when loading from filepath fails
+        other_parameters (dict, optional): [not used yet]
+        check_missing_sources (bool): indicates whether load should an raise exception if some chant refers to source that is not in sources
+        create_missing_sources (bool): indicates whether load should create Source entries for sources referred to in some of the chants and not being present in provided sources
     """
     def __init__(self, chants_filename : str, sources_filename : str, check_mising_sources : bool,
                  create_missing_sources : bool, chants_fallback_url : str =None, 
                  sources_fallback_url : str =None, other_parameters=None):
+        """
+        Initialize the CsvLoader. 
+        Args corresponds to class attributes.
+        """
         self.chants_filename = chants_filename
         self.sources_filename = sources_filename
         self.chants_fallback_url = chants_fallback_url
@@ -95,9 +118,13 @@ class CsvLoader():
                 self.download(url=self.sources_fallback_url, target=self.sources_filename)
 
 
-    def download(self, url : str, target : str) -> None:
+    def download(self, url : str, target : str):
         """
         Downloads a file from the given URL and saves it to the target path.
+
+        Args:
+            url (str): URL of file to be downloaded
+            target (str): path to directory where downloaded file should be placed
         """
         print(f"Downloading file from {url}...")
         dir = os.path.dirname(target)
@@ -113,6 +140,10 @@ class CsvLoader():
         """
         Raises exception if some source mentioned in chants does not have 
         record in sources.
+
+        Args:
+            chant_sources (set): (srclink, siglum) pair referred to in  provided Chants
+            sources (list): loaded Sources from provided file
         """
         print("Checking presence of sources...")
         existig_sources_srclinks = [s.srclink for s in sources]
@@ -124,6 +155,13 @@ class CsvLoader():
         """
         Checks missing Source entries based on chants info and add those
         in a basic form.
+
+        Args:
+            chant_sources (set): (srclink, siglum) pair referred to in  provided Chants
+            sources (list): loaded Sources from provided file
+
+        Returns:
+            list: possibly enriched Sources list
         """
         print("Creating missing sources...")
         new_sources = []
@@ -219,6 +257,10 @@ class CsvLoader():
         """
         Loads chants and sources from CSV files.
         Checks for mandatory fields and raises an error if any are missing.
+
+        Returns:
+            list: List of chant records provided as Chant objects.
+            list: List of source records provided as Sources objects.
         """
         print("Loading chants and sources...")
         

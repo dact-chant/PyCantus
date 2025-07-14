@@ -18,19 +18,34 @@ __author__ = "Anna Dvorakova"
 class Filter:
     """
     Base class for filters over Corpus data lists:
-    - chants - objects of class pycantus.models.Chant
-    - sources - objects of class pycantus.models.Source
-    - melodies - objects of class pycantus.models.Melody
+        - chants - objects of class pycantus.models.Chant
+        - sources - objects of class pycantus.models.Source
+    
+    Attributes:
+        name (str): Name of the filter, used in export.
+        filters_include (defaultdict(list)): { Data fields : Values to be included after filtration }
+        filters_exclude (defaultdict(list)): { Data fields : Values to be excluded after filtration }
     """
 
     def __init__(self, name: str):
+        """
+        Initialize the Source.
+
+        Args:
+            name (str): name of the filter, used in export
+        """
         self.name = name
         self.filters_include = defaultdict(list)
         self.filters_exclude = defaultdict(list)
     
     def add_value_include(self, field : str, values : list[str] | list[int] | int | str):
         """
-        Add a value to the filter for a specific field to be included.
+        Add a value of specific field to the filter to be included.
+        Other non-specified values would be droped during filtration.
+
+        Args:
+            field (str): Data field (Chant or Source attribute).
+            values: Either single value (str or int) or list of values to be included after filtration.
         """
         if not isinstance(values, list):
             values = [values]
@@ -43,7 +58,13 @@ class Filter:
             
     def add_value_exclude(self, field : str, values : list[str] | list[int] | int | str):
         """
-        Add a value to the filter for a specific field to be excluded.
+        Add a value of specific field to the filter to be excluded.
+
+        Other non-specified values would be kept during filtration.
+
+        Args:
+            field (str): Data field (Chant or Source attribute).
+            values: Either single value (str or int) or list of values to be included after filtration.
         """
         if not isinstance(values, list):
             values = [values]
@@ -55,17 +76,24 @@ class Filter:
         self.filters_exclude[field] = list(set(self.filters_exclude[field])) # discard dupliates
 
     
-    def apply(self, chants : list, sources : list, melodies : list):
+    def apply(self, chants : list, sources : list) -> tuple[list]:
         """
         Apply the filter to the given data.
-        Returns filtered chants and sources based on the filter criteria.
-        If no values for field are specified we expect that user do not care about the field.
+        If no values for field are specified we expect that user does not care about the field.
         If no filter is to be applied, returns the original lists.
+
+        Args:
+            chants (list): 
+            source (list):
+
+        Returns:
+            list: 
+            list:
         """
         filter_fields = set(self.filters_include.keys()).union(self.filters_exclude.keys())
         if len(filter_fields) == 0:
             print("No filtering applied because no filtration values were present, returning original lists.")
-            return chants, sources, melodies
+            return chants, sources
 
         filtered_sources= []
         discarded_srclinks = set()
@@ -113,31 +141,22 @@ class Filter:
                     filtered_chants.append(chant)
 
             chants = filtered_chants
-             
-        if len(melodies) > 0:
-            filtered_melodic_chantlinks = {chant.chantlink for chant in chants if chant._has_melody}
-            # Discard melodies that are not in the filtered chants
-            filtered_melodies = []
-            for melody in melodies:
-                if melody is not None and melody.chantlink in filtered_melodic_chantlinks:
-                    filtered_melodies.append(melody)
-            melodies = filtered_melodies
 
-        return chants, sources, melodies
+        return chants, sources
 
     def delete_field(self, field):
         """
-        Delete a field from both the include and the exclude filters.
+        Deletes a field from both the include and the exclude filters.
         """
         if field in self.filters_exclude.keys():
             del self.filters_exclude[field]
         elif field in self.filters_include.keys():
             del self.filters_include[field]
 
-    def __str__(self):
+    def __str__(self) -> str:
         """
-        Returns yaml style string representation of filter
-        configuration.
+        Returns 
+            str: yaml style string representation of filter configuration.
         """
         setting = {
             'name': self.name,
@@ -149,7 +168,12 @@ class Filter:
     def export_yaml(self, path : str):
         """
         Export the filter configuration to a directory given as path 
-        as '{self.name}.yaml' yaml file.
+        as '{self.name}.yaml' YAML file.
+
+        Tries to create the directory if it does not exist.
+
+        Args:
+            path (str): Path to directory where export YAML file should be created.
         """
         setting = {
             'name': self.name,
@@ -171,6 +195,9 @@ class Filter:
         """
         Function that reads YAML file and transforms it into 
         self.filter_include and self.filter_exclude dictionaries.
+
+        Args:
+            config_file_path (str): Path to YAML to be loaded into filter configuration.
         """
         try:
             with open(config_file_path, 'r') as f:

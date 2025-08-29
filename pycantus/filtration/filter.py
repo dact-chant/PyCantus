@@ -153,7 +153,7 @@ class Filter:
         elif field in self.filters_include.keys():
             del self.filters_include[field]
 
-    def __str__(self) -> str:
+    def as_yaml(self) -> str:
         """
         Returns 
             str: yaml style string representation of filter configuration.
@@ -165,6 +165,13 @@ class Filter:
         }
         return yaml.dump(setting, allow_unicode=True, sort_keys=False)
     
+    def __str__(self) -> str:
+        """
+        Returns 
+            str: yaml style string representation of filter configuration.
+        """
+        return self.as_yaml()
+    
     def export_yaml(self, path : str):
         """
         Export the filter configuration to a directory given as path 
@@ -175,18 +182,13 @@ class Filter:
         Args:
             path (str): Path to directory where export YAML file should be created.
         """
-        setting = {
-            'name': self.name,
-            'include_values' : dict(self.filters_include),
-            'exclude_values' : dict(self.filters_exclude)
-        }
         file_name = f"{self.name}.yaml"
         file_path = os.path.join(path, file_name)
 
         try:
             os.makedirs(path, exist_ok=True)  # Create directory if it doesn't exist
             with open(file_path, 'w', encoding='utf-8') as f:
-                yaml.dump(setting, f, allow_unicode=True, sort_keys=False)
+                yaml.dump(self.as_yaml(), f, allow_unicode=True, sort_keys=False)
             print(f"Filter '{self.name}' successfully exported to: {file_path}")
         except Exception as e:
             print(f"Error exporting filter to YAML: {e}")

@@ -30,6 +30,7 @@ class Corpus():
         is_editable (bool): indicates whether objects in Corpus should be locked
         check_missing_sources (bool): indicates whether load should an raise exception if some chant refers to source that is not in sources
         create_missing_sources (bool): indicates whether load should create Source entries for sources referred to in some of the chants and not being present in provided sources
+        filtration_history (list): list of applied filters
     
     Only chants_filepath is mandatory.
     """
@@ -69,6 +70,7 @@ class Corpus():
             self._lock_chants()
             self._lock_sources()
 
+        self.filtration_history = []
     
     def _lock_chants(self):
         """ 
@@ -205,8 +207,10 @@ class Corpus():
     def apply_filter(self, filter : Filter):
         """
         Applies the given filter on stored data in "in place" way.
+        Stores filter setting into filtraton_history.
         """
         self._chants, self._sources = filter.apply(self._chants, self._sources)
+        self.filtration_history.append(filter.as_yaml())
         #print('Discarding empty sources after filtration...')
         #self.discard_empty_sources()
         #print('Number of chants after filtration:', len(self._chants), '\nNumber of sources after filtration:', len(self._sources))

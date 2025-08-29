@@ -27,7 +27,8 @@ NOTE_STEPS = {v: i for v, i in zip(
 
 
 def expand_accidentals(volpiano, omit_notes=False, barlines='3456', apply_once_only=False):
-    """Expand all accidentals in a volpiano string by adding the accidental
+    """
+    Expand all accidentals in a volpiano string by adding the accidental
     to all other notes in the scope.
 
     In CANTUS transcriptions, flats are added only once, directly in front
@@ -151,7 +152,8 @@ def expand_accidentals(volpiano, omit_notes=False, barlines='3456', apply_once_o
 def clean_volpiano(volpiano, allowed_chars=None, keep_boundaries=False,
                    neume_boundary=' ', syllable_boundary=' ', word_boundary=' ',
                    keep_bars=False, allowed_bars='345', bar='|'):
-    """Extracts only the allowed characters (and optionally boundaries) from a
+    """
+    Extracts only the allowed characters (and optionally boundaries) from a
     volpiano string.
 
     By default, the allowed characters are only notes and accidentals. The
@@ -234,7 +236,8 @@ def clean_volpiano(volpiano, allowed_chars=None, keep_boundaries=False,
 
 
 def volpiano_characters(*groups):
-    """Returns accepted Volpiano characters
+    """
+    Returns accepted Volpiano characters
 
     The characters are organized in several groups: bars, clefs, liquescents,
     naturals, notes, flats, spaces and others. You can pass these group
@@ -273,7 +276,8 @@ def volpiano_characters(*groups):
 
 
 def contains_notes(volpiano, accidentals_are_notes=True):
-    """Tests whether a volpiano string contains notes, including liquescents.
+    """
+    Tests whether a volpiano string contains notes, including liquescents.
     By default, accidentals are also treated as notes, but you can disable
     this using the `accidentals_are_notes` parameter.
 
@@ -312,7 +316,8 @@ def has_no_notes(volpiano):
 
 
 def split_string(mystring, sep, keep_sep=True):
-    """Splits a string, with an option for keeping the separator in
+    """
+    Splits a string, with an option for keeping the separator in
 
     >>> split_string('this-is-a-test', '-')
     ['this-', 'is-', 'a-', 'test']
@@ -344,7 +349,8 @@ def split_string(mystring, sep, keep_sep=True):
 
 
 def split_volpiano(volpiano, sep, keep_sep=True):
-    """Split a Volpiano string, while ignoring the final dashes
+    """
+    Split a Volpiano string, while ignoring the final dashes
 
     >>> split_volpiano('f-g-h--', sep='-')
     ['f-', 'g-', 'h--']
@@ -384,7 +390,8 @@ def split_volpiano(volpiano, sep, keep_sep=True):
 
 
 def normalize_liquescents(volpiano):
-    """Treat all liquescences as normal notes.
+    """
+    Treat all liquescences as normal notes.
 
     >>> normalize_liquescents('f-g--fEgg--kF--g')
     'f-g--fegg--kf--g'
@@ -410,7 +417,8 @@ def normalize_liquescents(volpiano):
 
 
 def discard_differentia(volpiano: str, text: str=None) -> str:
-    """Determines whether the given volpiano melody ends
+    """
+    Determines whether the given volpiano melody ends
     with a differentia or not and if yes, strips it away.
 
     The antiphon should end with a double barline (volpiano: 4) and
@@ -449,7 +457,8 @@ def discard_differentia(volpiano: str, text: str=None) -> str:
 
 
 def get_range(volpiano: str) -> (int, int):
-    """Returns the range of the melody with respect to the last note:
+    """
+    Returns the range of the melody with respect to the last note:
     how many steps below and above this last note does the melody reach?
 
     Does NOT work with liquescents.
@@ -460,3 +469,34 @@ def get_range(volpiano: str) -> (int, int):
     min_step, max_step = min(steps), max(steps)
     return min_step - final_step, max_step - final_step
 
+
+
+def normalize_volpiano(volpiano : str, allowed_chars=None, keep_boundaries=False,
+                   neume_boundary=' ', syllable_boundary=' ', word_boundary=' ',
+                   keep_bars=False, allowed_bars='345', bar='|') -> str:
+    """
+    Wrapper for standard volpiano normalization steps.
+    Normalizes a volpiano string by removing differentiae, 
+    normalizing liquescents and cleaning
+    the string to only contain allowed characters.
+
+    >>> normalize_volpiano('1---fg---h--ij-h-3-f-4---k--k--j--k--h--g---3')
+    'fghijhf'
+
+    Parameters
+    ----------
+    volpiano : str
+        The volpiano string to normalize
+
+    Returns
+    -------
+    str
+        The normalized volpiano string
+    """
+    volpiano = discard_differentia(volpiano)
+    volpiano = normalize_liquescents(volpiano)
+    volpiano = clean_volpiano(volpiano, allowed_chars=allowed_chars, keep_boundaries=keep_boundaries,
+                   neume_boundary=neume_boundary, syllable_boundary=syllable_boundary,
+                   word_boundary=word_boundary, keep_bars=keep_bars,
+                   allowed_bars=allowed_bars, bar=bar)
+    return volpiano

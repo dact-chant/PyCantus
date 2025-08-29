@@ -12,7 +12,7 @@ wrapped them into Melody class methods.
 For more detailed documentation of the methods, see the volpiano.utils module.
 """
 
-from pycantus.volpiano.utils import clean_volpiano, expand_accidentals, normalize_liquescents, discard_differentia, get_range
+from pycantus.volpiano.utils import clean_volpiano, normalize_volpiano, expand_accidentals, normalize_liquescents, discard_differentia, get_range
 
 
 __version__ = "0.0.4"
@@ -59,6 +59,21 @@ class Melody():
         Edits the self.volpiano attribute.
         """
         self.volpiano = clean_volpiano(volpiano=self.volpiano, keep_boundaries=keep_boundaries, allowed_bars=allowed_bars, 
+                                       neume_boundary=neume_boundary, syllable_boundary=syllable_boundary, 
+                                       word_boundary=word_boundary, keep_bars=keep_bars, allowed_chars=allowed_chars, bar=bar)
+        
+    def normalize_volpiano(self, keep_boundaries=False, allowed_chars=None,
+                       neume_boundary=' ', syllable_boundary=' ', word_boundary=' ',
+                       keep_bars=False, allowed_bars='345', bar='|'):
+        """
+        Wrapper for standard volpiano normalization steps.
+        Normalizes a volpiano string by removing differentiae,
+        normalizing liquescents and cleaning
+        the string to only contain allowed characters.
+
+        Edits the self.volpiano attribute.
+        """
+        self.volpiano = normalize_volpiano(volpiano=self.volpiano, keep_boundaries=keep_boundaries, allowed_bars=allowed_bars, 
                                        neume_boundary=neume_boundary, syllable_boundary=syllable_boundary, 
                                        word_boundary=word_boundary, keep_bars=keep_bars, allowed_chars=allowed_chars, bar=bar)
     

@@ -5,6 +5,7 @@ It provides methods for loading, filtering, and exporting data related to the ch
 """
 
 import pandas as pd
+from collections import Counter
 
 from pycantus.models.chant import Chant
 from pycantus.models.source import Source
@@ -203,6 +204,15 @@ class Corpus():
         sources_in_chant_data = {ch.srclink for ch in self._chants}
         self._sources = [s for s in self._sources if s.srclink in sources_in_chant_data]
 
+    def drop_small_sources_data(self, min_chants : int = 150):
+        """
+        Discards all sources that have less than min_chants chants in corpus
+        and discard their chants as well.
+        """
+        source_chant_counts = Counter([ch.srclink for ch in self._chants])
+        sources_to_keep = {s for s, count in source_chant_counts.items() if count >= min_chants}
+        self._sources = [s for s in self._sources if s.srclink in sources_to_keep]
+        self._chants = [ch for ch in self._chants if ch.srclink in sources_to_keep]
 
     def apply_filter(self, filter : Filter):
         """

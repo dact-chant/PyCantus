@@ -1,6 +1,9 @@
 # PyCantus
-PyCantus is envisioned as a Python API to the Cantus family of databases that makes it easy to use this data for computational processing. Primarily we intend this to be used for research in digital chant scholarship, but of course it can be used to build chant-centric apps, new websites, extract data for comparative studies across different repertoires, study liturgy, etc.
+PyCantus is envisioned as a Python API to the Cantus family of databases that makes it easy to use this data for computational processing. Primarily we intend this to be used for research in digital chant scholarship, but of course it can be used to build chant-centric apps, new websites, extract data for comparative studies across different repertoires, study liturgy, etc.  
+  
+The CantusCorpus v1.0 dataset, containing data from the [Cantus Index](https://cantusindex.org/), that can be found in [this repository](https://github.com/DvorakovaA/CantusCorpus), is also related to the PyCantus library as library can work with this dataset easily.
 
+Finally, Django template of web API providing easier creation of YAML filtration setups is implemented with source code in [this repository](https://github.com/DvorakovaA/filterforpycantus) while also being deployed at [https://filterforpycantus.owx.cz](https://filterforpycantus.owx.cz).
 
 ## Data model
 

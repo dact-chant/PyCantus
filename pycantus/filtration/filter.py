@@ -203,7 +203,7 @@ class Filter:
         try:
             os.makedirs(path, exist_ok=True)  # Create directory if it doesn't exist
             with open(file_path, 'w', encoding='utf-8') as f:
-                yaml.dump(self.as_yaml(), f, allow_unicode=True, sort_keys=False)
+                f.write(self.as_yaml())
             print(f"Filter '{self.name}' successfully exported to: {file_path}")
         except Exception as e:
             print(f"Error exporting filter to YAML: {e}")
@@ -219,7 +219,6 @@ class Filter:
         try:
             with open(config_file_path, 'r') as f:
                 yaml_content = yaml.safe_load(f)
-            self.name = yaml_content['name']
             self.filters_include = defaultdict(list, yaml_content['include_values'])
             self.filters_exclude = defaultdict(list, yaml_content['exclude_values'])
         except:

@@ -14,14 +14,14 @@ from pycantus.models.source import Source, MANDATORY_SOURCES_FIELDS, OPTIONAL_SO
 import pycantus.dataset_files as dataset_files
 
 
-__version__ = "0.0.4"
+__version__ = "0.0.5"
 __author__ = "Anna Dvorakova"
 
 
 def get_numerical_century(century : str) -> int:
     """
     Extracts the numerical century from a string representation of a century.
-    Generaly takes the first 'possible to be translated to century' value.
+    Generally takes the first 'possible to be translated to century' value.
 
     E.g. 
         - for '12th century' -> 12
@@ -177,6 +177,13 @@ class CsvLoader():
     def _load_chants(self, chants_f : pd.DataFrame) -> tuple[list[Chant], set[str]]:
         """
         Loads chants from a DataFrame and creates Chant objects.
+
+        Args:
+            chants_f (pd.DataFrame): DataFrame containing chant data
+
+        Returns:
+            list: List of Chant objects created from the DataFrame
+            set: Set of (srclink, siglum) pairs referred to in provided chants_f DataFrame
         """
         chants = []
         chants_sources = set()
@@ -217,6 +224,11 @@ class CsvLoader():
     def _load_sources(self, sources_f : pd.DataFrame) -> list[Source]:
         """
         Loads sources from a DataFrame and creates Source objects.
+
+        Args:
+            sources_f (pd.DataFrame): DataFrame containing source data
+        Returns:
+            list: List of Source objects created from the DataFrame
         """
         sources = []
         for idx, row in sources_f.iterrows():

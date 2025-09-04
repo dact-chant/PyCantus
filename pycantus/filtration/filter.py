@@ -10,7 +10,7 @@ from collections import defaultdict
 from pycantus.models.source import EXPORT_SOURCES_FIELDS
 from pycantus.models.chant import EXPORT_CHANTS_FIELDS
 
-__version__ = "0.0.4"
+__version__ = "0.0.5"
 __author__ = "Anna Dvorakova"
 
 
@@ -41,7 +41,7 @@ class Filter:
     def add_value_include(self, field : str, values : list[str] | list[int] | int | str):
         """
         Add a value of specific field to the filter to be included.
-        Other non-specified values would be droped during filtration.
+        Other non-specified values would be dropped during filtration.
 
         Args:
             field (str): Data field (Chant or Source attribute).
@@ -54,7 +54,7 @@ class Filter:
             raise ValueError(f"Field '{field}' is not a valid chant or source field.")
 
         self.filters_include[field] += values
-        self.filters_include[field] = list(set(self.filters_include[field])) # discard dupliates
+        self.filters_include[field] = list(set(self.filters_include[field])) # discard duplicates
             
     def add_value_exclude(self, field : str, values : list[str] | list[int] | int | str):
         """
@@ -73,7 +73,7 @@ class Filter:
             raise ValueError(f"Field '{field}' is not a valid chant or source field.")
 
         self.filters_exclude[field] += values
-        self.filters_exclude[field] = list(set(self.filters_exclude[field])) # discard dupliates
+        self.filters_exclude[field] = list(set(self.filters_exclude[field])) # discard duplicates
 
     
     def apply(self, chants : list, sources : list) -> tuple[list]:
@@ -89,54 +89,69 @@ class Filter:
         Returns:
             list: 
             list:
+
+        Method should not be called directly, but through Corpus.apply_filter() method.
         """
+        # Collect all fields that need filtering (both include and exclude)
         filter_fields = set(self.filters_include.keys()).union(self.filters_exclude.keys())
+
         if len(filter_fields) == 0:
             print("No filtering applied because no filtration values were present, returning original lists.")
             return chants, sources
-
+        
+        # Sources
         filtered_sources= []
-        discarded_srclinks = set()
+        discarded_srclinks = set() # keep track of srclinks for excluded sources
         source_filter_fields = set(EXPORT_SOURCES_FIELDS).intersection(filter_fields)
         if source_filter_fields:
+            # Iterate through all sources and check if they pass include/exclude rules
             for source in sources:
+                # Pass if either no include filter defined (first two parts of expression) OR value is in include list
                 include_pass = all(
                     field not in self.filters_include or not self.filters_include[field] or
                     getattr(source, field, None) in self.filters_include[field]
                     for field in source_filter_fields
                 )
+                # Pass if either no exclude filter defined (first two parts of expression) OR value is NOT in exclude list
                 exclude_pass = all(
                     field not in self.filters_exclude or not self.filters_exclude[field] or
                     getattr(source, field, None) not in self.filters_exclude[field]
                     for field in source_filter_fields
                 )
-
+                # Keep source if it passes both include and exclude checks
                 if include_pass and exclude_pass:
                     filtered_sources.append(source)
                 else:
+                    # Otherwise, mark its srclink to filter out chants from that source
                     discarded_srclinks.add(source.srclink)
 
             sources = filtered_sources    
             
-
+        # Chants
         filtered_chants = []
+
+        # Limit filtering to only those fields relevant for chants
         chants_filter_fields = set(EXPORT_CHANTS_FIELDS).intersection(filter_fields)
+
+        # Apply chant filtering if there are relevant fields OR discarded sources
         if chants_filter_fields or discarded_srclinks:
             for chant in chants:
+                # Skip chant if its source was discarded earlier -> it will discard it
                 if chant.srclink in discarded_srclinks:
                     continue
-
+                # Pass if no include filter for field (first two parts of expression) OR value is in include list
                 include_pass = all(
                     field not in self.filters_include or not self.filters_include[field] or
                     getattr(chant, field, None) in self.filters_include[field]
                     for field in chants_filter_fields
                 )
+                # Pass if no exclude filter for field (first two parts of expression) OR value is NOT in exclude list
                 exclude_pass = all(
                     field not in self.filters_exclude or not self.filters_exclude[field] or
                     getattr(chant, field, None) not in self.filters_exclude[field]
                     for field in chants_filter_fields
                 )
-
+                # Keep chant if it passes both include and exclude checks
                 if include_pass and exclude_pass:
                     filtered_chants.append(chant)
 

@@ -3,9 +3,9 @@
 Volpiano utilities
 ==================
 
-Utilities for manipulating Volpiano strings.
+Utilities for manipulating volpiano strings.
 Mostly things that come from Bas Cornelissen's CantusCorpus repo.
-So far, a real data model for Volpiano is not implemented.
+So far, a real data model for volpiano is not implemented.
 
 Note: Probably will get refactored and renamed at some point.
 For now, it is a thing of convenience to avoid further copying
@@ -257,7 +257,7 @@ def volpiano_characters(*groups):
     Returns
     -------
     str
-       A string with accepted Volpiano characters
+       A string with accepted volpiano characters
     """
     symbols = {
         'bars': '34567',
@@ -456,7 +456,7 @@ def discard_differentia(volpiano: str, text: str=None) -> str:
     return output_volpiano
 
 
-def get_range(volpiano: str) -> (int, int):
+def get_range(volpiano: str) -> tuple[int]:
     """
     Returns the range of the melody with respect to the last note:
     how many steps below and above this last note does the melody reach?

@@ -12,7 +12,7 @@ import pycantus.static as static
 from pycantus.models.melody import Melody
 
 
-__version__ = "0.0.4"
+__version__ = "0.0.5"
 __author__ = "Anna Dvorakova"
 
 @staticmethod
@@ -39,7 +39,7 @@ EXPORT_CHANTS_FIELDS = ['cantus_id', 'incipit', 'siglum', 'srclink', 'chantlink'
 
 class Chant():
     """
-    Represents one chnat entry (record of chant occurence) in database.
+    Represents one chant entry (record of chant occurrence) in database.
 
     Attributes:
         siglum (str): \* Abbreviation for the source manuscript or collection (e.g., "A-ABC Fragm. 1"). Use RISM whenever possible.  
@@ -57,7 +57,7 @@ class Chant():
         image (str): URL link to an image of the manuscript page, if available (e.g., "https://yourdatabase.org/image/12345").
         mode (str): Mode of the chant, if available (e.g., "1").
         full_text (str): Full text of the chant (e.g., "Non sufficiens sibi semel aspexisse vis amoris multiplicavit in ea inten]tionem inquisitionis").
-        melody (str): Melody encoded in Volpiano, if available (e.g., "1---dH---h7--h--ghgfed--gH---h--h---").
+        melody (str): Melody encoded in volpiano, if available (e.g., "1---dH---h7--h--ghgfed--gH---h--h---").
         century (str): Number identifying the century of the source. If multiple centuries apply, the lowest number should be used. (e.g., "12").
         db (str): \* Code for the database providing the data, used for identification within CI (e.g., "DBcode").
 
@@ -168,7 +168,7 @@ class Chant():
     def create_melody(self):
         """
         Creates a Melody object for the chant if it has a melody.
-        Expectes volpiano to be provided.
+        Expects volpiano to be provided.
         """
         if self._has_melody:
             self.melody_object = Melody(self.melody, self.chantlink, self.cantus_id, self.mode)

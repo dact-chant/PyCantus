@@ -7,7 +7,7 @@ It is linked to a specific chant via chantlink.
 Right now, it is designed in volpiano-centric way, meaning it holds only the volpiano representation of the chant melody,
 if present. But it can be extended to hold other representations in the future (via new optional parameters).
 
-We take the volpiano.utils as already prepered methods (functions) for working with volpiano and just
+We take the volpiano.utils as already prepared methods (functions) for working with volpiano and just
 wrapped them into Melody class methods. 
 For more detailed documentation of the methods, see the volpiano.utils module.
 """
@@ -15,7 +15,7 @@ For more detailed documentation of the methods, see the volpiano.utils module.
 from pycantus.volpiano.utils import clean_volpiano, normalize_volpiano, expand_accidentals, normalize_liquescents, discard_differentia, get_range
 
 
-__version__ = "0.0.4"
+__version__ = "0.0.5"
 __author__ = "Anna Dvorakova"
 
 
@@ -23,10 +23,10 @@ class Melody():
     """
     Representation of one chant melody related to chant record.
     Attributes:
-        volpiano (str): The melody encoded in Volpiano notation.
+        volpiano (str): The melody encoded in volpiano notation.
         chantlink (str): URL link directly to the chant entry in the external database.
         cantus_id (str): The Cantus ID associated with the chant.
-        raw_volpiano (str): The original Volpiano string before any processing.
+        raw_volpiano (str): The original volpiano string before any processing.
         mode (str): Mode of the melody (e.g., "1").
 
         locked (bool): Indicates if the object is locked for editing. (functional attribute)

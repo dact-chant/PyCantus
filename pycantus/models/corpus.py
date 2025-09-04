@@ -14,7 +14,7 @@ from pycantus.dataloaders.loader import CsvLoader
 from pycantus.filtration.filter import Filter
 
 
-__version__ = "0.0.4"
+__version__ = "0.0.5"
 __author__ = "Anna Dvorakova"
 
 
@@ -217,7 +217,7 @@ class Corpus():
     def apply_filter(self, filter : Filter):
         """
         Applies the given filter on stored data in "in place" way.
-        Stores filter setting into filtraton_history.
+        Stores filter setting into filtration_history.
         """
         self._chants, self._sources = filter.apply(self._chants, self._sources)
         self.filtration_history.append(filter.as_yaml())

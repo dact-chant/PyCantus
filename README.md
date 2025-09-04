@@ -1,5 +1,5 @@
 # PyCantus
-PyCantus is envisioned as a Python API to the Cantus family of databases that makes it easy to use this data for computational processing. Primarily we intend this to be used for research in digital chant scholarship, but of course it can be used to build chant-centric apps, new websites, extract data for comparative studies across different repertoires, study liturgy, etc.  
+`PyCantus` is envisioned as a Python API to the Cantus family of databases that makes it easy to use this data for computational processing. Primarily we intend this to be used for research in digital chant scholarship, but of course it can be used to build chant-centric apps, new websites, extract data for comparative studies across different repertoires, study liturgy, etc.  
   
 The CantusCorpus v1.0 dataset, containing data from the [Cantus Index](https://cantusindex.org/), that can be found in [this repository](https://github.com/DvorakovaA/CantusCorpus), is also related to the PyCantus library as library can work with this dataset easily.
 
@@ -17,20 +17,31 @@ There are two further important classes in the data model: `Melody`, and `Corpus
 * A `Melody` contains the chant's melody at various levels of representation.
 * A `Corpus` contains a dataset composed of sources and chants (that may have melodies). Filtering is done on `Corpus` objects.
 
-## Tutorial
+## User documentation
 
-For an introduction to using PyCantus, run the `tutorial.ipynb` Jupyter notebook.
+We realize that two types of users come together at a library of this type – a group of programmers who are getting into Gregorian chant, and then (hopefully) a group of chant experts who are getting into its computer processing. Therefore, be warned that, quite inevitably, when examining the user documentation, each group will encounter things that are obvious to them, but that is fine, as these parts are there precisely for "the others."
 
-## Installing PyCantus library locally
+### Introduction for Computer Science people
+In the `.pdf` file we attempted to compile some basic overview information about Gregorian chant, that is a 'nice to have' before getting into work with the material. It should also serve as a cheat sheet for basic terms and concepts.
+
+
+### Tutorials
+
+For an introduction to using `PyCantus`, run the `tutorial.ipynb` Jupyter notebook.  
+  
+For more advanced and specific tasks there are four tutorials, two working with repertoire (`.ipynb` and `.ipynb`) and two working with melodies (`.ipynb` and `.ipynb`). They would show you
+more possibilities in using `PyCantus` and hopefully also possibilities in Gregorian chant research in general.
+
+### Installing PyCantus library locally
 
 1. Clone the repository:
     
     ```git clone https://github.com/dact-chant/PyCantus```
    
-2. Go to the root directory of the project
+2. Go to the root directory of the project (the one where `pyproject.toml` is)
 3. Run the following command:
 
-    ```pip install -e .```
+    ```pip install .```
    
 4. Import the pycantus library and verify it works:
 

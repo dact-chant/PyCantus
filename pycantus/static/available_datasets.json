@@ -2,12 +2,25 @@
     "sample_dataset" :
         {
             "name" : "Sample Dataset",
-            "description" : "This is a sample dataset for testing purposes.",
+            "description" : "This is a sample dataset for testing and tutorial purposes.",
             "chants_fallback_url" : "",
             "sources_fallback_url" : "",
             "chants_filepath" : "sample_dataset/chants.csv",
             "sources_filepath" : "sample_dataset/sources.csv",
             "other_parameters" : "available_dataset",
             "sumcheck" : "" 
+        },
+
+    "cantuscorpus_v1.0" : 
+        {
+            "name" : "CantusCorpus v1.0",
+            "description" : "A dataset of chants searchable through Cantus Index, see https://github.com/DvorakovaA/CantusCorpus/tree/main/cantuscorpus_1.0.",
+            "chants_fallback_url" : "https://github.com/DvorakovaA/CantusCorpus/releases/download/v1.0/chants.csv",
+            "sources_fallback_url" : "https://github.com/DvorakovaA/CantusCorpus/releases/download/v1.0/sources.csv",
+            "chants_filepath" : "cantuscorpus_v1.0/chants.csv",
+            "sources_filepath" : "cantuscorpus_v1.0/sources.csv",
+            "other_parameters" : "available_dataset",
+            "sumcheck" : "" 
+            
         }
 }

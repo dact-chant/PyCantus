@@ -10,7 +10,7 @@ from collections import defaultdict
 from pycantus.models.source import EXPORT_SOURCES_FIELDS
 from pycantus.models.chant import EXPORT_CHANTS_FIELDS
 
-__version__ = "0.0.5"
+__version__ = "0.0.6"
 __author__ = "Anna Dvorakova"
 
 
@@ -81,16 +81,16 @@ class Filter:
         Apply the filter to the given data.
         If no values for field are specified we expect that user does not care about the field.
         If no filter is to be applied, returns the original lists.
+        Method should not be called directly, but through Corpus.apply_filter() method.
 
         Args:
-            chants (list): 
-            source (list):
+            chants (list): List of chants from the Corpus to be filtered.
+            source (list): List of sources from the Corpus to be filtered.
 
         Returns:
-            list: 
-            list:
+            list: Reduced list of chants after filtration.
+            list: Reduced list of sources after filtration.
 
-        Method should not be called directly, but through Corpus.apply_filter() method.
         """
         # Collect all fields that need filtering (both include and exclude)
         filter_fields = set(self.filters_include.keys()).union(self.filters_exclude.keys())
@@ -223,3 +223,18 @@ class Filter:
             self.filters_exclude = defaultdict(list, yaml_content['exclude_values'])
         except:
             raise IOError(f"Filter configuration file on path {config_file_path} load failed!")
+
+    def import_string(self, yaml_string : str):
+        """
+        Function that reads YAML style string and transforms it into 
+        self.filter_include and self.filter_exclude dictionaries (= working filter)
+
+        Args:
+            yaml_string (str): YAML style string to be loaded into filter configuration.
+        """
+        try:
+            yaml_content = yaml.safe_load(yaml_string)
+            self.filters_include = defaultdict(list, yaml_content['include_values'])
+            self.filters_exclude = defaultdict(list, yaml_content['exclude_values'])
+        except:
+            raise ValueError("Filter configuration string load failed!")

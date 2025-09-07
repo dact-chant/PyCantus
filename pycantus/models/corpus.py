@@ -4,7 +4,6 @@ This module contains the Corpus class, which represents a collection of chants a
 It provides methods for loading, filtering, and exporting data related to the chants and sources.
 """
 
-import pandas as pd
 from collections import Counter
 
 from pycantus.models.chant import Chant
@@ -12,9 +11,10 @@ from pycantus.models.source import Source
 from pycantus.models.melody import Melody
 from pycantus.dataloaders.loader import CsvLoader
 from pycantus.filtration.filter import Filter
+from pycantus.history import HistoryEntry
+from pycantus.history.utils import log_operation
 
-
-__version__ = "0.0.5"
+__version__ = "0.0.6"
 __author__ = "Anna Dvorakova"
 
 
@@ -31,7 +31,7 @@ class Corpus():
         is_editable (bool): indicates whether objects in Corpus should be locked
         check_missing_sources (bool): indicates whether load should an raise exception if some chant refers to source that is not in sources
         create_missing_sources (bool): indicates whether load should create Source entries for sources referred to in some of the chants and not being present in provided sources
-        filtration_history (list): list of applied filters
+        operations_history (list): list of operations applied on the corpus (from predefined list - see methods with @log_operation decorator)
     
     Only chants_filepath is mandatory.
     """
@@ -71,7 +71,7 @@ class Corpus():
             self._lock_chants()
             self._lock_sources()
 
-        self.filtration_history = []
+        self.operations_history = []
     
     def _lock_chants(self):
         """ 
@@ -162,7 +162,7 @@ class Corpus():
             except Exception as e:
                 print(f"Error exporting sources file : {e}")
 
-
+    @log_operation
     def drop_duplicate_chants(self):
         """
         Discards all chants that have the same chantlink as another chant.
@@ -177,6 +177,7 @@ class Corpus():
                 chantlinks.remove(chantlinks[i])
             i += 1
 
+    @log_operation
     def drop_duplicate_sources(self):
         """
         Discards all sources that have the same srclink as another source.
@@ -191,12 +192,14 @@ class Corpus():
                 srclinks.remove(srclinks[i])
             i += 1
     
+    @log_operation
     def keep_melodic_chants(self):
         """
         Keeps only chants that have a melody in the corpus.
         """
         self._chants = [ch for ch in self._chants if ch._has_melody]
     
+    @log_operation
     def drop_empty_sources(self):
         """
         Discards all sources that have no chants in corpus.
@@ -204,7 +207,8 @@ class Corpus():
         sources_in_chant_data = {ch.srclink for ch in self._chants}
         self._sources = [s for s in self._sources if s.srclink in sources_in_chant_data]
 
-    def drop_small_sources_data(self, min_chants : int = 150):
+    @log_operation
+    def drop_small_sources_data(self, min_chants : int):
         """
         Discards all sources that have less than min_chants chants in corpus
         and discard their chants as well.
@@ -213,14 +217,22 @@ class Corpus():
         sources_to_keep = {s for s, count in source_chant_counts.items() if count >= min_chants}
         self._sources = [s for s in self._sources if s.srclink in sources_to_keep]
         self._chants = [ch for ch in self._chants if ch.srclink in sources_to_keep]
-
+    
+    @log_operation
     def apply_filter(self, filter : Filter):
         """
         Applies the given filter on stored data in "in place" way.
         Stores filter setting into filtration_history.
         """
         self._chants, self._sources = filter.apply(self._chants, self._sources)
-        self.filtration_history.append(filter.as_yaml())
-        #print('Discarding empty sources after filtration...')
-        #self.discard_empty_sources()
-        #print('Number of chants after filtration:', len(self._chants), '\nNumber of sources after filtration:', len(self._sources))
+    
+    def list_operations_history(self):
+        """
+        Prints the history of applied operations on the corpus.
+        """
+        if not self.operations_history:
+            print('No operations applied yet.')
+        else:
+            for entry in self.operations_history:
+                print(entry)
+                print()

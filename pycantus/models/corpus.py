@@ -226,13 +226,9 @@ class Corpus():
         """
         self._chants, self._sources = filter.apply(self._chants, self._sources)
     
-    def list_operations_history(self):
+    def get_operations_history_string(self):
         """
-        Prints the history of applied operations on the corpus.
+        Returns the history of applied operations on the corpus.
         """
-        if not self.operations_history:
-            print('No operations applied yet.')
-        else:
-            for entry in self.operations_history:
-                print(entry)
-                print()
+        history_string = '\n'.join([str(entry) for entry in self.operations_history])
+        return history_string

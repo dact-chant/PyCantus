@@ -14,7 +14,7 @@ import pycantus.static as static
 from pycantus.models.corpus import Corpus
 
 
-__version__ = "0.0.4"
+__version__ = "0.0.6"
 __author__ = "Anna Dvorakova"
 
 

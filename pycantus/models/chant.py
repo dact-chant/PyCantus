@@ -12,7 +12,7 @@ import pycantus.static as static
 from pycantus.models.melody import Melody
 
 
-__version__ = "0.0.5"
+__version__ = "0.0.6"
 __author__ = "Anna Dvorakova"
 
 @staticmethod

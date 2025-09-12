@@ -4,7 +4,7 @@ This module contains Source class, which represents a single source entry from s
 It provides methods for creating, modifying, and exporting source data in a standardized format.
 """
 
-__version__ = "0.0.5"
+__version__ = "0.0.6"
 __author__ = "Anna Dvorakova"
 
 

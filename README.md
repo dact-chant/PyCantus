@@ -27,9 +27,9 @@ In the documentation (`doc` folder) we attempted to compile some basic overview 
 
 ### Tutorials
 
-For an introduction to using `PyCantus`, run the `tutorials\intro_to_pycantus_01.ipynb` Jupyter notebook.  
+For an introduction to using `PyCantus`, run the `tutorials\01_intro_to_pycantus.ipynb` Jupyter notebook.  
   
-For more advanced and specific tasks there are four other tutorials in the `tutorials` folder, one describing some basics about the data for Gregorian chant beginners (`basic_setups_02.ipynb`), two working with repertoire (`traditions_detection_03.ipynb` and `unseen_species_04.ipynb`) and one working with melodies (`melody_classification_05.ipynb`). They would show you
+For more advanced and specific tasks there are four other tutorials in the `tutorials` folder, one describing some basics about the data for Gregorian chant beginners (`02_intro_to_chant_data.ipynb`), two working with repertoire (`03_traditions_detection.ipynb` and `04_unseen_species.ipynb`) and two working with melodies (`05_melody_vs_mode.ipynb` and `06_melody_classification.ipynb`). They would show you
 more possibilities in using `PyCantus` and hopefully also possibilities in Gregorian chant research in general.
 
 

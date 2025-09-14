@@ -50,3 +50,7 @@ more possibilities in using `PyCantus` and hopefully also possibilities in Grego
     from pycantus import hello_pycantus
     hello_pycantus()
     ```
+
+PyCantus is being developed under the Digital Analysis of Chant Transmission ([DACT](https://dact-chant.ca/)). This project, funded by the Social Sciences and Humanities Research Council of Canada, aims to advance the study of chant dissemination using computational tools.
+
+Explore more about the project, its goals and contacts on our [homepage](https://ufal.mff.cuni.cz/grants/dact).

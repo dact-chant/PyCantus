@@ -17,3 +17,5 @@ extract data for comparative studies across different repertoires, study liturgy
    :caption: Contents:
 
    modules
+   development_docs.md
+   intro_to_chant.md

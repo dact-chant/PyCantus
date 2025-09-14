@@ -10,6 +10,7 @@ Subpackages
    pycantus.dataloaders
    pycantus.filtration
    pycantus.models
+   pycantus.history
 
 Submodules
 ----------

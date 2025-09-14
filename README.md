@@ -22,7 +22,7 @@ There are two further important classes in the data model: `Melody`, and `Corpus
 We realize that two types of users come together at a library of this type – a group of programmers who are getting into Gregorian chant, and then (hopefully) a group of chant experts who are getting into its computer processing. Therefore, be warned that, quite inevitably, when examining the user documentation, each group will encounter things that are obvious to them, but that is fine, as these parts are there precisely for "the others."
 
 ### Introduction for Computer Science people
-In the documentation (`docs` folder) we attempted to compile some basic overview information about Gregorian chant (`intro_to chant.md`), that is a 'nice to have' before getting into work with the material. It should also serve as a cheat sheet for basic terms and concepts.  
+In the documentation (`docs\source` folder) we attempted to compile some basic overview information about Gregorian chant (`intro_to chant.md`), that is a 'nice to have' before getting into work with the material. It should also serve as a cheat sheet for basic terms and concepts.  
 (Rendered 'easy to read' version can be reached from `docs\build\html\index.html` entry point when opened in any web browser.)
 
 ### Tutorials
@@ -34,7 +34,7 @@ more possibilities in using `PyCantus` and hopefully also possibilities in Grego
 
 ## Development documentation
 
-Development documentation can be found in `docs` folder under `development_docs.md`.  
+Development documentation can be found in `docs\source` folder under `development_docs.md`.  
 
 Standard generated docstrings documentation can be found from `docs\build\html\index.html` entry point when opened in any web browser.
 

@@ -10,6 +10,7 @@ __author__ = "Anna Dvorakova"
 class HistoryEntry:
     """
     A class to represent history of main actions taken on a Corpus.
+    
     Attributes:
         method (str): The method used for the action.
         parameters (dict): Parameters used in the action.

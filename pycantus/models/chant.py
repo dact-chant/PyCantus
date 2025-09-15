@@ -5,7 +5,7 @@ It provides methods for creating, modifying, and exporting chant data in a stand
 """
 
 import pandas as pd
-import os
+import re
 from importlib import resources as impresources
 
 import pycantus.static as static
@@ -164,6 +164,40 @@ class Chant():
             else:
                 csv_row.append('')
         return ','.join(csv_row)
+    
+    @property
+    def is_complete_chant(self) -> bool:
+        """
+        Checks if the chant has complete melodic and textual data.
+        Conditions for being a complete chant:
+        - Has a melody
+        - The melody's volpiano is a valid string containing notes
+        - Has full text
+        - The full text is not identical to the incipit
+        - The volpiano starts with '1' (indicating G clef)
+        - The volpiano does not contain '2' (indicating F clef)
+        - The volpiano does not contain '6------6' (indicating missing pitches)
+        - The volpiano contains only valid characters
+        - The volpiano contains at least one word boundary ('---')
+        """
+        if not self._has_melody:
+            return False
+
+        volpiano = self.melody_object.raw_volpiano
+        volpiano_pattern = r'^[3456712\(\)ABCDEFGHJKLMNOPQRSIWXYZ89abcdefghjklmnopqrsiwxyz\.\,\-\[\]\{\¶]*$'
+        notes_pattern = r'[89abcdefghjklmnopqrs\(\)ABCDEFGHJKLMNOPQRS]+'
+
+        return (
+            isinstance(volpiano, str) and             # has volpiano
+            re.search(notes_pattern, volpiano) and    # contains notes
+            isinstance(self.full_text, str) and       # has full text
+            self.full_text != self.incipit and        # incipit is not full text
+            volpiano.startswith('1') and              # starts with G clef
+            '2' not in volpiano and                   # no F clef
+            '6------6' not in volpiano and            # no missing pitches
+            re.match(volpiano_pattern, volpiano) and  # only valid volpiano chars
+            '---' in volpiano                         # has at least word boundary
+        )
     
     def create_melody(self):
         """

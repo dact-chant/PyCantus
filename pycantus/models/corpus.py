@@ -11,7 +11,6 @@ from pycantus.models.source import Source
 from pycantus.models.melody import Melody
 from pycantus.dataloaders.loader import CsvLoader
 from pycantus.filtration.filter import Filter
-from pycantus.history import HistoryEntry
 from pycantus.history.utils import log_operation
 
 __version__ = "0.0.6"
@@ -218,6 +217,13 @@ class Corpus():
         self._sources = [s for s in self._sources if s.srclink in sources_to_keep]
         self._chants = [ch for ch in self._chants if ch.srclink in sources_to_keep]
     
+    @log_operation
+    def drop_incomplete_chants(self):
+        """
+        Discards all chants that do not have complete melodic and textual data.
+        """
+        self._chants = [c for c in self._chants if c.is_complete_chant]
+
     @log_operation
     def apply_filter(self, filter : Filter):
         """

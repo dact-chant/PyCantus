@@ -206,3 +206,6 @@ class Chant():
         """
         if self._has_melody:
             self.melody_object = Melody(self.melody, self.chantlink, self.cantus_id, self.mode)
+        # Lock melody if chant is locked
+        if self.locked:
+            self.melody_object.locked = True

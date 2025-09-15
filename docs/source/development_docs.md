@@ -29,7 +29,7 @@ Here is a simplified schema of the data model:
 
 ![PyCantus data model simplified schema.](_static/img/data_model_pycantus.png)
 
-More detailed lists of attributes follows.  
+More detailed lists of attributes and methods follows.  
 
 ### Corpus
 
@@ -38,13 +38,32 @@ It provides methods for loading, filtering, and exporting data related to the ch
 
 The only way to initialize `Corpus` is via load from CSV files, it is not possible from chants and sources lists. That is due to "good replicability practice" we wanted to emphasize.
 
-Attributes:
-
+### Attributes:
+- `chants_filepath (str)`: path to file with chants
+- `sources_filepath (str)`: path to file with sources
+- `chants_fallback_url (str)`: URL for chants file download, is used when loading from filepath fails
+- `sources_fallback_url (str)`: URL for sources file download, is used when loading from filepath fails
+- `other_download_parameters (dict)`: [not used yet]
+- `is_editable (bool)`: indicates whether objects in Corpus should be locked
+- `check_missing_sources (bool)`: indicates whether load should an raise exception if some chant refers to source that is not in sources
+- `create_missing_sources (bool)`: indicates whether load should create Source entries for sources referred to in some of the chants and not being present in provided sources
+- `operations_history (list)`: list of operations applied on the corpus (from predefined list - see methods with `@log_operation` decorator)
 
 
 #### Locked attribute
-The 'locking logic' is quite simple. We don't want people to shoot themselves in the foot, so we tried to make changes in the state of data (in `Corpus`) explicit.
+The 'locking logic' is quite simple. We don't want people to shoot themselves in the foot, so we tried to force them to make changes in the state of their data (in `Corpus`) explicit. 
 
+In the initialization of `Corpus` object, argument `is_editable` is passed (with default value set to `False`). Based on its value the value of `Corpus.locked` attribute is set. 
+
+Then getters and setters of `Corpus` were overwritten so the 'I am a locked corpus' logic is controlled. 
+
+Value of the `locked` attribute is propagated into all Chants, Sources and Melodies in the Corpus with `Corpus._lock_chants()`, `Corpus._lock_sources()` and in `Chant.create_melody()`. In these objects it "operates" in the overwritten method `__settatr__`. You can set the value of the `locked` attribute freely -- because that makes the intervention in the data state explicit, but not impossible.
+
+#### Methods
+For easier work with the data few methods were implemented directly on `Corpus`.
+
+- `export_csv(chants_path, sources_path)` - saves `Corpus` data back to CSV files on give paths
+- 
 
 ### Chant
 
@@ -52,52 +71,92 @@ The 'locking logic' is quite simple. We don't want people to shoot themselves in
 It provides methods for creating, modifying, and exporting chant data in a standardized format.
 
 
-Data related attributes:
-- siglum (str): \* Abbreviation for the source manuscript or collection (e.g., "A-ABC Fragm. 1"). Use RISM whenever possible.  
-- srclink (str): \* URL link to the source in the external database (e.g., "https://yourdatabase.org/source/123").  
-- chantlink (str): \* URL link directly to the chant entry in the external database (e.g., "https://yourdatabase.org/chant/45678").  
-- folio (str): \* Folio information for the chant (e.g., "001v").  
-- sequence (str): The order of the chant on the folio (e.g., "1").  
-- incipit (str): \* The opening words or phrase of the chant (e.g., "Non sufficiens sibi semel aspexisse vis ").  
-- feast (str): Feast or liturgical occasion associated with the chant (e.g., "Nativitas Mariae").
-- genre (str): Genre of the chant, such as antiphon (A), responsory (R), hymn (H), etc. (e.g., "V").
-- office (str): The office in which the chant is used, such as Matins (M) or Lauds (L) (e.g., "M").
-- position (str): Liturgical position of the chant in the office (e.g., "01").
-- cantus_id (str): The unique Cantus ID associated with the chant (e.g., "007129a").
-- melody_id (str): The unique Melody ID associated with the chant (e.g., "001216m1").
-- image (str): URL link to an image of the manuscript page, if available (e.g., "https://yourdatabase.org/image/12345").
-- mode (str): Mode of the chant, if available (e.g., "1").
-- full_text (str): Full text of the chant (e.g., "Non sufficiens sibi semel aspexisse vis amoris multiplicavit in ea intentionem inquisitionis").
-- melody (str): Melody encoded in volpiano, if available (e.g., "1---dH---h7--h--ghgfed--gH---h--h---").
-- century (str): Number identifying the century of the source. If multiple centuries apply, the lowest number should be used. (e.g., "12").
-- db (str): \* Code for the database providing the data, used for identification within CI (e.g., "DBcode").
+#### Data related attributes:
+- `siglum (str)`: \* Abbreviation for the source manuscript or collection (e.g., "A-ABC Fragm. 1"). Use RISM whenever possible.  
+- `srclink (str)`: \* URL link to the source in the external database (e.g., "https://yourdatabase.org/source/123").  
+- `chantlink (str)`: \* URL link directly to the chant entry in the external database (e.g., "https://yourdatabase.org/chant/45678").  
+- `folio (str)`: \* Folio information for the chant (e.g., "001v").  
+- `sequence (str)`: The order of the chant on the folio (e.g., "1").  
+- `incipit (str)`: \* The opening words or phrase of the chant (e.g., "Non sufficiens sibi semel aspexisse vis ").  
+- `feast (str)`: Feast or liturgical occasion associated with the chant (e.g., "Nativitas Mariae").
+- `genre (str)`: Genre of the chant, such as antiphon (A), responsory (R), hymn (H), etc. (e.g., "V").
+- `office (str)`: The office in which the chant is used, such as Matins (M) or Lauds (L) (e.g., "M").
+- `position (str)`: Liturgical position of the chant in the office (e.g., "01").
+- `cantus_id (str)`: The unique Cantus ID associated with the chant (e.g., "007129a").
+- `melody_id (str)`: The unique Melody ID associated with the chant (e.g., "001216m1").
+- `image (str)`: URL link to an image of the manuscript page, if available (e.g., "https://yourdatabase.org/image/12345").
+- `mode (str)`: Mode of the chant, if available (e.g., "1").
+- `full_text (str)`: Full text of the chant (e.g., "Non sufficiens sibi semel aspexisse vis amoris multiplicavit in ea intentionem inquisitionis").
+- `melody (str)`: Melody encoded in volpiano, if available (e.g., "1---dH---h7--h--ghgfed--gH---h--h---").
+- `century (str)`: Number identifying the century of the source. If multiple centuries apply, the lowest number should be used. (e.g., "12").
+- `db (str)`: \* Code for the database providing the data, used for identification within CI (e.g., "DBcode").
 
-- rite (str): (not yet in CI, but possibly to be (so we want to be ready), not in export)
+- `rite (str)`: Value of liturgical rite of the chant (not yet in CI, but possibly to be (so we want to be ready), not in export)
 
-Functional attributes:
-- locked (bool): Indicates whether the object is locked for editing. If True, no attributes can be modified. (functional attribute)
-- _has_melody (bool): True if the chant has a melody, False otherwise. (functional attribute)
-- melody_object (Melody): If the chant has a melody, this should be an instance of the Melody class representing the chant's melody once created.
-    
+#### Functional attributes:
+- `locked (bool)`: Indicates whether the object is locked for editing. If True, no attributes can be modified.
+- `_has_melody (bool)`: True if the chant has a melody, False otherwise.
+- `melody_object (Melody)`: If the chant has a melody, this should be an instance of the Melody class representing the chant's melody once created.
+
+#### Property methods
+Some of the methods of `Chant` are decorated with `@property` so that they can be called as property (attribute) of the object, because that is the intuitive comprehension we have about them.  
+These are:
+- `is_complete_chant` - bool value
+- `to_csv_row` - string value, method constructs 
+
+So we can have a piece of code:
+```
+if chant.is_complete_chant:
+    print(chant.to_csv_row)
+```
+
+#### Static methods
+
+
+#### Methods
+
+`Chant` has only one standard method which is `create_melody()`. It 
+
 
 ### Source
 `Source` class represents a single source entry from some database.
 It provides methods for creating, modifying, and exporting source data in a standardized format.
 
 
-Data related attributes:
-- title (str): \* Name of the source (can be same as siglum)
-- srclink (str): \* URL link to the source in the external database (e.g., "https://yourdatabase.org/source/123").
-- siglum (str): \* Abbreviation for the source manuscript or collection (e.g., "A-ABC Fragm. 1"). Use RISM whenever possible.
-- numeric_century (int): Integer representing the value of century field.
-- century (str): Century of source origin.
-- provenance (str): Name of the place of source origin.
-- cursus (str): Secular (Cathedral, Roman) or Monastic cursus of the source. 
+#### Data related attributes:
+- `title (str)`: \* Name of the source (can be same as siglum)
+- `srclink (str)`: \* URL link to the source in the external database (e.g., "https://yourdatabase.org/source/123").
+- `siglum (str)`: \* Abbreviation for the source manuscript or collection (e.g., "A-ABC Fragm. 1"). Use RISM whenever possible.
+- `numeric_century (int)`: Integer representing the value of century field.
+- `century (str)`: Century of source origin.
+- `provenance (str)`: Name of the place of source origin.
+- `cursus (str)`: Secular (Cathedral, Roman) or Monastic cursus of the source. 
 
-Functional attributes:
+#### Functional attributes:
 - locked (bool): Indicates whether the object is locked for editing. If True, no attributes can be modified. (functional attribute)
 
+#### Property methods
+
+#### Static methods
+
+
+
 ### Melody
+`Melody` class represents a single chant melody.
+
+It is linked to a specific chant record via `chantlink` as an unique chant record identifier.  
+
+Right now, it is designed in volpiano-centric way, meaning it holds only the volpiano representation of the chant melody, if present. But it can be extended to hold other representations in the future (via new optional parameters).
+
+We take the `volpiano.utils` as already prepared methods (functions) for working with volpiano and just wrapped them into `Melody` class methods. 
+For more detailed documentation of the methods, see the `volpiano/utils.py` module.
+
+#### Data related attributes
+
+
+#### Functional attributes
+
+#### Methods
 
 
 ## Loaders + validation
@@ -135,6 +194,7 @@ Methods that are saved into `self.operations_history` of `Corpus`:
 - `drop_empty_sources()`
 - `drop_small_sources_data(int)`
 - `apply_filter(Filter)`
+- `drop_incomplete_chants()`
 
 Whole history can be represented as one human-readable string via calling `get_operations_history_string()` method on `Corpus`.
 

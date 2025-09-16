@@ -26,9 +26,9 @@ def log_operation(func):
         else:
             # Transform kwargs into a string representation
             if args == () and kwargs != {}:
-                args = '\n'.join([f"{k}: {v}" for k, v in kwargs.items()])
+                args = '\n'.join([f"{k}: {v}" for k, v in kwargs.items()]) + '\n'
             else:
-                args = '{}'
+                args = '{}' + '\n'
 
         entry = HistoryEntry(
             method=func.__name__,

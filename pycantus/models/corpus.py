@@ -31,6 +31,8 @@ class Corpus():
         check_missing_sources (bool): indicates whether load should an raise exception if some chant refers to source that is not in sources
         create_missing_sources (bool): indicates whether load should create Source entries for sources referred to in some of the chants and not being present in provided sources
         operations_history (list): list of operations applied on the corpus (from predefined list - see methods with @log_operation decorator)
+        _chants (list): list of Chant objects in the corpus
+        _sources (list): list of Source objects in the corpus
     
     Only chants_filepath is mandatory.
     """
@@ -236,5 +238,7 @@ class Corpus():
         """
         Returns the history of applied operations on the corpus.
         """
-        history_string = '\n'.join([str(entry) for entry in self.operations_history])
+        history_string = 'chants file: ' + self.chants_filepath + '\n'
+        history_string += 'sources file: ' + str(self.sources_filepath) + '\n\n'
+        history_string += '\n'.join([str(entry) for entry in self.operations_history])
         return history_string

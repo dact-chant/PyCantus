@@ -29,8 +29,10 @@ In the documentation (`docs\source` folder) we attempted to compile some basic o
 
 For an introduction to using `PyCantus`, run the `tutorials\01_intro_to_pycantus.ipynb` Jupyter notebook.  
   
-For more advanced and specific tasks there are four other tutorials in the `tutorials` folder, one describing some basics about the data for Gregorian chant beginners (`02_intro_to_chant_data.ipynb`), two working with repertoire (`03_traditions_detection.ipynb` and `04_unseen_species.ipynb`) and two working with melodies (`05_melody_vs_mode.ipynb` and `06_melody_classification.ipynb`). They would show you
-more possibilities in using `PyCantus` and hopefully also possibilities in Gregorian chant research in general.
+For more advanced and specific tasks there are four other tutorials in the `tutorials` folder, one describing some basics about the data for Gregorian chant beginners (`02_intro_to_chant_data.ipynb`), two working with repertoire (`03_repertoire_traditions.ipynb` and `04_unseen_species.ipynb`) and two working with melodies (`05_melody_vs_mode.ipynb` and `06_melody_classification.ipynb`).  
+They would show you more possibilities in using `PyCantus` and hopefully also possibilities in Gregorian chant research in general.  
+  
+All these tutorials expect basic Python knowledge, if you feel weak about your Python programming skills, please, go through some of the many online tutorials available for Python.. 
 
 ## Development documentation
 
@@ -57,7 +59,7 @@ Standard generated docstrings documentation can be found from `docs\build\html\i
     hello_pycantus()
     ```
 
-### About project
+## About project
 
 PyCantus is being developed under the Digital Analysis of Chant Transmission ([DACT](https://dact-chant.ca/)). This project, funded by the Social Sciences and Humanities Research Council of Canada, aims to advance the study of chant dissemination using computational tools.
 

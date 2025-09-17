@@ -1,0 +1,454 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Intro to Gregorian Chant Data &mdash; PyCantus v0.0.4 documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
+
+  
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=77e3fdf6"></script>
+      <script src="_static/doctools.js?v=9bcbadda"></script>
+      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="PyCantus Development Documentation" href="development_docs.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            PyCantus
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="modules.html">pycantus</a></li>
+<li class="toctree-l1"><a class="reference internal" href="development_docs.html">PyCantus Development Documentation</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Intro to Gregorian Chant Data</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#fields">Fields</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#chants">Chants</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#genre">Genre</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#main-genres-of-office-of-hours">Main Genres of Office of Hours</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#office">Office</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#daily-cycle-of-the-office">Daily cycle of the Office</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#structure-lauds-vespers">Structure (Lauds &amp; Vespers)</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#feast">Feast</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#source-database">Source Database</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#sources">Sources</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#title">Title</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#siglum">Siglum</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#century">Century</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#numerical-century">Numerical Century</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#provenance">Provenance</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#cursus">Cursus</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">PyCantus</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Intro to Gregorian Chant Data</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/intro_to_chant.md.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="intro-to-gregorian-chant-data">
+<h1>Intro to Gregorian Chant Data<a class="headerlink" href="#intro-to-gregorian-chant-data" title="Link to this heading"></a></h1>
+<p>Gregorian chant is the universal liturgical vocal monody (music written for only a single voice) of the Latin church (today specifically the Roman Catholic church), an essential part of Western music history, and a dominant musical tradition in Latin Europe, as well as an expression of its religious and political unity. It is a musical tradition that is highly regulated by the institutions of the Roman Church: each day of the year has an assigned set of chants to be sung at specific points of the liturgies of that day. The Roman rite (and its variants in the Latin church) defines positions in liturgy for more than 3,000 such units of chant repertoire in the liturgical calendar.</p>
+<p>The moniker <strong>“Gregorian”</strong> comes from the legend of Pope Gregory I, who supposedly dictated Gregorian repertoire as sung to him by a dove of the Holy Spirit. Current historical understanding is that Gregory I had little to do with this music: rather, its origins and rise have to do with the establishment of the Frankish empire under Pepin III and especially Charlemagne, in the late 8th and early 9th century (Hucke 1980, Hiley 1993). However, the legend of the divine origin of Gregorian chant, including its melodies, obligated practitioners to perform chant faithfully to this implied “original” (Hiley 1993). This differentiates Gregorian chant from many other liturgical monodies: e.g., Greek Catholic chant allows singers to choose melodic patterns that match different pronunciations of its language, Church Slavonic, depending on the native language of the singers. (From personal communication with Greek Catholic chant singers.)</p>
+<p>While after the 2nd Vatican Council in the 1960s, the role of chant in liturgy diminished (in practice, even though the council’s documents still affirm Gregorian chant as the primary musical tradition of the Church), it retains this impressive level of standardization, with a global authoritative edition. Today, apps exist that contain the texts and melodies to be sung at each point of the day’s liturgy (e.g., ChantTools, SquareNote, and Neumz).</p>
+<p>A significant effort was expended to conserve chant: both in rules for the institutional practice of the <em>schola cantorum</em> model, where a selected member of the given community had the responsibility to teach new members the repertoire and correct deviations (Hiley 1993), for instance, the abbot William of Dijon, 961–1031 AD, is reported by his biographer Rodulphus Glaber to have “corrected and emended all that was sung by his choirs during the night or the day…” (Santosuosso 2024), and in the production of liturgical books with notated melodies, at significant expense (Buringh 2010). Conserving Gregorian melodies in fact even motivated development of a major feature of modern music notation: the staff, an 11th-century innovation of Guido of Arezzo, which allowed notating pitches exactly and thus enabled learning the melodies without a teacher present (Atkinson 2008). The staff was adopted very quickly and by the end of the 11th century, practically no new manuscripts with earlier adiastematic notation were being produced.</p>
+<p>Yet in this era of chant manuscript tradition between approx. 800–1600 AD, one rarely finds the melody of a chant recorded as exactly the same sequence of pitches in any two different manuscripts — and no two manuscripts contain exactly the same repertoire. The Gregorian tradition spanning all of Latin Europe for the better part of a millennium was — despite the conservation pressure and resources allocated for conservation — very diverse. This diversification of chant (together with the diversification of liturgy) went so far that the Council of Trent (1545–1563) decided to drastically limit permissible local liturgical specifics.</p>
+<p>This diversity within chant, and its relationship to different historical contexts in Europe, is a unique opportunity to study the broader cultural networks at play in medieval culture. And the scale of chant materials — some 30,000 extant manuscripts, out of which more than 2,000 have been digitised and almost a million catalogue records exist in chant databases — makes it the ideal material for computational study.</p>
+<hr class="docutils" />
+<p>Here follows overview of data fields used in PyCantus Data models, that are coming directly from the loaded datasets.</p>
+<section id="fields">
+<h2>Fields<a class="headerlink" href="#fields" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p><a class="reference internal" href="pycantus.models.html#pycantus.models.corpus.Corpus.chants" title="pycantus.models.corpus.Corpus.chants"><span class="xref myst py py-attr">Chants</span></a></p>
+<ul>
+<li><p><a class="reference internal" href="pycantus.models.html#pycantus.models.chant.Chant.genre" title="pycantus.models.chant.Chant.genre"><span class="xref myst py py-attr">Genre</span></a></p></li>
+<li><p><a class="reference internal" href="pycantus.models.html#pycantus.models.chant.Chant.office" title="pycantus.models.chant.Chant.office"><span class="xref myst py py-attr">Office</span></a></p></li>
+<li><p><a class="reference internal" href="pycantus.models.html#pycantus.models.chant.Chant.feast" title="pycantus.models.chant.Chant.feast"><span class="xref myst py py-attr">Feast</span></a></p></li>
+<li><p><a class="reference internal" href="pycantus.models.html#pycantus.models.chant.Chant.db" title="pycantus.models.chant.Chant.db"><span class="xref myst py py-attr">Source Database</span></a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="pycantus.models.html#pycantus.models.corpus.Corpus.sources" title="pycantus.models.corpus.Corpus.sources"><span class="xref myst py py-attr">Sources</span></a></p>
+<ul>
+<li><p><a class="reference internal" href="pycantus.models.html#pycantus.models.source.Source.title" title="pycantus.models.source.Source.title"><span class="xref myst py py-attr">Title</span></a></p></li>
+<li><p><a class="reference internal" href="pycantus.models.html#pycantus.models.chant.Chant.siglum" title="pycantus.models.chant.Chant.siglum"><span class="xref myst py py-attr">Siglum</span></a></p></li>
+<li><p><a class="reference internal" href="pycantus.models.html#pycantus.models.chant.Chant.century" title="pycantus.models.chant.Chant.century"><span class="xref myst py py-attr">Century</span></a></p></li>
+<li><p><a class="reference internal" href="#num_century"><span class="xref myst">Numerical Century</span></a></p></li>
+<li><p><a class="reference internal" href="pycantus.models.html#pycantus.models.source.Source.provenance" title="pycantus.models.source.Source.provenance"><span class="xref myst py py-attr">Provenance</span></a></p></li>
+<li><p><a class="reference internal" href="pycantus.models.html#pycantus.models.source.Source.cursus" title="pycantus.models.source.Source.cursus"><span class="xref myst py py-attr">Cursus</span></a></p></li>
+</ul>
+</li>
+</ul>
+</section>
+<hr class="docutils" />
+<section id="chants">
+<h2>Chants<a class="headerlink" href="#chants" title="Link to this heading"></a></h2>
+<p>Following first three fields reflect directly what is usually written in the medieval source itself.</p>
+<p><img alt="Rubric in medieval manuscript description." src="_images/rubric.png" /><br />
+Rubric in medieval liturgical manuscript with description of each part.</p>
+<p>And here we present schema on Cantus Index ecosystem that shows the “old book” → “web database” path of the data:</p>
+<p><img alt="Chant cataloguing schema." src="_images/chant-cataloguing-schema.png" /></p>
+<p>Chant data in the Cantus ecosystem: an expert reads a manuscript (today most often digitised), identifies chants, and creates their database records by assigning a Cantus ID (pink process). Expertise in Latin liturgy is needed to interpret rubrics (dark green process). With the chant text, this allows correct Cantus ID assignment. A link to the source and page is added (blue process). Once added to a Cantus database, the Cantus Index hub retrieves records (purple process, automatic).</p>
+<hr class="docutils" />
+<section id="genre">
+<h3>Genre<a class="headerlink" href="#genre" title="Link to this heading"></a></h3>
+<p>Individual songs are divided into two broad categories: liturgical recitative and free composition.</p>
+<ul class="simple">
+<li><p><strong>Liturgical recitative</strong>: singing on a single tone with rises/falls at section ends. Common in prayers and readings.</p></li>
+<li><p><strong>Psalmody</strong>: intermediate form, perfected formulas, limited psalms.</p></li>
+<li><p><strong>Free composition</strong>: each text has its own melody. Includes antiphons, responsories, hymns, invitatories, sequences, tropes, and later Mass parts like Alleluia, Credo, Gloria.</p></li>
+</ul>
+<section id="main-genres-of-office-of-hours">
+<h4>Main Genres of Office of Hours<a class="headerlink" href="#main-genres-of-office-of-hours" title="Link to this heading"></a></h4>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Genre</p></th>
+<th class="head"><p>Abbreviation</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Antiphons</p></td>
+<td><p>A</p></td>
+<td><p>Short chants before psalms and canticles</p></td>
+</tr>
+<tr class="row-odd"><td><p>Invitatory antiphon</p></td>
+<td><p>I</p></td>
+<td><p>Alternates with verses of Psalm 94 at beginning of Matins</p></td>
+</tr>
+<tr class="row-even"><td><p>Responsory</p></td>
+<td><p>R</p></td>
+<td><p>Two-part chant (Respond + Verse) often after a Lesson</p></td>
+</tr>
+<tr class="row-odd"><td><p>Hymns</p></td>
+<td><p>H</p></td>
+<td><p>Poetic texts with multiple stanzas</p></td>
+</tr>
+<tr class="row-even"><td><p>Responsory verse</p></td>
+<td><p>V</p></td>
+<td><p>Verse that completes a responsory</p></td>
+</tr>
+<tr class="row-odd"><td><p>Versicle</p></td>
+<td><p>W</p></td>
+<td><p>Short sung sentences with a short sung response</p></td>
+</tr>
+<tr class="row-even"><td><p>Canticle</p></td>
+<td><p>Ca</p></td>
+<td><p>New Testament poetic texts (e.g. <em>Benedictus</em>, <em>Magnificat</em>)</p></td>
+</tr>
+<tr class="row-odd"><td><p>Psalm</p></td>
+<td><p>Ps (PS)</p></td>
+<td><p>Old Testament texts sung to psalm notes</p></td>
+</tr>
+</tbody>
+</table>
+<p>More info: <a class="reference external" href="https://cantusindex.org/genre">Cantus Index Genres</a>.<br />
+See also <a class="reference external" href="https://cantusdatabase.org/documents/">Cantus Database manuals</a> and:</p>
+<ul class="simple">
+<li><p>Harper, <em>The Forms and Orders of Western Liturgy…</em> (1991)</p></li>
+<li><p>Hughes, <em>Medieval Manuscripts for Mass and Office</em> (1982)</p></li>
+</ul>
+</section>
+</section>
+<hr class="docutils" />
+<section id="office">
+<h3>Office<a class="headerlink" href="#office" title="Link to this heading"></a></h3>
+<p>The <strong>Office</strong> answers: “What time should we sing this?” Each chant is assigned a slot in the medieval day.</p>
+<section id="daily-cycle-of-the-office">
+<h4>Daily cycle of the Office<a class="headerlink" href="#daily-cycle-of-the-office" title="Link to this heading"></a></h4>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Latin</p></th>
+<th class="head"><p>English</p></th>
+<th class="head"><p>Abbrev</p></th>
+<th class="head"><p>Time of Day</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Ad vesperam</p></td>
+<td><p>Vespers</p></td>
+<td><p>V</p></td>
+<td><p>before sunset</p></td>
+</tr>
+<tr class="row-odd"><td><p>Ad completorium</p></td>
+<td><p>Compline</p></td>
+<td><p>C</p></td>
+<td><p>before rest</p></td>
+</tr>
+<tr class="row-even"><td><p>Ad Matutinum</p></td>
+<td><p>Matins</p></td>
+<td><p>M</p></td>
+<td><p>at night, after midnight</p></td>
+</tr>
+<tr class="row-odd"><td><p>Ad Laudes</p></td>
+<td><p>Lauds</p></td>
+<td><p>L</p></td>
+<td><p>before dawn, after Matins</p></td>
+</tr>
+<tr class="row-even"><td><p>Ad primam</p></td>
+<td><p>Prime</p></td>
+<td><p>P</p></td>
+<td><p>at dawn</p></td>
+</tr>
+<tr class="row-odd"><td><p>Missa matutinalis</p></td>
+<td><p>Morning Mass</p></td>
+<td><p>MI/MASS</p></td>
+<td><p>in winter after Terce</p></td>
+</tr>
+<tr class="row-even"><td><p>Ad tertiam</p></td>
+<td><p>Terce</p></td>
+<td><p>T</p></td>
+<td><p>at nine</p></td>
+</tr>
+<tr class="row-odd"><td><p>MISSA</p></td>
+<td><p>Mass</p></td>
+<td><p>MI/MASS</p></td>
+<td><p>in winter after Sext</p></td>
+</tr>
+<tr class="row-even"><td><p>Ad sextam</p></td>
+<td><p>Sext</p></td>
+<td><p>S</p></td>
+<td><p>at noon</p></td>
+</tr>
+<tr class="row-odd"><td><p>Ad nones</p></td>
+<td><p>None</p></td>
+<td><p>N</p></td>
+<td><p>at three</p></td>
+</tr>
+<tr class="row-even"><td><p>Ad vesperam II</p></td>
+<td><p>Second Vespers</p></td>
+<td><p>V2</p></td>
+<td><p>on great feasts</p></td>
+</tr>
+<tr class="row-odd"><td><p>Ad completorium</p></td>
+<td><p>Compline</p></td>
+<td><p>C</p></td>
+<td><p></p></td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<div><p><em>On feasts, Second Vespers replace the usual Vespers.</em></p>
+</div></blockquote>
+</section>
+<section id="structure-lauds-vespers">
+<h4>Structure (Lauds &amp; Vespers)<a class="headerlink" href="#structure-lauds-vespers" title="Link to this heading"></a></h4>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Chants</p></th>
+<th class="head"><p>Details</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Opening versicles</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p>Antiphons with 5 psalms</p></td>
+<td><p>Each sung before and after each psalm</p></td>
+</tr>
+<tr class="row-even"><td><p>Chapter</p></td>
+<td><p>Short reading</p></td>
+</tr>
+<tr class="row-odd"><td><p>Hymn</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p>Versicle and response</p></td>
+<td><p>Short sentences followed by a response</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Lauds</strong>: Antiphon + <em>Benedictus</em></p></td>
+<td><p>Canticle</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Vespers</strong>: Antiphon + <em>Magnificat</em></p></td>
+<td><p>Canticle</p></td>
+</tr>
+<tr class="row-odd"><td><p>Collect + <em>Benedicamus domino</em></p></td>
+<td><p></p></td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+<hr class="docutils" />
+<section id="feast">
+<h3>Feast<a class="headerlink" href="#feast" title="Link to this heading"></a></h3>
+<p>The <strong>feast</strong> field indicates which liturgical event the chant was for. Often written directly in rubrics.</p>
+<p><strong>Examples:</strong> <em>St. George</em>, <em>Dom. 1 Adventus</em>.</p>
+<p>Lists: <a class="reference external" href="https://cantusindex.org/feasts">Cantus Index Feasts</a>, <a class="reference external" href="https://lfri.pemdatabase.eu/feasts">LFRI Feasts</a>.</p>
+</section>
+<hr class="docutils" />
+<section id="source-database">
+<h3>Source Database<a class="headerlink" href="#source-database" title="Link to this heading"></a></h3>
+<p>Abbreviation of database in Cantus Index network.</p>
+<p>Databases in CantusCorpus v1.0:</p>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Name</p></th>
+<th class="head"><p>Abbrev</p></th>
+<th class="head"><p>Link</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Cantus Database</p></td>
+<td><p>CD</p></td>
+<td><p><a class="reference external" href="https://cantusdatabase.org/">cantusdatabase.org</a></p></td>
+</tr>
+<tr class="row-odd"><td><p>Medieval Music Manuscripts Online</p></td>
+<td><p>MMMO</p></td>
+<td><p><a class="reference external" href="https://musmed.eu/">musmed.eu</a></p></td>
+</tr>
+<tr class="row-even"><td><p>Slovak Early Music Database</p></td>
+<td><p>CSK</p></td>
+<td><p><a class="reference external" href="https://cantus.sk/">cantus.sk</a></p></td>
+</tr>
+<tr class="row-odd"><td><p>Cantus Fontes Bohemiae</p></td>
+<td><p>FCB</p></td>
+<td><p><a class="reference external" href="https://cantusbohemiae.cz/">cantusbohemiae.cz</a></p></td>
+</tr>
+<tr class="row-even"><td><p>Cantus Planus in Polonia</p></td>
+<td><p>CPL</p></td>
+<td><p><a class="reference external" href="https://cantusplanus.pl/">cantusplanus.pl</a></p></td>
+</tr>
+<tr class="row-odd"><td><p>Portuguese Early Music Database</p></td>
+<td><p>PEM</p></td>
+<td><p><a class="reference external" href="https://pemdatabase.eu/">pemdatabase.eu</a></p></td>
+</tr>
+<tr class="row-even"><td><p>Spanish Early Music Manuscripts Database</p></td>
+<td><p>SEMM</p></td>
+<td><p><a class="reference external" href="https://musicahispanica.eu/">musicahispanica.eu</a></p></td>
+</tr>
+<tr class="row-odd"><td><p>Hungarian Chant Database</p></td>
+<td><p>HCD</p></td>
+<td><p><a class="reference external" href="https://hun-chant.eu/">hun-chant.eu</a></p></td>
+</tr>
+<tr class="row-even"><td><p>Austrian Monasteries Manuscripts</p></td>
+<td><p>A4M</p></td>
+<td><p><a class="reference external" href="https://austriamanus.org/">austriamanus.org</a></p></td>
+</tr>
+<tr class="row-odd"><td><p>Codicologica et Hymnologica Bohemica Liturgica</p></td>
+<td><p>HYM</p></td>
+<td><p><a class="reference external" href="https://hymnologica.cz/">hymnologica.cz</a></p></td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+<hr class="docutils" />
+<section id="sources">
+<h2>Sources<a class="headerlink" href="#sources" title="Link to this heading"></a></h2>
+<section id="title">
+<h3>Title<a class="headerlink" href="#title" title="Link to this heading"></a></h3>
+<p>Textual identifier of the source. Can be same as siglum or a traditional name.<br />
+<strong>Examples:</strong> <em>A-KN CCl 00063 Antiphonarium</em>, <em>Jistebnice Graduale</em>.</p>
+</section>
+<section id="siglum">
+<h3>Siglum<a class="headerlink" href="#siglum" title="Link to this heading"></a></h3>
+<p>Identifier of the source (often <a class="reference external" href="https://rism.info/">RISM</a> style).<br />
+<strong>Examples:</strong> <em>A-Gu Ms 0807</em>, <em>CDN-Mrb MS Medieval 0222</em>.</p>
+</section>
+<section id="century">
+<h3>Century<a class="headerlink" href="#century" title="Link to this heading"></a></h3>
+<p>Text representation of century of origin.<br />
+<strong>Examples:</strong> <em>12th century (2nd quarter)</em>, <em>c. 1200</em>.</p>
+</section>
+<section id="numerical-century">
+<h3>Numerical Century<a class="headerlink" href="#numerical-century" title="Link to this heading"></a></h3>
+<p>Century as integer.<br />
+<strong>Example:</strong> <code class="docutils literal notranslate"><span class="pre">12</span></code> for <em>12th century</em>, <em>1155</em>, or <em>1st half of 12th</em>.</p>
+</section>
+<section id="provenance">
+<h3>Provenance<a class="headerlink" href="#provenance" title="Link to this heading"></a></h3>
+<p>Means <em>where the source is from</em>.<br />
+<strong>Examples:</strong> <em>St. George monastery in Prague</em>, <em>Spain</em>.</p>
+</section>
+<section id="cursus">
+<h3>Cursus<a class="headerlink" href="#cursus" title="Link to this heading"></a></h3>
+<p>Indicates institutional origin/use.<br />
+<strong>Examples:</strong> <em>secular</em> cursus (cathedrals), <em>monastic</em> cursus (monasteries).</p>
+<hr class="docutils" />
+<p>For more info about the Gregorian chant and its data, we strongly recommend reading through <a class="reference external" href="https://cantusdatabase.org/documents/">introductory manuals</a> created for the <a class="reference external" href="https://cantusdatabase.org/">Cantus Database</a>.</p>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="development_docs.html" class="btn btn-neutral float-left" title="PyCantus Development Documentation" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, [redacted for peer review].</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

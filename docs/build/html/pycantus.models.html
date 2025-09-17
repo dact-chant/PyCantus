@@ -1,0 +1,901 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>pycantus.models package &mdash; PyCantus v0.0.4 documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
+
+  
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=77e3fdf6"></script>
+      <script src="_static/doctools.js?v=9bcbadda"></script>
+      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="pycantus.history package" href="pycantus.history.html" />
+    <link rel="prev" title="pycantus.filtration package" href="pycantus.filtration.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            PyCantus
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="modules.html">pycantus</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="pycantus.html">pycantus package</a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="pycantus.html#subpackages">Subpackages</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="pycantus.dataloaders.html">pycantus.dataloaders package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pycantus.filtration.html">pycantus.filtration package</a></li>
+<li class="toctree-l4 current"><a class="current reference internal" href="#">pycantus.models package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pycantus.history.html">pycantus.history package</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="pycantus.html#submodules">Submodules</a></li>
+<li class="toctree-l3"><a class="reference internal" href="pycantus.html#module-pycantus.data">pycantus.data module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="pycantus.html#module-pycantus">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="development_docs.html">PyCantus Development Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="intro_to_chant.html">Intro to Gregorian Chant Data</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">PyCantus</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="modules.html">pycantus</a></li>
+          <li class="breadcrumb-item"><a href="pycantus.html">pycantus package</a></li>
+      <li class="breadcrumb-item active">pycantus.models package</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/pycantus.models.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="pycantus-models-package">
+<h1>pycantus.models package<a class="headerlink" href="#pycantus-models-package" title="Link to this heading"></a></h1>
+<section id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Link to this heading"></a></h2>
+</section>
+<section id="module-pycantus.models.chant">
+<span id="pycantus-models-chant-module"></span><h2>pycantus.models.chant module<a class="headerlink" href="#module-pycantus.models.chant" title="Link to this heading"></a></h2>
+<p>This module contains the Chant class, which represents a single chant entry from some database.
+It provides methods for creating, modifying, and exporting chant data in a standardized format.</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="pycantus.models.chant.Chant">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pycantus.models.chant.</span></span><span class="sig-name descname"><span class="pre">Chant</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cantus_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">incipit</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">siglum</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">srclink</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">chantlink</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">folio</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">db</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sequence</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">feast</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">genre</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">office</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">position</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">melody_id</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">image</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mode</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">full_text</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">melody</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">century</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rite</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pycantus.models.chant.Chant" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Represents one chant entry (record of chant occurrence) in database.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pycantus.models.chant.Chant.siglum">
+<span class="sig-name descname"><span class="pre">siglum</span></span><a class="headerlink" href="#pycantus.models.chant.Chant.siglum" title="Link to this definition"></a></dt>
+<dd><p>* Abbreviation for the source manuscript or collection (e.g., “A-ABC Fragm. 1”). Use RISM whenever possible.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pycantus.models.chant.Chant.srclink">
+<span class="sig-name descname"><span class="pre">srclink</span></span><a class="headerlink" href="#pycantus.models.chant.Chant.srclink" title="Link to this definition"></a></dt>
+<dd><p>* URL link to the source in the external database (e.g., “<a class="reference external" href="https://yourdatabase.org/source/123">https://yourdatabase.org/source/123</a>”).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pycantus.models.chant.Chant.chantlink">
+<span class="sig-name descname"><span class="pre">chantlink</span></span><a class="headerlink" href="#pycantus.models.chant.Chant.chantlink" title="Link to this definition"></a></dt>
+<dd><p>* URL link directly to the chant entry in the external database (e.g., “<a class="reference external" href="https://yourdatabase.org/chant/45678">https://yourdatabase.org/chant/45678</a>”).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pycantus.models.chant.Chant.folio">
+<span class="sig-name descname"><span class="pre">folio</span></span><a class="headerlink" href="#pycantus.models.chant.Chant.folio" title="Link to this definition"></a></dt>
+<dd><p>* Folio information for the chant (e.g., “001v”).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pycantus.models.chant.Chant.sequence">
+<span class="sig-name descname"><span class="pre">sequence</span></span><a class="headerlink" href="#pycantus.models.chant.Chant.sequence" title="Link to this definition"></a></dt>
+<dd><p>The order of the chant on the folio (e.g., “1”).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pycantus.models.chant.Chant.incipit">
+<span class="sig-name descname"><span class="pre">incipit</span></span><a class="headerlink" href="#pycantus.models.chant.Chant.incipit" title="Link to this definition"></a></dt>
+<dd><p>* The opening words or phrase of the chant (e.g., “Non sufficiens sibi semel aspexisse vis “).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pycantus.models.chant.Chant.feast">
+<span class="sig-name descname"><span class="pre">feast</span></span><a class="headerlink" href="#pycantus.models.chant.Chant.feast" title="Link to this definition"></a></dt>
+<dd><p>Feast or liturgical occasion associated with the chant (e.g., “Nativitas Mariae”).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pycantus.models.chant.Chant.genre">
+<span class="sig-name descname"><span class="pre">genre</span></span><a class="headerlink" href="#pycantus.models.chant.Chant.genre" title="Link to this definition"></a></dt>
+<dd><p>Genre of the chant, such as antiphon (A), responsory (R), hymn (H), etc. (e.g., “V”).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pycantus.models.chant.Chant.office">
+<span class="sig-name descname"><span class="pre">office</span></span><a class="headerlink" href="#pycantus.models.chant.Chant.office" title="Link to this definition"></a></dt>
+<dd><p>The office in which the chant is used, such as Matins (M) or Lauds (L) (e.g., “M”).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pycantus.models.chant.Chant.position">
+<span class="sig-name descname"><span class="pre">position</span></span><a class="headerlink" href="#pycantus.models.chant.Chant.position" title="Link to this definition"></a></dt>
+<dd><p>Liturgical position of the chant in the office (e.g., “01”).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pycantus.models.chant.Chant.cantus_id">
+<span class="sig-name descname"><span class="pre">cantus_id</span></span><a class="headerlink" href="#pycantus.models.chant.Chant.cantus_id" title="Link to this definition"></a></dt>
+<dd><p>The unique Cantus ID associated with the chant (e.g., “007129a”).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pycantus.models.chant.Chant.melody_id">
+<span class="sig-name descname"><span class="pre">melody_id</span></span><a class="headerlink" href="#pycantus.models.chant.Chant.melody_id" title="Link to this definition"></a></dt>
+<dd><p>The unique Melody ID associated with the chant (e.g., “001216m1”).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pycantus.models.chant.Chant.image">
+<span class="sig-name descname"><span class="pre">image</span></span><a class="headerlink" href="#pycantus.models.chant.Chant.image" title="Link to this definition"></a></dt>
+<dd><p>URL link to an image of the manuscript page, if available (e.g., “<a class="reference external" href="https://yourdatabase.org/image/12345">https://yourdatabase.org/image/12345</a>”).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pycantus.models.chant.Chant.mode">
+<span class="sig-name descname"><span class="pre">mode</span></span><a class="headerlink" href="#pycantus.models.chant.Chant.mode" title="Link to this definition"></a></dt>
+<dd><p>Mode of the chant, if available (e.g., “1”).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pycantus.models.chant.Chant.full_text">
+<span class="sig-name descname"><span class="pre">full_text</span></span><a class="headerlink" href="#pycantus.models.chant.Chant.full_text" title="Link to this definition"></a></dt>
+<dd><p>Full text of the chant (e.g., “Non sufficiens sibi semel aspexisse vis amoris multiplicavit in ea inten]tionem inquisitionis”).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pycantus.models.chant.Chant.melody">
+<span class="sig-name descname"><span class="pre">melody</span></span><a class="headerlink" href="#pycantus.models.chant.Chant.melody" title="Link to this definition"></a></dt>
+<dd><p>Melody encoded in volpiano, if available (e.g., “1—dH—h7–h–ghgfed–gH—h–h—“).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pycantus.models.chant.Chant.century">
+<span class="sig-name descname"><span class="pre">century</span></span><a class="headerlink" href="#pycantus.models.chant.Chant.century" title="Link to this definition"></a></dt>
+<dd><p>Number identifying the century of the source. If multiple centuries apply, the lowest number should be used. (e.g., “12”).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pycantus.models.chant.Chant.db">
+<span class="sig-name descname"><span class="pre">db</span></span><a class="headerlink" href="#pycantus.models.chant.Chant.db" title="Link to this definition"></a></dt>
+<dd><p>* Code for the database providing the data, used for identification within CI (e.g., “DBcode”).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pycantus.models.chant.Chant.rite">
+<span class="sig-name descname"><span class="pre">rite</span></span><a class="headerlink" href="#pycantus.models.chant.Chant.rite" title="Link to this definition"></a></dt>
+<dd><p>(not yet in CI, but possibly to be (so we want to be ready), not in export)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pycantus.models.chant.Chant.locked">
+<span class="sig-name descname"><span class="pre">locked</span></span><a class="headerlink" href="#pycantus.models.chant.Chant.locked" title="Link to this definition"></a></dt>
+<dd><p>Indicates whether the object is locked for editing. If True, no attributes can be modified. (functional attribute)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pycantus.models.chant.Chant._has_melody">
+<span class="sig-name descname"><span class="pre">_has_melody</span></span><a class="headerlink" href="#pycantus.models.chant.Chant._has_melody" title="Link to this definition"></a></dt>
+<dd><p>True if the chant has a melody, False otherwise. (functional attribute)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pycantus.models.chant.Chant.melody_object">
+<span class="sig-name descname"><span class="pre">melody_object</span></span><a class="headerlink" href="#pycantus.models.chant.Chant.melody_object" title="Link to this definition"></a></dt>
+<dd><p>If the chant has a melody, this should be an instance of the Melody class representing the chant’s melody once created. (functional attribute)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="#pycantus.models.melody.Melody" title="pycantus.models.melody.Melody">Melody</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<p>(Fields marked with an asterisk (*) are obligatory and must be included in every record.
+Other fields are optional but recommended when data is available.)</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="pycantus.models.chant.Chant.create_melody">
+<span class="sig-name descname"><span class="pre">create_melody</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pycantus.models.chant.Chant.create_melody" title="Link to this definition"></a></dt>
+<dd><p>Creates a Melody object for the chant if it has a melody.
+Expects volpiano to be provided.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pycantus.models.chant.Chant.header">
+<em class="property"><span class="k"><span class="pre">static</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">header</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="#pycantus.models.chant.Chant.header" title="Link to this definition"></a></dt>
+<dd><p>Constructs proper csv header of chants, e.g. for export.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>the header for the CSV file, which includes all mandatory and optional fields.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="pycantus.models.chant.Chant.to_csv_row">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">to_csv_row</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><a class="headerlink" href="#pycantus.models.chant.Chant.to_csv_row" title="Link to this definition"></a></dt>
+<dd><p>Returns data fields of Chant in “to be pasted to the csv export file” form.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>data of object as standardized csv row</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pycantus.models.chant.get_rite_dict">
+<span class="sig-prename descclassname"><span class="pre">pycantus.models.chant.</span></span><span class="sig-name descname"><span class="pre">get_rite_dict</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#pycantus.models.chant.get_rite_dict" title="Link to this definition"></a></dt>
+<dd><p>Loads data about rites of genres.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>{genre : rite}</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="module-pycantus.models.corpus">
+<span id="pycantus-models-corpus-module"></span><h2>pycantus.models.corpus module<a class="headerlink" href="#module-pycantus.models.corpus" title="Link to this heading"></a></h2>
+<p>This module contains the Corpus class, which represents a collection of chants and sources.
+It provides methods for loading, filtering, and exporting data related to the chants and sources.</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="pycantus.models.corpus.Corpus">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pycantus.models.corpus.</span></span><span class="sig-name descname"><span class="pre">Corpus</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">chants_filepath</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sources_filepath</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">chants_fallback_url</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sources_fallback_url</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">other_parameters</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">is_editable</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">check_missing_sources</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">create_missing_sources</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pycantus.models.corpus.Corpus" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Represents a collection of chants and sources (piece of repertoire).</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pycantus.models.corpus.Corpus.chants_filepath">
+<span class="sig-name descname"><span class="pre">chants_filepath</span></span><a class="headerlink" href="#pycantus.models.corpus.Corpus.chants_filepath" title="Link to this definition"></a></dt>
+<dd><p>path to file with chants</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pycantus.models.corpus.Corpus.sources_filepath">
+<span class="sig-name descname"><span class="pre">sources_filepath</span></span><a class="headerlink" href="#pycantus.models.corpus.Corpus.sources_filepath" title="Link to this definition"></a></dt>
+<dd><p>path to file with sources</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str, optional</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pycantus.models.corpus.Corpus.chants_fallback_url">
+<span class="sig-name descname"><span class="pre">chants_fallback_url</span></span><a class="headerlink" href="#pycantus.models.corpus.Corpus.chants_fallback_url" title="Link to this definition"></a></dt>
+<dd><p>URL for chants file download, is used when loading from filepath fails</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str, optional</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pycantus.models.corpus.Corpus.sources_fallback_url">
+<span class="sig-name descname"><span class="pre">sources_fallback_url</span></span><a class="headerlink" href="#pycantus.models.corpus.Corpus.sources_fallback_url" title="Link to this definition"></a></dt>
+<dd><p>URL for sources file download, is used when loading from filepath fails</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str, optional</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pycantus.models.corpus.Corpus.other_download_parameters">
+<span class="sig-name descname"><span class="pre">other_download_parameters</span></span><a class="headerlink" href="#pycantus.models.corpus.Corpus.other_download_parameters" title="Link to this definition"></a></dt>
+<dd><p>[not used yet]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>dict, optional</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pycantus.models.corpus.Corpus.is_editable">
+<span class="sig-name descname"><span class="pre">is_editable</span></span><a class="headerlink" href="#pycantus.models.corpus.Corpus.is_editable" title="Link to this definition"></a></dt>
+<dd><p>indicates whether objects in Corpus should be locked</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pycantus.models.corpus.Corpus.check_missing_sources">
+<span class="sig-name descname"><span class="pre">check_missing_sources</span></span><a class="headerlink" href="#pycantus.models.corpus.Corpus.check_missing_sources" title="Link to this definition"></a></dt>
+<dd><p>indicates whether load should an raise exception if some chant refers to source that is not in sources</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pycantus.models.corpus.Corpus.create_missing_sources">
+<span class="sig-name descname"><span class="pre">create_missing_sources</span></span><a class="headerlink" href="#pycantus.models.corpus.Corpus.create_missing_sources" title="Link to this definition"></a></dt>
+<dd><p>indicates whether load should create Source entries for sources referred to in some of the chants and not being present in provided sources</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pycantus.models.corpus.Corpus.operations_history">
+<span class="sig-name descname"><span class="pre">operations_history</span></span><a class="headerlink" href="#pycantus.models.corpus.Corpus.operations_history" title="Link to this definition"></a></dt>
+<dd><p>list of operations applied on the corpus (from predefined list - see methods with &#64;log_operation decorator)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>list</p>
+</dd>
+</dl>
+</dd></dl>
+
+<p>Only chants_filepath is mandatory.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="pycantus.models.corpus.Corpus.apply_filter">
+<span class="sig-name descname"><span class="pre">apply_filter</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filter</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="pycantus.filtration.html#pycantus.filtration.filter.Filter" title="pycantus.filtration.filter.Filter"><span class="pre">Filter</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pycantus.models.corpus.Corpus.apply_filter" title="Link to this definition"></a></dt>
+<dd><p>Applies the given filter on stored data in “in place” way.
+Stores filter setting into filtration_history.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="pycantus.models.corpus.Corpus.chants">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">chants</span></span><a class="headerlink" href="#pycantus.models.corpus.Corpus.chants" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="pycantus.models.corpus.Corpus.csv_chants_header">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">csv_chants_header</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><a class="headerlink" href="#pycantus.models.corpus.Corpus.csv_chants_header" title="Link to this definition"></a></dt>
+<dd><p>Returns proper csv header for chants export to csv.
+:returns: csv header for Chant
+:rtype: str</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="pycantus.models.corpus.Corpus.csv_sources_header">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">csv_sources_header</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><a class="headerlink" href="#pycantus.models.corpus.Corpus.csv_sources_header" title="Link to this definition"></a></dt>
+<dd><p>Returns proper csv header for sources export to csv.
+:returns: csv header for Source
+:rtype: str</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pycantus.models.corpus.Corpus.drop_duplicate_chants">
+<span class="sig-name descname"><span class="pre">drop_duplicate_chants</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pycantus.models.corpus.Corpus.drop_duplicate_chants" title="Link to this definition"></a></dt>
+<dd><p>Discards all chants that have the same chantlink as another chant.</p>
+<p>Keeps the last occurrence of each chant.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pycantus.models.corpus.Corpus.drop_duplicate_sources">
+<span class="sig-name descname"><span class="pre">drop_duplicate_sources</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pycantus.models.corpus.Corpus.drop_duplicate_sources" title="Link to this definition"></a></dt>
+<dd><p>Discards all sources that have the same srclink as another source.</p>
+<p>Keeps the last occurrence of each source.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pycantus.models.corpus.Corpus.drop_empty_sources">
+<span class="sig-name descname"><span class="pre">drop_empty_sources</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pycantus.models.corpus.Corpus.drop_empty_sources" title="Link to this definition"></a></dt>
+<dd><p>Discards all sources that have no chants in corpus.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pycantus.models.corpus.Corpus.drop_small_sources_data">
+<span class="sig-name descname"><span class="pre">drop_small_sources_data</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">min_chants</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pycantus.models.corpus.Corpus.drop_small_sources_data" title="Link to this definition"></a></dt>
+<dd><p>Discards all sources that have less than min_chants chants in corpus
+and discard their chants as well.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pycantus.models.corpus.Corpus.export_csv">
+<span class="sig-name descname"><span class="pre">export_csv</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">chants_filepath</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sources_filepath</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pycantus.models.corpus.Corpus.export_csv" title="Link to this definition"></a></dt>
+<dd><p>Exports the chants and sources to CSV files.</p>
+<p>If sources_filepath is not provided, only chants will be exported.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pycantus.models.corpus.Corpus.get_operations_history_string">
+<span class="sig-name descname"><span class="pre">get_operations_history_string</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pycantus.models.corpus.Corpus.get_operations_history_string" title="Link to this definition"></a></dt>
+<dd><p>Returns the history of applied operations on the corpus.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pycantus.models.corpus.Corpus.keep_melodic_chants">
+<span class="sig-name descname"><span class="pre">keep_melodic_chants</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pycantus.models.corpus.Corpus.keep_melodic_chants" title="Link to this definition"></a></dt>
+<dd><p>Keeps only chants that have a melody in the corpus.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="pycantus.models.corpus.Corpus.melody_objects">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">melody_objects</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">list</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#pycantus.models.melody.Melody" title="pycantus.models.melody.Melody"><span class="pre">Melody</span></a><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#pycantus.models.corpus.Corpus.melody_objects" title="Link to this definition"></a></dt>
+<dd><p>Collects melody_objects of Chants in self._chants .
+:returns: melody objects of chants in the Corpus
+:rtype: list</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="pycantus.models.corpus.Corpus.sources">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">sources</span></span><a class="headerlink" href="#pycantus.models.corpus.Corpus.sources" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-pycantus.models.melody">
+<span id="pycantus-models-melody-module"></span><h2>pycantus.models.melody module<a class="headerlink" href="#module-pycantus.models.melody" title="Link to this heading"></a></h2>
+<p>This module contains the Melody class, which represents a single chant melody.</p>
+<p>It is linked to a specific chant via chantlink.</p>
+<p>Right now, it is designed in volpiano-centric way, meaning it holds only the volpiano representation of the chant melody,
+if present. But it can be extended to hold other representations in the future (via new optional parameters).</p>
+<p>We take the volpiano.utils as already prepared methods (functions) for working with volpiano and just
+wrapped them into Melody class methods.
+For more detailed documentation of the methods, see the volpiano.utils module.</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="pycantus.models.melody.Melody">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pycantus.models.melody.</span></span><span class="sig-name descname"><span class="pre">Melody</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">volpiano</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">chantlink</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cantus_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mode</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pycantus.models.melody.Melody" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Representation of one chant melody related to chant record.
+.. attribute:: volpiano</p>
+<blockquote>
+<div><p>The melody encoded in volpiano notation.</p>
+<dl class="field-list simple">
+<dt class="field-odd">type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</div></blockquote>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pycantus.models.melody.Melody.chantlink">
+<span class="sig-name descname"><span class="pre">chantlink</span></span><a class="headerlink" href="#pycantus.models.melody.Melody.chantlink" title="Link to this definition"></a></dt>
+<dd><p>URL link directly to the chant entry in the external database.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pycantus.models.melody.Melody.cantus_id">
+<span class="sig-name descname"><span class="pre">cantus_id</span></span><a class="headerlink" href="#pycantus.models.melody.Melody.cantus_id" title="Link to this definition"></a></dt>
+<dd><p>The Cantus ID associated with the chant.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pycantus.models.melody.Melody.raw_volpiano">
+<span class="sig-name descname"><span class="pre">raw_volpiano</span></span><a class="headerlink" href="#pycantus.models.melody.Melody.raw_volpiano" title="Link to this definition"></a></dt>
+<dd><p>The original volpiano string before any processing.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pycantus.models.melody.Melody.mode">
+<span class="sig-name descname"><span class="pre">mode</span></span><a class="headerlink" href="#pycantus.models.melody.Melody.mode" title="Link to this definition"></a></dt>
+<dd><p>Mode of the melody (e.g., “1”).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pycantus.models.melody.Melody.locked">
+<span class="sig-name descname"><span class="pre">locked</span></span><a class="headerlink" href="#pycantus.models.melody.Melody.locked" title="Link to this definition"></a></dt>
+<dd><p>Indicates if the object is locked for editing. (functional attribute)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pycantus.models.melody.Melody.clean_volpiano">
+<span class="sig-name descname"><span class="pre">clean_volpiano</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">keep_boundaries</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">allowed_chars</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">neume_boundary</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'</span> <span class="pre">'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">syllable_boundary</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'</span> <span class="pre">'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">word_boundary</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'</span> <span class="pre">'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">keep_bars</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">allowed_bars</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'345'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bar</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'|'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pycantus.models.melody.Melody.clean_volpiano" title="Link to this definition"></a></dt>
+<dd><p>Extracts only the allowed characters (and optionally boundaries) from a volpiano string.</p>
+<p>Edits the self.volpiano attribute.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pycantus.models.melody.Melody.discard_differentia">
+<span class="sig-name descname"><span class="pre">discard_differentia</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">text</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pycantus.models.melody.Melody.discard_differentia" title="Link to this definition"></a></dt>
+<dd><p>Determines whether the given volpiano melody ends
+with a differentia or not and if yes, strips it away.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pycantus.models.melody.Melody.expand_accidentals">
+<span class="sig-name descname"><span class="pre">expand_accidentals</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">omit_notes</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">barlines</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'3456'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">apply_once_only</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pycantus.models.melody.Melody.expand_accidentals" title="Link to this definition"></a></dt>
+<dd><p>Expand all accidentals in a volpiano string by adding the accidental
+to all other notes in the scope.</p>
+<p>Edits the self.volpiano attribute.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pycantus.models.melody.Melody.get_range">
+<span class="sig-name descname"><span class="pre">get_range</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#pycantus.models.melody.Melody.get_range" title="Link to this definition"></a></dt>
+<dd><p>Computes the range of the melody with respect to the last note:
+how many steps below and above this last note does the melody reach?</p>
+<p>Does NOT work with liquescents.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>the range of the melody with respect to the last note</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>tuple</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pycantus.models.melody.Melody.normalize_liquescents">
+<span class="sig-name descname"><span class="pre">normalize_liquescents</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pycantus.models.melody.Melody.normalize_liquescents" title="Link to this definition"></a></dt>
+<dd><p>Treat all liquescences as normal notes.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pycantus.models.melody.Melody.normalize_volpiano">
+<span class="sig-name descname"><span class="pre">normalize_volpiano</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">keep_boundaries</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">allowed_chars</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">neume_boundary</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'</span> <span class="pre">'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">syllable_boundary</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'</span> <span class="pre">'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">word_boundary</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'</span> <span class="pre">'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">keep_bars</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">allowed_bars</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'345'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bar</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'|'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pycantus.models.melody.Melody.normalize_volpiano" title="Link to this definition"></a></dt>
+<dd><p>Wrapper for standard volpiano normalization steps.
+Normalizes a volpiano string by removing differentiae,
+normalizing liquescents and cleaning
+the string to only contain allowed characters.</p>
+<p>Edits the self.volpiano attribute.</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-pycantus.models.source">
+<span id="pycantus-models-source-module"></span><h2>pycantus.models.source module<a class="headerlink" href="#module-pycantus.models.source" title="Link to this heading"></a></h2>
+<p>This module contains Source class, which represents a single source entry from some database.
+It provides methods for creating, modifying, and exporting source data in a standardized format.</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="pycantus.models.source.Source">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pycantus.models.source.</span></span><span class="sig-name descname"><span class="pre">Source</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">title</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">srclink</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">siglum</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">numeric_century</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">century</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">provenance</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cursus</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pycantus.models.source.Source" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Represents one source entry in database.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pycantus.models.source.Source.title">
+<span class="sig-name descname"><span class="pre">title</span></span><a class="headerlink" href="#pycantus.models.source.Source.title" title="Link to this definition"></a></dt>
+<dd><p>* Name of the source (can be same as siglum)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pycantus.models.source.Source.srclink">
+<span class="sig-name descname"><span class="pre">srclink</span></span><a class="headerlink" href="#pycantus.models.source.Source.srclink" title="Link to this definition"></a></dt>
+<dd><p>* URL link to the source in the external database (e.g., “<a class="reference external" href="https://yourdatabase.org/source/123">https://yourdatabase.org/source/123</a>”).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pycantus.models.source.Source.siglum">
+<span class="sig-name descname"><span class="pre">siglum</span></span><a class="headerlink" href="#pycantus.models.source.Source.siglum" title="Link to this definition"></a></dt>
+<dd><p>* Abbreviation for the source manuscript or collection (e.g., “A-ABC Fragm. 1”). Use RISM whenever possible.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pycantus.models.source.Source.numeric_century">
+<span class="sig-name descname"><span class="pre">numeric_century</span></span><a class="headerlink" href="#pycantus.models.source.Source.numeric_century" title="Link to this definition"></a></dt>
+<dd><p>Integer representing the value of century field.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pycantus.models.source.Source.century">
+<span class="sig-name descname"><span class="pre">century</span></span><a class="headerlink" href="#pycantus.models.source.Source.century" title="Link to this definition"></a></dt>
+<dd><p>Century of source origin.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pycantus.models.source.Source.provenance">
+<span class="sig-name descname"><span class="pre">provenance</span></span><a class="headerlink" href="#pycantus.models.source.Source.provenance" title="Link to this definition"></a></dt>
+<dd><p>Name of the place of source origin.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pycantus.models.source.Source.cursus">
+<span class="sig-name descname"><span class="pre">cursus</span></span><a class="headerlink" href="#pycantus.models.source.Source.cursus" title="Link to this definition"></a></dt>
+<dd><p>Secular (Cathedral, Roman) or Monastic cursus of the source.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pycantus.models.source.Source.locked">
+<span class="sig-name descname"><span class="pre">locked</span></span><a class="headerlink" href="#pycantus.models.source.Source.locked" title="Link to this definition"></a></dt>
+<dd><p>Indicates whether the object is locked for editing. If True, no attributes can be modified. (functional attribute)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pycantus.models.source.Source.header">
+<em class="property"><span class="k"><span class="pre">static</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">header</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="#pycantus.models.source.Source.header" title="Link to this definition"></a></dt>
+<dd><p>Constructs proper csv header of sources, e.g. for export.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>the header for the CSV file, which includes all mandatory and optional fields.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="pycantus.models.source.Source.to_csv_row">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">to_csv_row</span></span><a class="headerlink" href="#pycantus.models.source.Source.to_csv_row" title="Link to this definition"></a></dt>
+<dd><p>Returns data fields of Source in “to be pasted to the csv export file” form.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>data of object as standardized csv row</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-pycantus.models">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-pycantus.models" title="Link to this heading"></a></h2>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="pycantus.filtration.html" class="btn btn-neutral float-left" title="pycantus.filtration package" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="pycantus.history.html" class="btn btn-neutral float-right" title="pycantus.history package" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, [redacted for peer review].</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

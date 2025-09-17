@@ -1,0 +1,290 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>pycantus.filtration package &mdash; PyCantus v0.0.4 documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
+
+  
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=77e3fdf6"></script>
+      <script src="_static/doctools.js?v=9bcbadda"></script>
+      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="pycantus.models package" href="pycantus.models.html" />
+    <link rel="prev" title="pycantus.dataloaders package" href="pycantus.dataloaders.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            PyCantus
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="modules.html">pycantus</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="pycantus.html">pycantus package</a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="pycantus.html#subpackages">Subpackages</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="pycantus.dataloaders.html">pycantus.dataloaders package</a></li>
+<li class="toctree-l4 current"><a class="current reference internal" href="#">pycantus.filtration package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pycantus.models.html">pycantus.models package</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="pycantus.html#submodules">Submodules</a></li>
+<li class="toctree-l3"><a class="reference internal" href="pycantus.html#module-pycantus.data">pycantus.data module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="pycantus.html#module-pycantus">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="development_docs.html">PyCantus Development Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="intro_to_chant.html">Intro to Gregorian Chant Data</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">PyCantus</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="modules.html">pycantus</a></li>
+          <li class="breadcrumb-item"><a href="pycantus.html">pycantus package</a></li>
+      <li class="breadcrumb-item active">pycantus.filtration package</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/pycantus.filtration.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="pycantus-filtration-package">
+<h1>pycantus.filtration package<a class="headerlink" href="#pycantus-filtration-package" title="Link to this heading"></a></h1>
+<section id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Link to this heading"></a></h2>
+</section>
+<section id="module-pycantus.filtration.filter">
+<span id="pycantus-filtration-filter-module"></span><h2>pycantus.filtration.filter module<a class="headerlink" href="#module-pycantus.filtration.filter" title="Link to this heading"></a></h2>
+<p>This module defines the base class for filters used in the PyCantus library.
+It provides a structure for creating and applying filters to chant data.</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="pycantus.filtration.filter.Filter">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pycantus.filtration.filter.</span></span><span class="sig-name descname"><span class="pre">Filter</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pycantus.filtration.filter.Filter" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="simple">
+<dt>Base class for filters over Corpus data lists:</dt><dd><ul class="simple">
+<li><p>chants - objects of class pycantus.models.Chant</p></li>
+<li><p>sources - objects of class pycantus.models.Source</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pycantus.filtration.filter.Filter.name">
+<span class="sig-name descname"><span class="pre">name</span></span><a class="headerlink" href="#pycantus.filtration.filter.Filter.name" title="Link to this definition"></a></dt>
+<dd><p>Name of the filter, used in export.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pycantus.filtration.filter.Filter.filters_include">
+<span class="sig-name descname"><span class="pre">filters_include</span></span><a class="headerlink" href="#pycantus.filtration.filter.Filter.filters_include" title="Link to this definition"></a></dt>
+<dd><p>{ Data fields : Values to be included after filtration }</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>defaultdict(list)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pycantus.filtration.filter.Filter.filters_exclude">
+<span class="sig-name descname"><span class="pre">filters_exclude</span></span><a class="headerlink" href="#pycantus.filtration.filter.Filter.filters_exclude" title="Link to this definition"></a></dt>
+<dd><p>{ Data fields : Values to be excluded after filtration }</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>defaultdict(list)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pycantus.filtration.filter.Filter.add_value_exclude">
+<span class="sig-name descname"><span class="pre">add_value_exclude</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">field</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">values</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pycantus.filtration.filter.Filter.add_value_exclude" title="Link to this definition"></a></dt>
+<dd><p>Add a value of specific field to the filter to be excluded.</p>
+<p>Other non-specified values would be kept during filtration.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>field</strong> (<em>str</em>) – Data field (Chant or Source attribute).</p></li>
+<li><p><strong>values</strong> – Either single value (str or int) or list of values to be included after filtration.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pycantus.filtration.filter.Filter.add_value_include">
+<span class="sig-name descname"><span class="pre">add_value_include</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">field</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">values</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pycantus.filtration.filter.Filter.add_value_include" title="Link to this definition"></a></dt>
+<dd><p>Add a value of specific field to the filter to be included.
+Other non-specified values would be dropped during filtration.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>field</strong> (<em>str</em>) – Data field (Chant or Source attribute).</p></li>
+<li><p><strong>values</strong> – Either single value (str or int) or list of values to be included after filtration.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pycantus.filtration.filter.Filter.apply">
+<span class="sig-name descname"><span class="pre">apply</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">chants</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sources</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">list</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#pycantus.filtration.filter.Filter.apply" title="Link to this definition"></a></dt>
+<dd><p>Apply the filter to the given data.
+If no values for field are specified we expect that user does not care about the field.
+If no filter is to be applied, returns the original lists.
+Method should not be called directly, but through Corpus.apply_filter() method.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>chants</strong> (<em>list</em>) – List of chants from the Corpus to be filtered.</p></li>
+<li><p><strong>source</strong> (<em>list</em>) – List of sources from the Corpus to be filtered.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Reduced list of chants after filtration.
+list: Reduced list of sources after filtration.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>list</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pycantus.filtration.filter.Filter.as_yaml">
+<span class="sig-name descname"><span class="pre">as_yaml</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="#pycantus.filtration.filter.Filter.as_yaml" title="Link to this definition"></a></dt>
+<dd><dl class="simple">
+<dt>Returns</dt><dd><p>str: yaml style string representation of filter configuration.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pycantus.filtration.filter.Filter.delete_field">
+<span class="sig-name descname"><span class="pre">delete_field</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">field</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pycantus.filtration.filter.Filter.delete_field" title="Link to this definition"></a></dt>
+<dd><p>Deletes a field from both the include and the exclude filters.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pycantus.filtration.filter.Filter.export_yaml">
+<span class="sig-name descname"><span class="pre">export_yaml</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pycantus.filtration.filter.Filter.export_yaml" title="Link to this definition"></a></dt>
+<dd><p>Export the filter configuration to a directory given as path
+as ‘{self.name}.yaml’ YAML file.</p>
+<p>Tries to create the directory if it does not exist.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>path</strong> (<em>str</em>) – Path to directory where export YAML file should be created.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pycantus.filtration.filter.Filter.import_string">
+<span class="sig-name descname"><span class="pre">import_string</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">yaml_string</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pycantus.filtration.filter.Filter.import_string" title="Link to this definition"></a></dt>
+<dd><p>Function that reads YAML style string and transforms it into
+self.filter_include and self.filter_exclude dictionaries (= working filter)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>yaml_string</strong> (<em>str</em>) – YAML style string to be loaded into filter configuration.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pycantus.filtration.filter.Filter.import_yaml">
+<span class="sig-name descname"><span class="pre">import_yaml</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">config_file_path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pycantus.filtration.filter.Filter.import_yaml" title="Link to this definition"></a></dt>
+<dd><p>Function that reads YAML file and transforms it into
+self.filter_include and self.filter_exclude dictionaries.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>config_file_path</strong> (<em>str</em>) – Path to YAML to be loaded into filter configuration.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-pycantus.filtration">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-pycantus.filtration" title="Link to this heading"></a></h2>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="pycantus.dataloaders.html" class="btn btn-neutral float-left" title="pycantus.dataloaders package" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="pycantus.models.html" class="btn btn-neutral float-right" title="pycantus.models package" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, [redacted for peer review].</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

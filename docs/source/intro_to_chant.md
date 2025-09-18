@@ -31,9 +31,9 @@ While after the 2nd Vatican Council in the 1960s, the role of chant in liturgy d
 (https://www.newliturgicalmovement.org)
 
 
-### What (and why) can we study 
+### Why chant computing? What can we study?
 
-Diving back into the medeival era of chant manuscript tradition, between approx. 800–1600 AD, one rarely finds the melody of a chant recorded as exactly the same sequence of pitches in any two different manuscripts — and no two manuscripts contain exactly the same repertoire. The Gregorian tradition spanning all of Latin Europe for the better part of a millennium was — despite the conservation pressure and resources allocated for conservation — very diverse. This diversification of chant (together with the diversification of liturgy) went so far that the Council of Trent (1545–1563) decided to drastically limit permissible local liturgical specifics.
+Diving back into the medieval era of chant manuscript tradition, between approx. 800–1600 AD, one rarely finds the melody of a chant recorded as exactly the same sequence of pitches in any two different manuscripts, and no two manuscripts contain exactly the same repertoire. The Gregorian tradition spanning all of Latin Europe for the better part of a millennium was — despite the conservation pressure and resources allocated for conservation — very diverse. This diversification of chant (together with the diversification of liturgy) went so far that the Council of Trent (1545–1563) decided to drastically limit permissible local liturgical specifics.
 
 This diversity within chant, and its relationship to different historical contexts in Europe, is a unique opportunity to study the broader cultural networks at play in medieval culture. And the scale of chant materials — some 30,000 extant manuscripts, out of which more than 2,000 have been digitised and almost a million catalogue records exist in chant databases — makes it the ideal material for computational study. This is supported by the homogeneity of the material (see the aforementioned standardization tendencies of the church and the sanctity of the material) and also by the existence of categories "directly in the data"; in the vast majority of cases, the authors themselves told us "what is what," which is a great advantage not only for machine processing. 
   

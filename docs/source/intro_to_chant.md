@@ -9,20 +9,7 @@ The moniker **“Gregorian”** comes from the legend of Pope Gregory I, who sup
   
 A significant effort was expended to conserve chant: both in rules for the institutional practice of the *schola cantorum* model, where a selected member of the given community had the responsibility to teach new members the repertoire and correct deviations and in the production of liturgical books with notated melodies, at significant expense. Conserving Gregorian melodies in fact even motivated development of a major feature of modern music notation: the staff, an 11th-century innovation of Guido of Arezzo, which allowed notating pitches exactly and thus enabled learning the melodies without a teacher present. The staff was adopted very quickly and by the end of the 11th century, practically no new manuscripts with earlier adiastematic notation were being produced.
   
-![](_static/img/hodie_old.png)
-Chant *Hodie scietis* from CH-SGs 390, f. 041, end of 10th century.  
-
-![](_static/img/hodie_mid_12.png)
-Chant *Hodie scietis* from  Cz-Pu XIV B 13, f. 021r, beginning of 14th century.
-
-![](_static/img/hodie_mid.png)
-Chant *Hodie scietis* from A-KN 1010, f. 019r, 12th century.
-  
-![](_static/img/hodie_new.png)
-Chant *Hodie scietis* from Cz-Pn XII A 24, f. 027v, beginning of 15th century.
-  
-![](_static/img/hodie_very_new.png)
-Chant *Hodie scietis* from MA Impr. 1537, f. 025r, 16th century.
+![Chant hodie.](_static/img/hodie.png)
 
 
 While after the 2nd Vatican Council in the 1960s, the role of chant in liturgy diminished (in practice, even though the council's documents still affirm Gregorian chant as the primary musical tradition of the Church), it retains this impressive level of standardization, with a global authoritative edition. Today, apps exist that contain the texts and melodies to be sung at each point of the day's liturgy (e.g., ChantTools, SquareNote, and Neumz).
@@ -39,13 +26,16 @@ This diversity within chant, and its relationship to different historical contex
   
 
 To show you what can really be done, here is a list of some 'computational gregorian chant research' papers of last years:
-- Bas Cornelissen et.al. work *Mode Classification and Natural Units in Plainchant*, 2020. (https://program.ismir2020.net/static/final_papers/232.pdf) -- see tutorial 06
 
-- Tim Eipert and Fabian C. Moss work *Communities in Medieval Troper Networks are Shaped by Carolingian Politics*, 2023. (https://dlfm.web.ox.ac.uk/sites/default/files/dlfm/documents/media/poster2023_eipert_communities.pdf) -- see tutorial 03
+- Kate Helsen, Mark Daley and Jake Schindler [The Sticky Riff: Quantifying the Melodic Identities of Medieval Modes](https://emusicology.org/article/id/4781/) 2023 paper, where some 5,900 melodies where examined with n-gram analysis as well as recurrent neural networks while focusing on semitones.
 
-- Jan Hajič jr. et.al. work with melodies: *Towards Building a Phylogeny of Gregorian Chant Melodies.*, 2023. (https://doi.org/10.5281/zenodo.10340442.)
+- In 2020 Bas Cornelissen, Willem Zuidema and John Ashley Burgoyne  did work with modality of chants in [Mode Classification and Natural Units in Plainchant](https://program.ismir2020.net/static/final_papers/232.pdf). To learn more about their approach look at the [06 tutorial](https://github.com/dact-chant/PyCantus/blob/main/tutorials/06_melody_classification.ipynb) for PyCantus. 
 
-- Jan Hajič jr. and Fabian C. Moss work *Knowing when to stop: insights from ecology for building catalogues, collections, and corpora*, 2025. (https://arxiv.org/abs/2507.14614) -- see tutorial 04
+- Another work with melodies is coming from Jan Hajič jr. et.al.: [Towards Building a Phylogeny of Gregorian Chant Melodies](https://doi.org/10.5281/zenodo.10340442.), 2023. That brings bioinformatics to the table as a good resource of potential methods.
+
+- On the 'repertoire field' Tim Eipert and Fabian C. Moss worked in 2023 with [Corpus Troporum](https://www.cambridge.org/core/journals/journal-of-the-plainsong-and-mediaeval-music-society/article/abs/corpus-troporum/8F06FB592D4D727A4BC34331F73BB8D8) bringing a discovery that [Communities in Medieval Troper Networks are Shaped by Carolingian Politics](https://dlfm.web.ox.ac.uk/sites/default/files/dlfm/documents/media/poster2023_eipert_communities.pdf). For an insight into their approach, see [tutorial number three](https://github.com/dact-chant/PyCantus/blob/main/tutorials/03_repertoire_traditions.ipynb) showing the Louvain algorithm for detecting communities in a networks.
+
+- Jan Hajič jr. and Fabian C. Moss work 2025 [Knowing when to stop: insights from ecology for building catalogues, collections, and corpora](https://arxiv.org/abs/2507.14614) -- see tutorial 04
 
 
 Even though there have been computational research around Gregorian chant as we just demonstrated, this field still offers a lot of opportunities (where some of them can be a very low hanging fruit).

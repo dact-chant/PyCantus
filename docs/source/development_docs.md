@@ -12,6 +12,19 @@ from other sources of chant data (e.g. Corpus Monodicum database).
   
 PyCantus functionality is introduced by a tutorial which guides the user through the steps required to prepare a sub-corpus for experiments. The library source code and documentation are available at [https://github.com/dact-chant/PyCantus](https://github.com/dact-chant/PyCantus).
 
+## Content
+- [Data Model](#data-model)
+  - [Corpus](#corpus)  
+  - [Chant](#chant)  
+  - [Source](#source)  
+  - [Melody](#melody)  
+
+- [Loaders + validation](#loaders--validation)
+
+- [Filtering & preprocessing](#filtering--preprocessing) 
+    - [History of operations](#history-of-operations)  
+
+
 ## Data Model
 The core of PyCantus is the data model the `Chant` and `Source` classes representing the corresponding items of the dataset,
 a `Corpus` class to aggregate them, and a `Melody` class to support abstracting away from specific melody encodings in the future. (We are aware of the chant21 library, but we opted not to make music21 a core dependency of PyCantus.)
@@ -38,7 +51,7 @@ It provides methods for loading, filtering, and exporting data related to the ch
 
 The only way to initialize `Corpus` is via load from CSV files, it is not possible from chants and sources lists. That is due to "good replicability practice" we wanted to emphasize.
 
-### Attributes:
+#### Attributes:
 - `chants_filepath (str)`: path to file with chants
 - `sources_filepath (str)`: path to file with sources
 - `chants_fallback_url (str)`: URL for chants file download, is used when loading from filepath fails
@@ -47,17 +60,19 @@ The only way to initialize `Corpus` is via load from CSV files, it is not possib
 - `is_editable (bool)`: indicates whether objects in Corpus should be locked
 - `check_missing_sources (bool)`: indicates whether load should an raise exception if some chant refers to source that is not in sources
 - `create_missing_sources (bool)`: indicates whether load should create Source entries for sources referred to in some of the chants and not being present in provided sources
+- `_chants (list)`: list of `Chant`s in the corpus
+- `_sources (list)`: list of `Source`s in the corpus 
 - `operations_history (list)`: list of operations applied on the corpus (from predefined list - see methods with `@log_operation` decorator)
 
 
 #### Locked attribute
-The 'locking logic' is quite simple. We don't want people to shoot themselves in the foot, so we tried to force them to make changes in the state of their data (in `Corpus`) explicit. 
+The 'locking logic' is quite simple. We don't want people to shoot themselves in the foot, so we tried to force them to make changes in the state of their data (in `Corpus`) explicit. Besides that, it is also part of the 'good replicability' strategy we want to emphasize.
 
-In the initialization of `Corpus` object, argument `is_editable` is passed (with default value set to `False`). Based on its value the value of `Corpus.locked` attribute is set. 
+In the initialization of `Corpus` object, argument `is_editable` is passed (with default value set to `False`). 
 
 Then getters and setters of `Corpus` were overwritten so the 'I am a locked corpus' logic is controlled. 
 
-Value of the `locked` attribute is propagated into all Chants, Sources and Melodies in the Corpus with `Corpus._lock_chants()`, `Corpus._lock_sources()` and in `Chant.create_melody()`. In these objects it "operates" in the overwritten method `__settatr__`. You can set the value of the `locked` attribute freely -- because that makes the intervention in the data state explicit, but not impossible.
+Value of the `is_editable` attribute is propagated into all Chants, Sources and Melodies in the Corpus with `Corpus._lock_chants()`, `Corpus._lock_sources()` and in `Chant.create_melody()`, where attribute `locked` is set to `True` if 'is not editable corpus'. In these objects it "operates" in the overwritten method `__settatr__`. You can set the value of the `locked` attribute freely -- because that makes the intervention in the data state explicit, but not impossible.
 
 #### Methods
 For easier work with the data few methods were implemented directly on `Corpus`.
@@ -101,7 +116,7 @@ It provides methods for creating, modifying, and exporting chant data in a stand
 #### Property methods
 Some of the methods of `Chant` are decorated with `@property` so that they can be called as property (attribute) of the object, because that is the intuitive comprehension we have about them.  
 These are:
-- `is_complete_chant` - bool value
+- `is_complete_chant` - bool value (checks presence of full text and long enough melody)
 - `to_csv_row` - string value, method constructs 
 
 So we can have a piece of code:
@@ -152,11 +167,23 @@ We take the `volpiano.utils` as already prepared methods (functions) for working
 For more detailed documentation of the methods, see the `volpiano/utils.py` module.
 
 #### Data related attributes
+Here we see attributes. until some modification of `volpiano`, same to what is in `Chant` record directly, having these here should just make things more convenient for working with melodies (e.g. when we want to take only list of melodies from corpus while not being interested in source information in such situation, while still being able to get it form `chantlink` when needed).
 
+- `volpiano (str)`: The melody encoded in volpiano notation.
+- `chantlink (str)`: URL link directly to the chant entry in the external database.
+- `cantus_id (str)`: The Cantus ID associated with the chant.
+- `raw_volpiano (str)`: The original volpiano string before any processing.
+- `mode (str)`: Mode of the melody (e.g., "1").
+
+        
 
 #### Functional attributes
+- `locked (bool)`: Indicates if the object is locked for editing.
 
 #### Methods
+These are mostly wrappers for methods from `volpiano.utils` being applied to `Melody.volpiano`.
+
+
 
 
 ## Loaders + validation
@@ -195,6 +222,8 @@ Methods that are saved into `self.operations_history` of `Corpus`:
 - `drop_small_sources_data(int)`
 - `apply_filter(Filter)`
 - `drop_incomplete_chants()`
+- `drop_incomplete_chants()`
+- and also if `Corpus.create_missing_sources` is `True`, then that is noted to the history in `Corpus` initialization
 
 Whole history can be represented as one human-readable string via calling `get_operations_history_string()` method on `Corpus`.
 

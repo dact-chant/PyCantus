@@ -146,7 +146,15 @@ class Chant():
 
 
     def __str__(self) -> str:
-        return str(self.chantlink) + ' : ' + str(self.cantus_id)
+        chant_string = self.incipit + '\n'
+        chant_string += f"  Cantus ID: {self.cantus_id}\n"
+        chant_string += f"  Genre: {self.genre}\n"
+        chant_string += f"  Office: {self.office}\n"
+        chant_string += f"  Chantlink: {self.chantlink}\n"
+        chant_string += f"  Feast: {self.feast}\n"
+        chant_string += f"  Source: {self.siglum}\n"
+        chant_string += f"  Srclink: {self.srclink}\n"
+        return chant_string
     
     @property
     def to_csv_row(self) -> str:

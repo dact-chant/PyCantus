@@ -59,7 +59,9 @@ class Source():
 
 
     def __str__(self):
-        return self.siglum
+        source_string = self.siglum + '\n'
+        source_string += f"  Srclink: {self.srclink}\n"
+        return source_string
 
     @property
     def to_csv_row(self):

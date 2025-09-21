@@ -12,6 +12,7 @@ from pycantus.models.melody import Melody
 from pycantus.dataloaders.loader import CsvLoader
 from pycantus.filtration.filter import Filter
 from pycantus.history.utils import log_operation
+from pycantus.history.history import HistoryEntry
 
 __version__ = "0.0.6"
 __author__ = "Anna Dvorakova"
@@ -59,7 +60,6 @@ class Corpus():
         self.is_editable = is_editable
         self.create_missing_sources = create_missing_sources
         self.check_missing_sources = check_missing_sources
-
         loader = CsvLoader(self.chants_filepath, self.sources_filepath, self.check_missing_sources, 
                            self.create_missing_sources, self.chants_fallback_url, self.sources_fallback_url, 
                            other_parameters)
@@ -73,6 +73,13 @@ class Corpus():
             self._lock_sources()
 
         self.operations_history = []
+
+        if self.create_missing_sources:
+            miss_his_entry = HistoryEntry(
+                method='create_missing_sources',
+                parameters='{}'+'\n',
+            )
+            self.operations_history.append(miss_his_entry)
     
     def _lock_chants(self):
         """ 

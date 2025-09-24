@@ -192,9 +192,18 @@ The `data.load_dataset(...)` function from the `data` module (implemented in `da
 
 Data are loaded into the `Corpus` class via a `CsvLoader` object (implemented in `dataloaders/loader.py`).
 The loader also handles the possible download of missing CSV files from provided fallback URL addresses and 
-validation. Given the lack of controlled vocabularies, currently it cannot do more than check whether mandatory fields and their values are present and also optionally check unavailable source records (arguments `check_missing_sources` and `create_missing_sources`).
+validation. 
+
+Given the lack of controlled vocabularies, currently it cannot do more than check whether mandatory fields and their values are present and also optionally check unavailable source records (arguments `check_missing_sources` and `create_missing_sources`).
+
+As was just written, the only validation we implemented into PyCantus is checking if mandatory fields have some value present - but not what value it is... 
+  
+As Cantus Index is growing quite quickly it can hardly be updated enough to e.g. check validity Cantus IDs. Also making these controlled  vocabularies for fields is not our decision to make in general.
+  
+Another reason for not making validation strict part of the procedure of loading data into PyCantus is an accessibility of the library for people outside Cantus ecosystem. For data 'not from Cantus Index world' one can assign arbitrary values into non-relevant fields (e.g. Cantus ID) and still use the library for their work.
 
 While loading the data `CsvLoader` creates `Source.numeric_century` values from given `century` value (see `get_numerical_century(str)` function in `dataloaders/loader.py`).
+
 
 ## Filtering & preprocessing
 

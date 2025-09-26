@@ -42,6 +42,10 @@ Here is a simplified schema of the data model:
 
 ![PyCantus data model simplified schema.](_static/img/data_model_pycantus.png)
 
+Attributes in bold are primary keys (identifiers) - in case of Corpus it can be pair.  
+Gray dashed line signals foreign key relation.  
+The attribute *locked* is strictly functional attribute, that is initially set base on `is_editable` attribute of `Corpus` class.
+
 More detailed lists of attributes and methods follows.  
 
 ### Corpus
@@ -198,11 +202,101 @@ Given the lack of controlled vocabularies, currently it cannot do more than chec
 
 As was just written, the only validation we implemented into PyCantus is checking if mandatory fields have some value present - but not what value it is... 
   
-As Cantus Index is growing quite quickly it can hardly be updated enough to e.g. check validity Cantus IDs. Also making these controlled  vocabularies for fields is not our decision to make in general.
+As Cantus Index is growing quite quickly it can hardly be updated enough to e.g. check validity Cantus IDs. Also making these controlled  vocabularies for fields is not our decision to make in general. (To have an idea how difficult this can be refer to Harmonization issues report in CantusCorpus v1.0 and/or tutorial 02_intro_to_chant_data.ipynb.)
   
 Another reason for not making validation strict part of the procedure of loading data into PyCantus is an accessibility of the library for people outside Cantus ecosystem. For data 'not from Cantus Index world' one can assign arbitrary values into non-relevant fields (e.g. Cantus ID) and still use the library for their work.
 
 While loading the data `CsvLoader` creates `Source.numeric_century` values from given `century` value (see `get_numerical_century(str)` function in `dataloaders/loader.py`).
+
+Overall with preparing your own CSV files take care of formatting the file as a correct CSV. The Python library PyCantus is using for this is `pandas`. It can save some troubles but is not a magician, so especially `\n` characters inside lines can cause troubles with loading your data correctly.
+
+
+### Examples of CSV files to be loaded 
+Here we present examples of CSV files and how PyCantus would behave when loading them.
+
+#### 1. Correct example
+
+`chants.csv`
+```
+chantlink,incipit,cantus_id,mode,siglum,position,folio,sequence,feast,feast_code,genre,office,srclink,melody_id,full_text,melody,db,image  
+https://musmed.eu/chant/118468,Humiliamini*,a01149,,F-Pn Lat. 17436,,028r,,Pro paenitentibus,,A,,http://musmed.eu/source/13502,,Humiliamini sub potenti manu dei ut vos exaltet in tempore visitationis omnem sollicitudinem vestram proicientes in eum quoniam ipsi cura est de nobis,,MMMO,https://gallica.bnf.fr/ark:/12148/btv1b8426787t/f61.item.zoom
+https://cantusdatabase.org/chant/231265,Omnibus se invocantibus benignus adest,004141,4,CH-E 611,2.6,157v,,Nicolai,14120600,A,M,https://cantusdatabase.org/source/123606,,Omnibus se invocantibus benignus adest sanctus Nicolaus gloria tibi trinitas deus,1---fE--de--fdc---dc---d--ef--g--de--e---dh--hG--g---hk--hg-gfe---e--g---gh--hgfe--de--e77---efg--fe--d---g--f---gh--gfe--dE---e--e---4---h--g--h--k--g--e---3,CD,http://www.e-codices.unifr.ch/en/sbe/0611/157v/small
+
+```
+And here is how this looks opened in spreadsheet editor:
+![Chant data in Excel.](_static/img/excel.png)
+
+`sources.csv`
+```
+title,siglum,century,provenance,srclink,cursus
+F-Pn : Lat. 17436,F-Pn Lat. 17436,9th century,Abbaye Saint-Corneille de Compiègne,https://musmed.eu/source/13502,Romanum
+"Einsiedeln, Stiftsbibliothek, 611",CH-E 611,14th century,Einsiedeln,https://cantusdatabase.org/source/123606,Monastic
+```
+This pair of files will be loaded with PyCantus without any problems.  
+Though some columns are partially empty (e.g. office) and some are empty completely (e.g. feast_code) as these are not mandatory, everything is fine.
+
+#### 2. Missing sources
+
+`chants.csv`
+```
+chantlink,incipit,cantus_id,mode,siglum,position,folio,sequence,feast,feast_code,genre,office,srclink,melody_id,full_text,melody,db,image  
+https://musmed.eu/chant/118468,Humiliamini*,a01149,,F-Pn Lat. 17436,,028r,,Pro paenitentibus,,A,,http://musmed.eu/source/13502,,Humiliamini sub potenti manu dei ut vos exaltet in tempore visitationis omnem sollicitudinem vestram proicientes in eum quoniam ipsi cura est de nobis,,MMMO,https://gallica.bnf.fr/ark:/12148/btv1b8426787t/f61.item.zoom
+https://cantusdatabase.org/chant/231265,Omnibus se invocantibus benignus adest,004141,4,CH-E 611,2.6,157v,,Nicolai,14120600,A,M,https://cantusdatabase.org/source/123606,,Omnibus se invocantibus benignus adest sanctus Nicolaus gloria tibi trinitas deus,1---fE--de--fdc---dc---d--ef--g--de--e---dh--hG--g---hk--hg-gfe---e--g---gh--hgfe--de--e77---efg--fe--d---g--f---gh--gfe--dE---e--e---4---h--g--h--k--g--e---3,CD,http://www.e-codices.unifr.ch/en/sbe/0611/157v/small
+```
+`sources.csv`
+```
+title,siglum,century,provenance,srclink,cursus
+F-Pn : Lat. 17436,F-Pn Lat. 17436,9th century,Abbaye Saint-Corneille de Compiègne,https://musmed.eu/source/13502,Romanum
+```
+With this pair of files reaction of PyCantus depends on parameters of initialization of `Corpus`:  
+
+If `check_missing_sources` is set to `True`:  
+We will recieve Error saying:
+```
+ValueError: 
+Source 'https://cantusdatabase.org/source/123606 : CH-E 611' from chants does not have record in provided sources!
+```
+
+If `check_missing_sources` is set to `False` and `create_missing_sources`is set to `True`:  
+PyCantus would not return Error and also will inform us, how many sources was created - that means how many  `Source` entry was constructed from `siglum` and `srclink` columns of `chants.csv` (where `title` is taken equal to `siglum`).
+
+
+PyCantus load works even without `sources.csv` file being passed.
+
+
+#### 3. Minimal example
+Here is an example demonstrating how minimal validation is implemented in PyCantus (and so how minimal demands there are).
+
+`chants.csv`
+```
+chantlink,incipit,folio,cantus_id,siglum,srclink,db
+hello.com,Carpe Diem,42,754r,Siglum,https://cantus.org/911,CSK
+```
+`sources.csv`
+```
+title,siglum,srclink
+Pride and Prejudice,MaledivesLib-22,www.howtouseinternet.io
+```
+With this file PyCantus will load everything happily.  
+No checking of existence of `chantlink`, `sourcelink` as well as `Cantus ID` is present in the library. Also these 7 and 3 are the minimal mandatory columns that has to be present in the files and filled for all lines for load to work in PyCantus.
+
+Totally minimal working example would be fine even without `sources.csv` file (possibly with `check_missing_sources` parameter of `Corupus` init set to `True` but not necessarily).
+
+
+#### 4. Problems
+##### 1. Missing mandatory columns  
+For example:
+```
+Exception: 
+Error loading CSV sources.csv file: Missing mandatory fields in CSV: siglum
+```
+
+##### 2. Missing value in mandatory column
+For example:
+```
+Exception: 
+Error loading CSV chants.csv file: Missing mandatory field 'srclink' in chants in row 15
+```
 
 
 ## Filtering & preprocessing

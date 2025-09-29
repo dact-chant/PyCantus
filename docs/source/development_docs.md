@@ -33,8 +33,8 @@ a `Corpus` class to aggregate them, and a `Melody` class to support abstracting 
 Classes related to data model has its implementations in `models` folder.
 
 For all four data classes we can divide their data attributes into to groups:
-- data related (data fields based on CantusCorpus v1.0 structure)
-- functional (quality-of-life fields such as locking or more flexible melody handling)
+- Data related (data fields based on CantusCorpus v1.0 structure)
+- Functional (quality-of-life fields such as locking or more flexible melody handling)
 
 Besides that, some of the data model classes has convenience methods described bellow.
 
@@ -86,12 +86,18 @@ For easier work with the data few methods were implemented directly on `Corpus`.
 - `export_csv(chants_path, sources_path)` - saves `Corpus` data back to CSV files on give paths (`sources_path` can be omitted)
 - `drop_duplicate_chants()` - 
 - `drop_duplicate_sources()` - 
-- ``
+- `keep_melodic_chants()` -
+- `drop_empty_sources()` -
+- `drop_small_sources_data(min_chants)` -
+- `drop_incomplete_chants()` -
+- `apply_filter()` -
+- `get_operations_history_string()` -
+
 
 #### Property Methods
 Some of the methods of `Corpus` are decorated with `@property` so that they can be called as property (attribute) of the object, because that is the intuitive comprehension we have about them.  
 
-- `to_csv_row` - - `to_csv_row` - string value, method constructs the correct string representing the Chant record as a row of CSV file (used e.g. in `Corpus.export_to_csv` method)
+- `to_csv_row` - "returns" string value, method constructs the correct string representing the Chant record as a row of CSV file (used e.g. in `Corpus.export_to_csv` method)
 
 
 
@@ -183,7 +189,7 @@ These are:
 - `to_csv_row` - string value, method constructs the correct string representing the Chant record as a row of CSV file (used e.g. in `Corpus.export_to_csv` method)
 
 #### Static methods
-
+Method decorated with `@static` here is a `Source.header()`. It returns standardized CSV header string for sources. By standardized we mean compatible with what `Source.to_csv_row` returns.
 
 ----
 
@@ -196,6 +202,7 @@ Right now, it is designed in a volpiano-centric way, meaning it holds only the v
 
 We take the `volpiano.utils` as already prepared methods (functions) for working with volpiano and just wrapped them into `Melody` class methods. 
 For more detailed documentation of the methods, see the `volpiano/utils.py` module.
+
 
 #### Data related attributes
 `cantus_id`, `chantlink` and `raw_volpiano` are partly equal to those that were used in initialization of related `Chant` record (`Melody.raw_volpiano` == `Chant.melody`).  
@@ -216,6 +223,13 @@ For more info about 'locking logic' refer to description of this in the [Corpus 
 
 #### Methods
 These are mostly wrappers for methods from `volpiano.utils` being applied to `Melody.volpiano`.
+
+- `clean_volpiano()`
+- `normlize_volpiano()`
+- `expand_accidentals()`
+- `normalize_liquescents()`
+- `discard_differentia()`
+- `get_range()`
 
 
 ## Loaders + validation
@@ -355,5 +369,5 @@ Methods that are saved into `self.operations_history` of `Corpus`:
 - `drop_incomplete_chants()`
 - and also if `Corpus.create_missing_sources` is `True`, then that is noted to the history in `Corpus` initialization
 
-Whole history can be represented as one human-readable string via calling `get_operations_history_string()` method on `Corpus`.
+Whole history can be represented as one human-readable string via calling `get_operations_history_string()` method on `Corpus`. Besides the operations history it also returns paths to csv files used for intialization of the `Corpus` to emphasize the replicability.
 

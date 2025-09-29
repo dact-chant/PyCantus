@@ -145,11 +145,12 @@ class Corpus():
         """
         return Source.header()
 
-    def export_csv(self, chants_filepath : str, sources_filepath):
+    def export_csv(self, chants_filepath : str, sources_filepath=None):
         """ 
         Exports the chants and sources to CSV files.
 
-        If sources_filepath is not provided, only chants will be exported.
+        If sources_filepath is not provided or sources are not in Corpus,
+        only chants will be exported.
         """
         # Chants
         try:
@@ -161,7 +162,7 @@ class Corpus():
             print(f"Error exporting chants file : {e}")
 
         # Sources
-        if self._sources:
+        if self._sources and sources_filepath:
             try:
                 with open(sources_filepath, 'w') as s_file:
                     print(self.csv_sources_header, file=s_file)

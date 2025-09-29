@@ -20,6 +20,7 @@ PyCantus functionality is introduced by a tutorial which guides the user through
   - [Melody](#melody)  
 
 - [Loaders + validation](#loaders--validation)
+  - [Examples of CSV files to be loaded](#examples-of-csv-files-to-be-loaded)
 
 - [Filtering & preprocessing](#filtering--preprocessing) 
     - [History of operations](#history-of-operations)  
@@ -38,22 +39,23 @@ For all four data classes we can divide their data attributes into to groups:
 Besides that, some of the data model classes has convenience methods described bellow.
 
 
-Here is a simplified schema of the data model:
+Here is a schema of the data model:
 
 ![PyCantus data model simplified schema.](_static/img/data_model_pycantus.png)
 
-Attributes in bold are primary keys (identifiers) - in case of Corpus it can be pair.  
-Gray dashed line signals foreign key relation.  
-The attribute *locked* is strictly functional attribute, that is initially set base on `is_editable` attribute of `Corpus` class.
+Attributes in bold are primary keys (identifiers) - in case of Corpus it can be a pair.  
+Gray dashed lines signal foreign key relation.  
+The attribute *locked* is strictly functional attribute, that is initially set based on the value of `is_editable` attribute of `Corpus` class.
 
-More detailed lists of attributes and methods follows.  
+More detailed lists of attributes and methods follow.  
+
 
 ### Corpus
 
 `Corpus` class represents a collection of chants and sources.
 It provides methods for loading, filtering, and exporting data related to the chants and sources.
 
-The only way to initialize `Corpus` is via load from CSV files, it is not possible from chants and sources lists. That is due to "good replicability practice" we wanted to emphasize.
+The only way to initialize `Corpus` is via load from CSV files, it is not possible from chants and sources lists. That is due to the "good replicability practice" we wanted to emphasize.
 
 #### Attributes:
 - `chants_filepath (str)`: path to file with chants
@@ -81,9 +83,20 @@ Value of the `is_editable` attribute is propagated into all Chants, Sources and 
 #### Methods
 For easier work with the data few methods were implemented directly on `Corpus`.
 
-- `export_csv(chants_path, sources_path)` - saves `Corpus` data back to CSV files on give paths
-- 
+- `export_csv(chants_path, sources_path)` - saves `Corpus` data back to CSV files on give paths (`sources_path` can be omitted)
+- `drop_duplicate_chants()` - 
+- `drop_duplicate_sources()` - 
+- ``
 
+#### Property Methods
+Some of the methods of `Corpus` are decorated with `@property` so that they can be called as property (attribute) of the object, because that is the intuitive comprehension we have about them.  
+
+- `to_csv_row` - - `to_csv_row` - string value, method constructs the correct string representing the Chant record as a row of CSV file (used e.g. in `Corpus.export_to_csv` method)
+
+
+
+
+-----
 ### Chant
 
 `Chant` class represents a single chant entry from some database.
@@ -109,19 +122,24 @@ It provides methods for creating, modifying, and exporting chant data in a stand
 - `melody (str)`: Melody encoded in volpiano, if available (e.g., "1---dH---h7--h--ghgfed--gH---h--h---").
 - `century (str)`: Number identifying the century of the source. If multiple centuries apply, the lowest number should be used. (e.g., "12").
 - `db (str)`: \* Code for the database providing the data, used for identification within CI (e.g., "DBcode").
+------
+Non Cantus Index fields - not in export:
+- `rite (str)`: Value of liturgical rite of the chant 
+- `_has_melody (bool)`: True if the chant has a melody, False otherwise.
+- `melody_object (Melody)`: If the chant has a melody, this should be an instance of the Melody class representing the chant's melody once created.
 
-- `rite (str)`: Value of liturgical rite of the chant (not yet in CI, but possibly to be (so we want to be ready), not in export)
 
 #### Functional attributes:
 - `locked (bool)`: Indicates whether the object is locked for editing. If True, no attributes can be modified.
-- `_has_melody (bool)`: True if the chant has a melody, False otherwise.
-- `melody_object (Melody)`: If the chant has a melody, this should be an instance of the Melody class representing the chant's melody once created.
+
+For more info about 'locking logic' refer to description of this in the [Corpus section](#corpus).
+
 
 #### Property methods
 Some of the methods of `Chant` are decorated with `@property` so that they can be called as property (attribute) of the object, because that is the intuitive comprehension we have about them.  
 These are:
 - `is_complete_chant` - bool value (checks presence of full text and long enough melody)
-- `to_csv_row` - string value, method constructs 
+- `to_csv_row` - string value, method constructs the correct string representing the Chant record as a row of CSV file (used e.g. in `Corpus.export_to_csv` method)
 
 So we can have a piece of code:
 ```
@@ -130,13 +148,12 @@ if chant.is_complete_chant:
 ```
 
 #### Static methods
-
+Method decorated with `@static` here is a `Chant.header()`. It returns standardized CSV header string for chants. By standardized we mean compatible with what `Chant.to_csv_row` returns.
 
 #### Methods
+`Chant` has only one standard method which is `create_melody()`. It creates a object of `Melody` class for the chant if it has some melody. Expects volpiano to be provided.
 
-`Chant` has only one standard method which is `create_melody()`. It 
-
-
+-----
 ### Source
 `Source` class represents a single source entry from some database.
 It provides methods for creating, modifying, and exporting source data in a standardized format.
@@ -151,29 +168,40 @@ It provides methods for creating, modifying, and exporting source data in a stan
 - `provenance (str)`: Name of the place of source origin.
 - `cursus (str)`: Secular (Cathedral, Roman) or Monastic cursus of the source. 
 
+The \* signals that such attribute always has some value (is not equal to `None` or empty string `''`).
+
 #### Functional attributes:
-- locked (bool): Indicates whether the object is locked for editing. If True, no attributes can be modified. (functional attribute)
+- `locked (bool)`: Indicates whether the object is locked for editing. If True, no attributes can be modified. (functional attribute)
+
+For more info about 'locking logic' refer to description of this in the [Corpus section](#corpus).
+
 
 #### Property methods
+Some of the methods of `Source` are decorated with `@property` so that they can be called as property (attribute) of the object, because that is the intuitive comprehension we have about them.  
+These are:
+- `is_complete_chant` - bool value (checks presence of full text and long enough melody)
+- `to_csv_row` - string value, method constructs the correct string representing the Chant record as a row of CSV file (used e.g. in `Corpus.export_to_csv` method)
 
 #### Static methods
 
 
+----
 
 ### Melody
 `Melody` class represents a single chant melody.
 
-It is linked to a specific chant record via `chantlink` as an unique chant record identifier.  
+It is linked to a specific chant record via `chantlink` as an unique chant record identifier and also by being stored in the corresponding  chant in `Chant.melody_object`.  
 
-Right now, it is designed in volpiano-centric way, meaning it holds only the volpiano representation of the chant melody, if present. But it can be extended to hold other representations in the future (via new optional parameters).
+Right now, it is designed in a volpiano-centric way, meaning it holds only the volpiano representation of the chant melody, if present. But it can be extended to hold other representations in the future (via new optional parameters).
 
 We take the `volpiano.utils` as already prepared methods (functions) for working with volpiano and just wrapped them into `Melody` class methods. 
 For more detailed documentation of the methods, see the `volpiano/utils.py` module.
 
 #### Data related attributes
-Here we see attributes. until some modification of `volpiano`, same to what is in `Chant` record directly, having these here should just make things more convenient for working with melodies (e.g. when we want to take only list of melodies from corpus while not being interested in source information in such situation, while still being able to get it form `chantlink` when needed).
+`cantus_id`, `chantlink` and `raw_volpiano` are partly equal to those that were used in initialization of related `Chant` record (`Melody.raw_volpiano` == `Chant.melody`).  
+Having these here should just make things more convenient for working with melodies (e.g. when we want to take only list of melodies from corpus while not being interested in source information in such situation, while still being able to get it from `chantlink` when needed or when comparing what melody modifying operation did to the volpiano string).
 
-- `volpiano (str)`: The melody encoded in volpiano notation.
+- `volpiano (str)`: The melody encoded in volpiano notation (this is modified by melody related operations)
 - `chantlink (str)`: URL link directly to the chant entry in the external database.
 - `cantus_id (str)`: The Cantus ID associated with the chant.
 - `raw_volpiano (str)`: The original volpiano string before any processing.
@@ -184,10 +212,10 @@ Here we see attributes. until some modification of `volpiano`, same to what is i
 #### Functional attributes
 - `locked (bool)`: Indicates if the object is locked for editing.
 
+For more info about 'locking logic' refer to description of this in the [Corpus section](#corpus).
+
 #### Methods
 These are mostly wrappers for methods from `volpiano.utils` being applied to `Melody.volpiano`.
-
-
 
 
 ## Loaders + validation
@@ -297,7 +325,6 @@ For example:
 Exception: 
 Error loading CSV chants.csv file: Missing mandatory field 'srclink' in chants in row 15
 ```
-
 
 ## Filtering & preprocessing
 

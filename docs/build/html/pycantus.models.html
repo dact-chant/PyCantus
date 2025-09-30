@@ -217,7 +217,7 @@ It provides methods for creating, modifying, and exporting chant data in a stand
 <dl class="py attribute">
 <dt class="sig sig-object py" id="pycantus.models.chant.Chant.cantus_id">
 <span class="sig-name descname"><span class="pre">cantus_id</span></span><a class="headerlink" href="#pycantus.models.chant.Chant.cantus_id" title="Link to this definition"></a></dt>
-<dd><p>The unique Cantus ID associated with the chant (e.g., “007129a”).</p>
+<dd><p>* The unique Cantus ID associated with the chant (e.g., “007129a”).</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>str</p>
@@ -370,6 +370,22 @@ Expects volpiano to be provided.</p>
 </dd></dl>
 
 <dl class="py property">
+<dt class="sig sig-object py" id="pycantus.models.chant.Chant.is_complete_chant">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">is_complete_chant</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">bool</span></em><a class="headerlink" href="#pycantus.models.chant.Chant.is_complete_chant" title="Link to this definition"></a></dt>
+<dd><p>Checks if the chant has complete melodic and textual data.
+Conditions for being a complete chant:
+- Has a melody
+- The melody’s volpiano is a valid string containing notes
+- Has full text
+- The full text is not identical to the incipit
+- The volpiano starts with ‘1’ (indicating G clef)
+- The volpiano does not contain ‘2’ (indicating F clef)
+- The volpiano does not contain ‘6——6’ (indicating missing pitches)
+- The volpiano contains only valid characters
+- The volpiano contains at least one word boundary (’—‘)</p>
+</dd></dl>
+
+<dl class="py property">
 <dt class="sig sig-object py" id="pycantus.models.chant.Chant.to_csv_row">
 <em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">to_csv_row</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><a class="headerlink" href="#pycantus.models.chant.Chant.to_csv_row" title="Link to this definition"></a></dt>
 <dd><p>Returns data fields of Chant in “to be pasted to the csv export file” form.</p>
@@ -508,12 +524,46 @@ It provides methods for loading, filtering, and exporting data related to the ch
 </dl>
 </dd></dl>
 
-<p>Only chants_filepath is mandatory.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pycantus.models.corpus.Corpus._chants">
+<span class="sig-name descname"><span class="pre">_chants</span></span><a class="headerlink" href="#pycantus.models.corpus.Corpus._chants" title="Link to this definition"></a></dt>
+<dd><p>list of Chant objects in the corpus</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>list</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pycantus.models.corpus.Corpus._sources">
+<span class="sig-name descname"><span class="pre">_sources</span></span><a class="headerlink" href="#pycantus.models.corpus.Corpus._sources" title="Link to this definition"></a></dt>
+<dd><p>list of Source objects in the corpus</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>list</p>
+</dd>
+</dl>
+</dd></dl>
+
+<p>Only chants_filepath is mandatory.
+The only way to initialize <cite>Corpus</cite> is via load from CSV files,
+it is not possible from chants and sources lists.
+That is due to the “good replicability practice” we wanted to emphasize.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="pycantus.models.corpus.Corpus.apply_filter">
 <span class="sig-name descname"><span class="pre">apply_filter</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filter</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="pycantus.filtration.html#pycantus.filtration.filter.Filter" title="pycantus.filtration.filter.Filter"><span class="pre">Filter</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pycantus.models.corpus.Corpus.apply_filter" title="Link to this definition"></a></dt>
 <dd><p>Applies the given filter on stored data in “in place” way.
 Stores filter setting into filtration_history.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>filter</strong> (<a class="reference internal" href="pycantus.filtration.html#pycantus.filtration.filter.Filter" title="pycantus.filtration.filter.Filter"><em>Filter</em></a>) – filter to be applied</p>
+</dd>
+</dl>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>In future we plan to add clone_and_apply_filter(filter) method as well.</p>
+</div>
 </dd></dl>
 
 <dl class="py property">
@@ -558,17 +608,37 @@ Stores filter setting into filtration_history.</p>
 </dd></dl>
 
 <dl class="py method">
+<dt class="sig sig-object py" id="pycantus.models.corpus.Corpus.drop_incomplete_chants">
+<span class="sig-name descname"><span class="pre">drop_incomplete_chants</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pycantus.models.corpus.Corpus.drop_incomplete_chants" title="Link to this definition"></a></dt>
+<dd><p>Discards all chants that do not have complete melodic and textual data.</p>
+</dd></dl>
+
+<dl class="py method">
 <dt class="sig sig-object py" id="pycantus.models.corpus.Corpus.drop_small_sources_data">
 <span class="sig-name descname"><span class="pre">drop_small_sources_data</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">min_chants</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pycantus.models.corpus.Corpus.drop_small_sources_data" title="Link to this definition"></a></dt>
 <dd><p>Discards all sources that have less than min_chants chants in corpus
 and discard their chants as well.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>min_chants</strong> (<em>int</em>) – minimum number of chants a source must have to be kept</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="pycantus.models.corpus.Corpus.export_csv">
-<span class="sig-name descname"><span class="pre">export_csv</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">chants_filepath</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sources_filepath</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pycantus.models.corpus.Corpus.export_csv" title="Link to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">export_csv</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">chants_filepath</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sources_filepath</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pycantus.models.corpus.Corpus.export_csv" title="Link to this definition"></a></dt>
 <dd><p>Exports the chants and sources to CSV files.</p>
-<p>If sources_filepath is not provided, only chants will be exported.</p>
+<p>If sources_filepath is not provided or sources are not in Corpus,
+only chants will be exported.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>chants_filepath</strong> (<em>str</em>) – Path to the output CSV file for chants.</p></li>
+<li><p><strong>sources_filepath</strong> (<em>str</em>) – Path to the output CSV file for sources. (optional)</p></li>
+</ul>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="py method">

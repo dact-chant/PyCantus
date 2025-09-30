@@ -20,7 +20,7 @@
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="Intro to Gregorian Chant Data" href="intro_to_chant.html" />
-    <link rel="prev" title="pycantus.models package" href="pycantus.models.html" /> 
+    <link rel="prev" title="pycantus.history package" href="pycantus.history.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -45,7 +45,55 @@
               <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="modules.html">pycantus</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">PyCantus Development Documentation</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">PyCantus Development Documentation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#content">Content</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#data-model">Data Model</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#corpus">Corpus</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#attributes">Attributes:</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#locked-attribute">Locked attribute</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#methods">Methods</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#property-methods">Property Methods</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#chant">Chant</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#data-related-attributes">Data related attributes:</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#functional-attributes">Functional attributes:</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id1">Property methods</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#static-methods">Static methods</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id2">Methods</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#source">Source</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id3">Data related attributes:</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id4">Functional attributes:</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id5">Property methods</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id6">Static methods</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#melody">Melody</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id7">Data related attributes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id8">Functional attributes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id9">Methods</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#loaders-validation">Loaders + validation</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#examples-of-csv-files-to-be-loaded">Examples of CSV files to be loaded</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#correct-example">1. Correct example</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#missing-sources">2. Missing sources</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#minimal-example">3. Minimal example</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#problems">4. Problems</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#filtering-preprocessing">Filtering &amp; preprocessing</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#history-of-operations">History of operations</a></li>
+</ul>
+</li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="intro_to_chant.html">Intro to Gregorian Chant Data</a></li>
 </ul>
 
@@ -75,15 +123,391 @@
              
   <section id="pycantus-development-documentation">
 <h1>PyCantus Development Documentation<a class="headerlink" href="#pycantus-development-documentation" title="Link to this heading"></a></h1>
-<p>PyCantus is a Python library for</p>
+<p>PyCantus is a lightweight Python library for loading
+and manipulating Gregorian chant data, e.g. the CantusCorpus v1.0 dataset.
+The “division of labour” between the library and dataset is shown in the schema bellow.
+Most importantly, PyCantus implements a data model for CantusCorpus v1.0.
+However, the library is an independent component, so the data model can be reused for datasets assembled
+from other sources of chant data (e.g. Corpus Monodicum database).</p>
 <p><img alt="Schema of PyCantus and CCv1.0 contributions." src="_images/pycantus_schema_cleaned.png" /></p>
+<p>PyCantus functionality is introduced by a tutorials which guides the user through the steps required to prepare a sub-corpus for experiments. The library source code and documentation are available at <a class="reference external" href="https://github.com/dact-chant/PyCantus">https://github.com/dact-chant/PyCantus</a>.</p>
+<p>The design of the library is influenced by the idea of two different kinds of users: a group of programmers who are getting into Gregorian chant, and then (hopefully) a group of chant experts who are getting into its computer processing.<br />
+Therefore in design choices of some features one can observe an unusual inflexibility. That is motivated by attempts to do not let people shoot themselves into foot too easily. Also the data are kind of “alive” and so part of the responsibilities that would usually lie on such library is in this case “in the datasets” (this holds especially around validation).</p>
+<section id="content">
+<h2>Content<a class="headerlink" href="#content" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p><a class="reference internal" href="#data-model"><span class="xref myst">Data Model</span></a></p>
+<ul>
+<li><p><a class="reference internal" href="pycantus.models.html#module-pycantus.models.corpus" title="pycantus.models.corpus"><span class="xref myst py py-mod">Corpus</span></a></p></li>
+<li><p><a class="reference internal" href="pycantus.models.html#module-pycantus.models.chant" title="pycantus.models.chant"><span class="xref myst py py-mod">Chant</span></a></p></li>
+<li><p><a class="reference internal" href="pycantus.models.html#module-pycantus.models.source" title="pycantus.models.source"><span class="xref myst py py-mod">Source</span></a></p></li>
+<li><p><a class="reference internal" href="pycantus.models.html#pycantus.models.chant.Chant.melody" title="pycantus.models.chant.Chant.melody"><span class="xref myst py py-attr">Melody</span></a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#loaders--validation"><span class="xref myst">Loaders + validation</span></a></p>
+<ul>
+<li><p><a class="reference internal" href="#examples-of-csv-files-to-be-loaded"><span class="xref myst">Examples of CSV files to be loaded</span></a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#filtering--preprocessing"><span class="xref myst">Filtering &amp; preprocessing</span></a></p>
+<ul>
+<li><p><a class="reference internal" href="#history-of-operations"><span class="xref myst">History of operations</span></a></p></li>
+</ul>
+</li>
+</ul>
+</section>
+<section id="data-model">
+<h2>Data Model<a class="headerlink" href="#data-model" title="Link to this heading"></a></h2>
+<p>The core of PyCantus is the data model the <code class="docutils literal notranslate"><span class="pre">Chant</span></code> and <code class="docutils literal notranslate"><span class="pre">Source</span></code> classes representing the corresponding items of the dataset,
+a <code class="docutils literal notranslate"><span class="pre">Corpus</span></code> class to aggregate them, and a <code class="docutils literal notranslate"><span class="pre">Melody</span></code> class to support abstracting away from specific melody encodings in the future. (We are aware of the chant21 library, but we opted not to make music21 a core dependency of PyCantus.)</p>
+<p>Classes related to data model has its implementations in <code class="docutils literal notranslate"><span class="pre">models</span></code> folder.</p>
+<p>For all four data classes we can divide their data attributes into to groups:</p>
+<ul class="simple">
+<li><p>Data related (data fields based on CantusCorpus v1.0 structure)</p></li>
+<li><p>Functional (quality-of-life fields such as locking or more flexible melody handling)</p></li>
+</ul>
+<p>Besides that, some of the data model classes has convenience methods described bellow.</p>
+<p>Here is a schema of the data model:</p>
+<p><img alt="PyCantus data model simplified schema." src="_images/data_model_pycantus.png" /></p>
+<p>Attributes in bold are primary keys (identifiers) - in case of Corpus it can be a pair.<br />
+Gray dashed lines signal foreign key relation.<br />
+The attribute <em>locked</em> is strictly functional attribute, that is initially set based on the value of <code class="docutils literal notranslate"><span class="pre">is_editable</span></code> attribute of <code class="docutils literal notranslate"><span class="pre">Corpus</span></code> class.</p>
+<p>More details about data classes follow.</p>
+<section id="corpus">
+<h3>Corpus<a class="headerlink" href="#corpus" title="Link to this heading"></a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">Corpus</span></code> class represents a collection of chants and sources.
+It provides methods for loading, filtering, and exporting data related to the chants and sources.</p>
+<p>The only way to initialize <code class="docutils literal notranslate"><span class="pre">Corpus</span></code> is via load from CSV files, it is not possible from chants and sources lists. That is due to the “good replicability practice” we wanted to emphasize. Good experiment</p>
+<section id="attributes">
+<h4>Attributes:<a class="headerlink" href="#attributes" title="Link to this heading"></a></h4>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">chants_filepath</span> <span class="pre">(str)</span></code>: path to file with chants</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">sources_filepath</span> <span class="pre">(str)</span></code>: path to file with sources</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">chants_fallback_url</span> <span class="pre">(str)</span></code>: URL for chants file download, is used when loading from filepath fails</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">sources_fallback_url</span> <span class="pre">(str)</span></code>: URL for sources file download, is used when loading from filepath fails</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">other_download_parameters</span> <span class="pre">(dict)</span></code>: [not used yet]</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">is_editable</span> <span class="pre">(bool)</span></code>: indicates whether objects in Corpus should be locked</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">check_missing_sources</span> <span class="pre">(bool)</span></code>: indicates whether load should an raise exception if some chant refers to source that is not in sources</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">create_missing_sources</span> <span class="pre">(bool)</span></code>: indicates whether load should create Source entries for sources referred to in some of the chants and not being present in provided sources</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">_chants</span> <span class="pre">(list)</span></code>: list of <code class="docutils literal notranslate"><span class="pre">Chant</span></code>s in the corpus</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">_sources</span> <span class="pre">(list)</span></code>: list of <code class="docutils literal notranslate"><span class="pre">Source</span></code>s in the corpus</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">operations_history</span> <span class="pre">(list)</span></code>: list of operations applied on the corpus (from predefined list - see methods with <code class="docutils literal notranslate"><span class="pre">&#64;log_operation</span></code> decorator)</p></li>
+</ul>
+</section>
+<section id="locked-attribute">
+<h4>Locked attribute<a class="headerlink" href="#locked-attribute" title="Link to this heading"></a></h4>
+<p>The ‘locking logic’ is quite simple. We don’t want people to shoot themselves in the foot, so we tried to force them to make changes in the state of their data (in <code class="docutils literal notranslate"><span class="pre">Corpus</span></code>) explicit. Besides that, it is also part of the ‘good replicability’ strategy we want to emphasize.</p>
+<p>In the initialization of <code class="docutils literal notranslate"><span class="pre">Corpus</span></code> object, argument <code class="docutils literal notranslate"><span class="pre">is_editable</span></code> is passed (with default value set to <code class="docutils literal notranslate"><span class="pre">False</span></code>).</p>
+<p>Then getters and setters of <code class="docutils literal notranslate"><span class="pre">Corpus</span></code> were overwritten so the ‘I am a locked corpus’ logic is controlled.</p>
+<p>Value of the <code class="docutils literal notranslate"><span class="pre">is_editable</span></code> attribute is propagated into all Chants, Sources and Melodies in the Corpus with <code class="docutils literal notranslate"><span class="pre">Corpus._lock_chants()</span></code>, <code class="docutils literal notranslate"><span class="pre">Corpus._lock_sources()</span></code> and in <code class="docutils literal notranslate"><span class="pre">Chant.create_melody()</span></code>, where attribute <code class="docutils literal notranslate"><span class="pre">locked</span></code> is set to <code class="docutils literal notranslate"><span class="pre">True</span></code> if ‘is not editable corpus’. In these objects it “operates” in the overwritten method <code class="docutils literal notranslate"><span class="pre">__settatr__</span></code> and limits access to others then <code class="docutils literal notranslate"><span class="pre">locked</span></code> attributes based on the value of <code class="docutils literal notranslate"><span class="pre">locked</span></code>. You can set the value of the <code class="docutils literal notranslate"><span class="pre">locked</span></code> attribute freely – because that makes the intervention in the data state explicit, but not impossible.</p>
+</section>
+<section id="methods">
+<h4>Methods<a class="headerlink" href="#methods" title="Link to this heading"></a></h4>
+<p>For easier work with the data few methods were implemented directly on <code class="docutils literal notranslate"><span class="pre">Corpus</span></code>.</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">export_csv(chants_path,</span> <span class="pre">sources_path)</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">drop_duplicate_chants()</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">drop_duplicate_sources()</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">keep_melodic_chants()</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">drop_empty_sources()</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">drop_small_sources_data(min_chants)</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">drop_incomplete_chants()</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">apply_filter()</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">get_operations_history_string()</span></code></p></li>
+</ul>
+<p>Their description can be found in reference documentation.</p>
+</section>
+<section id="property-methods">
+<h4>Property Methods<a class="headerlink" href="#property-methods" title="Link to this heading"></a></h4>
+<p>Some of the methods of <code class="docutils literal notranslate"><span class="pre">Corpus</span></code> are decorated with <code class="docutils literal notranslate"><span class="pre">&#64;property</span></code> so that they can be called as property (attribute) of the object, because that is the intuitive comprehension we have about them.</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">to_csv_row</span></code> - “returns” string value, method constructs the correct string representing the Chant record as a row of CSV file (used e.g. in <code class="docutils literal notranslate"><span class="pre">Corpus.export_to_csv</span></code> method)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">sources</span></code> - getter of <code class="docutils literal notranslate"><span class="pre">_sources</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">chants</span></code> - getter of <code class="docutils literal notranslate"><span class="pre">_chants</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">melody_objects</span></code> - returns list of <code class="docutils literal notranslate"><span class="pre">Melody</span></code> objects from chants</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">csv_chants_header</span></code> - standardized CSV header string for chants</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">csv_sources_header</span></code> - standardized CSV header string for sources</p></li>
+</ul>
+</section>
+</section>
+<hr class="docutils" />
+<section id="chant">
+<h3>Chant<a class="headerlink" href="#chant" title="Link to this heading"></a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">Chant</span></code> class represents a single chant entry from some database.
+It provides methods for creating, modifying, and exporting chant data in a standardized format.</p>
+<section id="data-related-attributes">
+<h4>Data related attributes:<a class="headerlink" href="#data-related-attributes" title="Link to this heading"></a></h4>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">siglum</span> <span class="pre">(str)</span></code>: * Abbreviation for the source manuscript or collection (e.g., “A-ABC Fragm. 1”). Use RISM whenever possible.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">srclink</span> <span class="pre">(str)</span></code>: * URL link to the source in the external database (e.g., “https://yourdatabase.org/source/123”).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">chantlink</span> <span class="pre">(str)</span></code>: * URL link directly to the chant entry in the external database (e.g., “https://yourdatabase.org/chant/45678”).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">folio</span> <span class="pre">(str)</span></code>: * Folio information for the chant (e.g., “001v”).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">sequence</span> <span class="pre">(str)</span></code>: The order of the chant on the folio (e.g., “1”).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">incipit</span> <span class="pre">(str)</span></code>: * The opening words or phrase of the chant (e.g., “Non sufficiens sibi semel aspexisse vis “).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">feast</span> <span class="pre">(str)</span></code>: Feast or liturgical occasion associated with the chant (e.g., “Nativitas Mariae”).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">genre</span> <span class="pre">(str)</span></code>: Genre of the chant, such as antiphon (A), responsory (R), hymn (H), etc. (e.g., “V”).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">office</span> <span class="pre">(str)</span></code>: The office in which the chant is used, such as Matins (M) or Lauds (L) (e.g., “M”).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">position</span> <span class="pre">(str)</span></code>: Liturgical position of the chant in the office (e.g., “01”).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">cantus_id</span> <span class="pre">(str)</span></code>: The unique Cantus ID associated with the chant (e.g., “007129a”).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">melody_id</span> <span class="pre">(str)</span></code>: The unique Melody ID associated with the chant (e.g., “001216m1”).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">image</span> <span class="pre">(str)</span></code>: URL link to an image of the manuscript page, if available (e.g., “https://yourdatabase.org/image/12345”).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">mode</span> <span class="pre">(str)</span></code>: Mode of the chant, if available (e.g., “1”).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">full_text</span> <span class="pre">(str)</span></code>: Full text of the chant (e.g., “Non sufficiens sibi semel aspexisse vis amoris multiplicavit in ea intentionem inquisitionis”).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">melody</span> <span class="pre">(str)</span></code>: Melody encoded in volpiano, if available (e.g., “1—dH—h7–h–ghgfed–gH—h–h—“).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">century</span> <span class="pre">(str)</span></code>: Number identifying the century of the source. If multiple centuries apply, the lowest number should be used. (e.g., “12”).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">db</span> <span class="pre">(str)</span></code>: * Code for the database providing the data, used for identification within CI (e.g., “DBcode”).</p></li>
+</ul>
+<hr class="docutils" />
+<p>Non Cantus Index fields - not in export:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">rite</span> <span class="pre">(str)</span></code>: Value of liturgical rite of the chant</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">_has_melody</span> <span class="pre">(bool)</span></code>: True if the chant has a melody, False otherwise.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">melody_object</span> <span class="pre">(Melody)</span></code>: If the chant has a melody, this should be an instance of the Melody class representing the chant’s melody once created.</p></li>
+</ul>
+<p>The * signals that such attribute always has some value (is not equal to <code class="docutils literal notranslate"><span class="pre">None</span></code> or empty string <code class="docutils literal notranslate"><span class="pre">''</span></code>).</p>
+<p>Here we would like to point out the inconsistency in filling the data fields among source databases.</p>
+</section>
+<section id="functional-attributes">
+<h4>Functional attributes:<a class="headerlink" href="#functional-attributes" title="Link to this heading"></a></h4>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">locked</span> <span class="pre">(bool)</span></code>: Indicates whether the object is locked for editing. If True, no attributes can be modified.</p></li>
+</ul>
+<p>For more info about ‘locking logic’ refer to description of this in the <a class="reference internal" href="pycantus.models.html#module-pycantus.models.corpus" title="pycantus.models.corpus"><span class="xref myst py py-mod">Corpus section</span></a>.</p>
+</section>
+<section id="id1">
+<h4>Property methods<a class="headerlink" href="#id1" title="Link to this heading"></a></h4>
+<p>Some of the methods of <code class="docutils literal notranslate"><span class="pre">Chant</span></code> are decorated with <code class="docutils literal notranslate"><span class="pre">&#64;property</span></code> so that they can be called as property (attribute) of the object, because that is the intuitive comprehension we have about them.<br />
+These are:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">is_complete_chant</span></code> - bool value (checks presence of full text and long enough melody)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">to_csv_row</span></code> - string value, method constructs the correct string representing the Chant record as a row of CSV file (used e.g. in <code class="docutils literal notranslate"><span class="pre">Corpus.export_to_csv</span></code> method)</p></li>
+</ul>
+<p>So we can have a piece of code:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="n">chant</span><span class="o">.</span><span class="n">is_complete_chant</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">chant</span><span class="o">.</span><span class="n">to_csv_row</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="static-methods">
+<h4>Static methods<a class="headerlink" href="#static-methods" title="Link to this heading"></a></h4>
+<p>Method decorated with <code class="docutils literal notranslate"><span class="pre">&#64;static</span></code> here is a <code class="docutils literal notranslate"><span class="pre">Chant.header()</span></code>. It returns standardized CSV header string for chants. By standardized we mean compatible with what <code class="docutils literal notranslate"><span class="pre">Chant.to_csv_row</span></code> returns.</p>
+</section>
+<section id="id2">
+<h4>Methods<a class="headerlink" href="#id2" title="Link to this heading"></a></h4>
+<p><code class="docutils literal notranslate"><span class="pre">Chant</span></code> has only one standard method which is <code class="docutils literal notranslate"><span class="pre">create_melody()</span></code>. It creates a object of <code class="docutils literal notranslate"><span class="pre">Melody</span></code> class for the chant if it has some melody. Expects volpiano to be provided.</p>
+</section>
+</section>
+<hr class="docutils" />
+<section id="source">
+<h3>Source<a class="headerlink" href="#source" title="Link to this heading"></a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">Source</span></code> class represents a single source entry from some database.
+It provides methods for creating, modifying, and exporting source data in a standardized format.</p>
+<section id="id3">
+<h4>Data related attributes:<a class="headerlink" href="#id3" title="Link to this heading"></a></h4>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">title</span> <span class="pre">(str)</span></code>: * Name of the source (can be same as siglum)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">srclink</span> <span class="pre">(str)</span></code>: * URL link to the source in the external database (e.g., “https://yourdatabase.org/source/123”).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">siglum</span> <span class="pre">(str)</span></code>: * Abbreviation for the source manuscript or collection (e.g., “A-ABC Fragm. 1”). Use RISM whenever possible.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">numeric_century</span> <span class="pre">(int)</span></code>: Integer representing the value of century field.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">century</span> <span class="pre">(str)</span></code>: Century of source origin.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">provenance</span> <span class="pre">(str)</span></code>: Name of the place of source origin.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">cursus</span> <span class="pre">(str)</span></code>: Secular (Cathedral, Roman) or Monastic cursus of the source.</p></li>
+</ul>
+<p>The * signals that such attribute always has some value (is not equal to <code class="docutils literal notranslate"><span class="pre">None</span></code> or empty string <code class="docutils literal notranslate"><span class="pre">''</span></code>).</p>
+<p>Here we would like to point out the inconsistency in filling the data fields among source databases, about sources this holds even more then about chants.</p>
+</section>
+<section id="id4">
+<h4>Functional attributes:<a class="headerlink" href="#id4" title="Link to this heading"></a></h4>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">locked</span> <span class="pre">(bool)</span></code>: Indicates whether the object is locked for editing. If True, no attributes can be modified. (functional attribute)</p></li>
+</ul>
+<p>For more info about ‘locking logic’ refer to description of this in the <a class="reference internal" href="pycantus.models.html#module-pycantus.models.corpus" title="pycantus.models.corpus"><span class="xref myst py py-mod">Corpus section</span></a>.</p>
+</section>
+<section id="id5">
+<h4>Property methods<a class="headerlink" href="#id5" title="Link to this heading"></a></h4>
+<p>Some of the methods of <code class="docutils literal notranslate"><span class="pre">Source</span></code> are decorated with <code class="docutils literal notranslate"><span class="pre">&#64;property</span></code> so that they can be called as property (attribute) of the object, because that is the intuitive comprehension we have about them.<br />
+These are:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">is_complete_chant</span></code> - bool value (checks presence of full text and long enough melody)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">to_csv_row</span></code> - string value, method constructs the correct string representing the Chant record as a row of CSV file (used e.g. in <code class="docutils literal notranslate"><span class="pre">Corpus.export_to_csv</span></code> method)</p></li>
+</ul>
+</section>
+<section id="id6">
+<h4>Static methods<a class="headerlink" href="#id6" title="Link to this heading"></a></h4>
+<p>Method decorated with <code class="docutils literal notranslate"><span class="pre">&#64;static</span></code> here is a <code class="docutils literal notranslate"><span class="pre">Source.header()</span></code>. It returns standardized CSV header string for sources. By standardized we mean compatible with what <code class="docutils literal notranslate"><span class="pre">Source.to_csv_row</span></code> returns.</p>
+</section>
+</section>
+<hr class="docutils" />
+<section id="melody">
+<h3>Melody<a class="headerlink" href="#melody" title="Link to this heading"></a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">Melody</span></code> class represents a single chant melody.</p>
+<p>It is linked to a specific chant record via <code class="docutils literal notranslate"><span class="pre">chantlink</span></code> as an unique chant record identifier and also by being stored in the corresponding  chant in <code class="docutils literal notranslate"><span class="pre">Chant.melody_object</span></code>.</p>
+<p>Right now, it is designed in a volpiano-centric way, meaning it holds only the volpiano representation of the chant melody, if present. But it can be extended to hold other representations in the future (via new optional parameters).</p>
+<p>We take the <code class="docutils literal notranslate"><span class="pre">volpiano.utils</span></code> as already prepared methods (functions) for working with volpiano and just wrapped them into <code class="docutils literal notranslate"><span class="pre">Melody</span></code> class methods.
+For more detailed documentation of the methods, see the <code class="docutils literal notranslate"><span class="pre">volpiano/utils.py</span></code> module.</p>
+<section id="id7">
+<h4>Data related attributes<a class="headerlink" href="#id7" title="Link to this heading"></a></h4>
+<p><code class="docutils literal notranslate"><span class="pre">cantus_id</span></code>, <code class="docutils literal notranslate"><span class="pre">chantlink</span></code> and <code class="docutils literal notranslate"><span class="pre">raw_volpiano</span></code> are partly equal to those that were used in initialization of related <code class="docutils literal notranslate"><span class="pre">Chant</span></code> record (<code class="docutils literal notranslate"><span class="pre">Melody.raw_volpiano</span></code> == <code class="docutils literal notranslate"><span class="pre">Chant.melody</span></code>).<br />
+Having these here should just make things more convenient for working with melodies (e.g. when we want to take only list of melodies from corpus while not being interested in source information in such situation, while still being able to get it from <code class="docutils literal notranslate"><span class="pre">chantlink</span></code> when needed or when comparing what melody modifying operation did to the volpiano string).</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">volpiano</span> <span class="pre">(str)</span></code>: The melody encoded in volpiano notation (this is modified by melody related operations)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">chantlink</span> <span class="pre">(str)</span></code>: URL link directly to the chant entry in the external database.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">cantus_id</span> <span class="pre">(str)</span></code>: The Cantus ID associated with the chant.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">raw_volpiano</span> <span class="pre">(str)</span></code>: The original volpiano string before any processing.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">mode</span> <span class="pre">(str)</span></code>: Mode of the melody (e.g., “1”).</p></li>
+</ul>
+</section>
+<section id="id8">
+<h4>Functional attributes<a class="headerlink" href="#id8" title="Link to this heading"></a></h4>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">locked</span> <span class="pre">(bool)</span></code>: Indicates if the object is locked for editing.</p></li>
+</ul>
+<p>For more info about ‘locking logic’ refer to description of this in the <a class="reference internal" href="pycantus.models.html#module-pycantus.models.corpus" title="pycantus.models.corpus"><span class="xref myst py py-mod">Corpus section</span></a>.</p>
+</section>
+<section id="id9">
+<h4>Methods<a class="headerlink" href="#id9" title="Link to this heading"></a></h4>
+<p>These are mostly wrappers for methods from <code class="docutils literal notranslate"><span class="pre">volpiano.utils</span></code> being applied to <code class="docutils literal notranslate"><span class="pre">Melody.volpiano</span></code>.</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">clean_volpiano()</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">normlize_volpiano()</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">expand_accidentals()</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">normalize_liquescents()</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">discard_differentia()</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">get_range()</span></code></p></li>
+</ul>
+<p>Their description can be found in reference documentation of <code class="docutils literal notranslate"><span class="pre">Melody</span></code> and <code class="docutils literal notranslate"><span class="pre">volpiano.utils</span></code>.</p>
+</section>
+</section>
+</section>
+<section id="loaders-validation">
+<h2>Loaders + validation<a class="headerlink" href="#loaders-validation" title="Link to this heading"></a></h2>
+<p>The <code class="docutils literal notranslate"><span class="pre">data.load_dataset(...)</span></code> function from the <code class="docutils literal notranslate"><span class="pre">data</span></code> module (implemented in <code class="docutils literal notranslate"><span class="pre">data.py</span></code>) is used to load the dataset into the Corpus object and collect all needed parameters as well as .</p>
+<p>Data are loaded into the <code class="docutils literal notranslate"><span class="pre">Corpus</span></code> class via a <code class="docutils literal notranslate"><span class="pre">CsvLoader</span></code> object (implemented in <code class="docutils literal notranslate"><span class="pre">dataloaders/loader.py</span></code>).
+The loader also handles the possible download of missing CSV files from provided fallback URL addresses and
+validation.</p>
+<p>Given the lack of controlled vocabularies, currently it cannot do more than check whether mandatory fields and their values are present and also optionally check unavailable source records (arguments <code class="docutils literal notranslate"><span class="pre">check_missing_sources</span></code> and <code class="docutils literal notranslate"><span class="pre">create_missing_sources</span></code>).</p>
+<p>As was just written, the only validation we implemented into PyCantus is checking if mandatory fields have some value present - but not what value it is…</p>
+<p>As Cantus Index is growing quite quickly it can hardly be updated enough to e.g. check validity Cantus IDs. Also making these controlled  vocabularies for fields is not our decision to make in general. (To have an idea how difficult this can be refer to Harmonization issues report in CantusCorpus v1.0 and/or tutorial 02_intro_to_chant_data.ipynb.)</p>
+<p>Another reason for not making validation strict part of the procedure of loading data into PyCantus is an accessibility of the library for people outside Cantus ecosystem. For data ‘not from Cantus Index world’ one can assign arbitrary values into non-relevant fields (e.g. Cantus ID) and still use the library for their work.</p>
+<p>While loading the data <code class="docutils literal notranslate"><span class="pre">CsvLoader</span></code> creates <code class="docutils literal notranslate"><span class="pre">Source.numeric_century</span></code> values from given <code class="docutils literal notranslate"><span class="pre">century</span></code> value (see <code class="docutils literal notranslate"><span class="pre">get_numerical_century(str)</span></code> function in <code class="docutils literal notranslate"><span class="pre">dataloaders/loader.py</span></code>).</p>
+<p>Overall with preparing your own CSV files take care of formatting the file as a correct CSV. The Python library PyCantus is using for this is <code class="docutils literal notranslate"><span class="pre">pandas</span></code>. It can save some troubles but is not a magician, so especially <code class="docutils literal notranslate"><span class="pre">\n</span></code> characters inside lines can cause troubles with loading your data correctly.</p>
+<section id="examples-of-csv-files-to-be-loaded">
+<h3>Examples of CSV files to be loaded<a class="headerlink" href="#examples-of-csv-files-to-be-loaded" title="Link to this heading"></a></h3>
+<p>Here we present examples of CSV files and how PyCantus would behave when loading them.</p>
+<section id="correct-example">
+<h4>1. Correct example<a class="headerlink" href="#correct-example" title="Link to this heading"></a></h4>
+<p><code class="docutils literal notranslate"><span class="pre">chants.csv</span></code></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">chantlink</span><span class="p">,</span><span class="n">incipit</span><span class="p">,</span><span class="n">cantus_id</span><span class="p">,</span><span class="n">mode</span><span class="p">,</span><span class="n">siglum</span><span class="p">,</span><span class="n">position</span><span class="p">,</span><span class="n">folio</span><span class="p">,</span><span class="n">sequence</span><span class="p">,</span><span class="n">feast</span><span class="p">,</span><span class="n">feast_code</span><span class="p">,</span><span class="n">genre</span><span class="p">,</span><span class="n">office</span><span class="p">,</span><span class="n">srclink</span><span class="p">,</span><span class="n">melody_id</span><span class="p">,</span><span class="n">full_text</span><span class="p">,</span><span class="n">melody</span><span class="p">,</span><span class="n">db</span><span class="p">,</span><span class="n">image</span>  
+<span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">musmed</span><span class="o">.</span><span class="n">eu</span><span class="o">/</span><span class="n">chant</span><span class="o">/</span><span class="mi">118468</span><span class="p">,</span><span class="n">Humiliamini</span><span class="o">*</span><span class="p">,</span><span class="n">a01149</span><span class="p">,,</span><span class="n">F</span><span class="o">-</span><span class="n">Pn</span> <span class="n">Lat</span><span class="o">.</span> <span class="mi">17436</span><span class="p">,,</span><span class="mi">028</span><span class="n">r</span><span class="p">,,</span><span class="n">Pro</span> <span class="n">paenitentibus</span><span class="p">,,</span><span class="n">A</span><span class="p">,,</span><span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">musmed</span><span class="o">.</span><span class="n">eu</span><span class="o">/</span><span class="n">source</span><span class="o">/</span><span class="mi">13502</span><span class="p">,,</span><span class="n">Humiliamini</span> <span class="n">sub</span> <span class="n">potenti</span> <span class="n">manu</span> <span class="n">dei</span> <span class="n">ut</span> <span class="n">vos</span> <span class="n">exaltet</span> <span class="ow">in</span> <span class="n">tempore</span> <span class="n">visitationis</span> <span class="n">omnem</span> <span class="n">sollicitudinem</span> <span class="n">vestram</span> <span class="n">proicientes</span> <span class="ow">in</span> <span class="n">eum</span> <span class="n">quoniam</span> <span class="n">ipsi</span> <span class="n">cura</span> <span class="n">est</span> <span class="n">de</span> <span class="n">nobis</span><span class="p">,,</span><span class="n">MMMO</span><span class="p">,</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">gallica</span><span class="o">.</span><span class="n">bnf</span><span class="o">.</span><span class="n">fr</span><span class="o">/</span><span class="n">ark</span><span class="p">:</span><span class="o">/</span><span class="mi">12148</span><span class="o">/</span><span class="n">btv1b8426787t</span><span class="o">/</span><span class="n">f61</span><span class="o">.</span><span class="n">item</span><span class="o">.</span><span class="n">zoom</span>
+<span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">cantusdatabase</span><span class="o">.</span><span class="n">org</span><span class="o">/</span><span class="n">chant</span><span class="o">/</span><span class="mi">231265</span><span class="p">,</span><span class="n">Omnibus</span> <span class="n">se</span> <span class="n">invocantibus</span> <span class="n">benignus</span> <span class="n">adest</span><span class="p">,</span><span class="mi">004141</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="n">CH</span><span class="o">-</span><span class="n">E</span> <span class="mi">611</span><span class="p">,</span><span class="mf">2.6</span><span class="p">,</span><span class="mi">157</span><span class="n">v</span><span class="p">,,</span><span class="n">Nicolai</span><span class="p">,</span><span class="mi">14120600</span><span class="p">,</span><span class="n">A</span><span class="p">,</span><span class="n">M</span><span class="p">,</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">cantusdatabase</span><span class="o">.</span><span class="n">org</span><span class="o">/</span><span class="n">source</span><span class="o">/</span><span class="mi">123606</span><span class="p">,,</span><span class="n">Omnibus</span> <span class="n">se</span> <span class="n">invocantibus</span> <span class="n">benignus</span> <span class="n">adest</span> <span class="n">sanctus</span> <span class="n">Nicolaus</span> <span class="n">gloria</span> <span class="n">tibi</span> <span class="n">trinitas</span> <span class="n">deus</span><span class="p">,</span><span class="mi">1</span><span class="o">---</span><span class="n">fE</span><span class="o">--</span><span class="n">de</span><span class="o">--</span><span class="n">fdc</span><span class="o">---</span><span class="n">dc</span><span class="o">---</span><span class="n">d</span><span class="o">--</span><span class="n">ef</span><span class="o">--</span><span class="n">g</span><span class="o">--</span><span class="n">de</span><span class="o">--</span><span class="n">e</span><span class="o">---</span><span class="n">dh</span><span class="o">--</span><span class="n">hG</span><span class="o">--</span><span class="n">g</span><span class="o">---</span><span class="n">hk</span><span class="o">--</span><span class="n">hg</span><span class="o">-</span><span class="n">gfe</span><span class="o">---</span><span class="n">e</span><span class="o">--</span><span class="n">g</span><span class="o">---</span><span class="n">gh</span><span class="o">--</span><span class="n">hgfe</span><span class="o">--</span><span class="n">de</span><span class="o">--</span><span class="n">e77</span><span class="o">---</span><span class="n">efg</span><span class="o">--</span><span class="n">fe</span><span class="o">--</span><span class="n">d</span><span class="o">---</span><span class="n">g</span><span class="o">--</span><span class="n">f</span><span class="o">---</span><span class="n">gh</span><span class="o">--</span><span class="n">gfe</span><span class="o">--</span><span class="n">dE</span><span class="o">---</span><span class="n">e</span><span class="o">--</span><span class="n">e</span><span class="o">---</span><span class="mi">4</span><span class="o">---</span><span class="n">h</span><span class="o">--</span><span class="n">g</span><span class="o">--</span><span class="n">h</span><span class="o">--</span><span class="n">k</span><span class="o">--</span><span class="n">g</span><span class="o">--</span><span class="n">e</span><span class="o">---</span><span class="mi">3</span><span class="p">,</span><span class="n">CD</span><span class="p">,</span><span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">www</span><span class="o">.</span><span class="n">e</span><span class="o">-</span><span class="n">codices</span><span class="o">.</span><span class="n">unifr</span><span class="o">.</span><span class="n">ch</span><span class="o">/</span><span class="n">en</span><span class="o">/</span><span class="n">sbe</span><span class="o">/</span><span class="mi">0611</span><span class="o">/</span><span class="mi">157</span><span class="n">v</span><span class="o">/</span><span class="n">small</span>
+
+</pre></div>
+</div>
+<p>And here is how this looks opened in spreadsheet editor:
+<img alt="Chant data in Excel." src="_images/excel.png" /></p>
+<p><code class="docutils literal notranslate"><span class="pre">sources.csv</span></code></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">title</span><span class="p">,</span><span class="n">siglum</span><span class="p">,</span><span class="n">century</span><span class="p">,</span><span class="n">provenance</span><span class="p">,</span><span class="n">srclink</span><span class="p">,</span><span class="n">cursus</span>
+<span class="n">F</span><span class="o">-</span><span class="n">Pn</span> <span class="p">:</span> <span class="n">Lat</span><span class="o">.</span> <span class="mi">17436</span><span class="p">,</span><span class="n">F</span><span class="o">-</span><span class="n">Pn</span> <span class="n">Lat</span><span class="o">.</span> <span class="mi">17436</span><span class="p">,</span><span class="mi">9</span><span class="n">th</span> <span class="n">century</span><span class="p">,</span><span class="n">Abbaye</span> <span class="n">Saint</span><span class="o">-</span><span class="n">Corneille</span> <span class="n">de</span> <span class="n">Compiègne</span><span class="p">,</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">musmed</span><span class="o">.</span><span class="n">eu</span><span class="o">/</span><span class="n">source</span><span class="o">/</span><span class="mi">13502</span><span class="p">,</span><span class="n">Romanum</span>
+<span class="s2">&quot;Einsiedeln, Stiftsbibliothek, 611&quot;</span><span class="p">,</span><span class="n">CH</span><span class="o">-</span><span class="n">E</span> <span class="mi">611</span><span class="p">,</span><span class="mi">14</span><span class="n">th</span> <span class="n">century</span><span class="p">,</span><span class="n">Einsiedeln</span><span class="p">,</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">cantusdatabase</span><span class="o">.</span><span class="n">org</span><span class="o">/</span><span class="n">source</span><span class="o">/</span><span class="mi">123606</span><span class="p">,</span><span class="n">Monastic</span>
+</pre></div>
+</div>
+<p>This pair of files will be loaded with PyCantus without any problems.<br />
+Though some columns are partially empty (e.g. office) and some are empty completely (e.g. feast_code) as these are not mandatory, everything is fine.</p>
+</section>
+<section id="missing-sources">
+<h4>2. Missing sources<a class="headerlink" href="#missing-sources" title="Link to this heading"></a></h4>
+<p><code class="docutils literal notranslate"><span class="pre">chants.csv</span></code></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">chantlink</span><span class="p">,</span><span class="n">incipit</span><span class="p">,</span><span class="n">cantus_id</span><span class="p">,</span><span class="n">mode</span><span class="p">,</span><span class="n">siglum</span><span class="p">,</span><span class="n">position</span><span class="p">,</span><span class="n">folio</span><span class="p">,</span><span class="n">sequence</span><span class="p">,</span><span class="n">feast</span><span class="p">,</span><span class="n">feast_code</span><span class="p">,</span><span class="n">genre</span><span class="p">,</span><span class="n">office</span><span class="p">,</span><span class="n">srclink</span><span class="p">,</span><span class="n">melody_id</span><span class="p">,</span><span class="n">full_text</span><span class="p">,</span><span class="n">melody</span><span class="p">,</span><span class="n">db</span><span class="p">,</span><span class="n">image</span>  
+<span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">musmed</span><span class="o">.</span><span class="n">eu</span><span class="o">/</span><span class="n">chant</span><span class="o">/</span><span class="mi">118468</span><span class="p">,</span><span class="n">Humiliamini</span><span class="o">*</span><span class="p">,</span><span class="n">a01149</span><span class="p">,,</span><span class="n">F</span><span class="o">-</span><span class="n">Pn</span> <span class="n">Lat</span><span class="o">.</span> <span class="mi">17436</span><span class="p">,,</span><span class="mi">028</span><span class="n">r</span><span class="p">,,</span><span class="n">Pro</span> <span class="n">paenitentibus</span><span class="p">,,</span><span class="n">A</span><span class="p">,,</span><span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">musmed</span><span class="o">.</span><span class="n">eu</span><span class="o">/</span><span class="n">source</span><span class="o">/</span><span class="mi">13502</span><span class="p">,,</span><span class="n">Humiliamini</span> <span class="n">sub</span> <span class="n">potenti</span> <span class="n">manu</span> <span class="n">dei</span> <span class="n">ut</span> <span class="n">vos</span> <span class="n">exaltet</span> <span class="ow">in</span> <span class="n">tempore</span> <span class="n">visitationis</span> <span class="n">omnem</span> <span class="n">sollicitudinem</span> <span class="n">vestram</span> <span class="n">proicientes</span> <span class="ow">in</span> <span class="n">eum</span> <span class="n">quoniam</span> <span class="n">ipsi</span> <span class="n">cura</span> <span class="n">est</span> <span class="n">de</span> <span class="n">nobis</span><span class="p">,,</span><span class="n">MMMO</span><span class="p">,</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">gallica</span><span class="o">.</span><span class="n">bnf</span><span class="o">.</span><span class="n">fr</span><span class="o">/</span><span class="n">ark</span><span class="p">:</span><span class="o">/</span><span class="mi">12148</span><span class="o">/</span><span class="n">btv1b8426787t</span><span class="o">/</span><span class="n">f61</span><span class="o">.</span><span class="n">item</span><span class="o">.</span><span class="n">zoom</span>
+<span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">cantusdatabase</span><span class="o">.</span><span class="n">org</span><span class="o">/</span><span class="n">chant</span><span class="o">/</span><span class="mi">231265</span><span class="p">,</span><span class="n">Omnibus</span> <span class="n">se</span> <span class="n">invocantibus</span> <span class="n">benignus</span> <span class="n">adest</span><span class="p">,</span><span class="mi">004141</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="n">CH</span><span class="o">-</span><span class="n">E</span> <span class="mi">611</span><span class="p">,</span><span class="mf">2.6</span><span class="p">,</span><span class="mi">157</span><span class="n">v</span><span class="p">,,</span><span class="n">Nicolai</span><span class="p">,</span><span class="mi">14120600</span><span class="p">,</span><span class="n">A</span><span class="p">,</span><span class="n">M</span><span class="p">,</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">cantusdatabase</span><span class="o">.</span><span class="n">org</span><span class="o">/</span><span class="n">source</span><span class="o">/</span><span class="mi">123606</span><span class="p">,,</span><span class="n">Omnibus</span> <span class="n">se</span> <span class="n">invocantibus</span> <span class="n">benignus</span> <span class="n">adest</span> <span class="n">sanctus</span> <span class="n">Nicolaus</span> <span class="n">gloria</span> <span class="n">tibi</span> <span class="n">trinitas</span> <span class="n">deus</span><span class="p">,</span><span class="mi">1</span><span class="o">---</span><span class="n">fE</span><span class="o">--</span><span class="n">de</span><span class="o">--</span><span class="n">fdc</span><span class="o">---</span><span class="n">dc</span><span class="o">---</span><span class="n">d</span><span class="o">--</span><span class="n">ef</span><span class="o">--</span><span class="n">g</span><span class="o">--</span><span class="n">de</span><span class="o">--</span><span class="n">e</span><span class="o">---</span><span class="n">dh</span><span class="o">--</span><span class="n">hG</span><span class="o">--</span><span class="n">g</span><span class="o">---</span><span class="n">hk</span><span class="o">--</span><span class="n">hg</span><span class="o">-</span><span class="n">gfe</span><span class="o">---</span><span class="n">e</span><span class="o">--</span><span class="n">g</span><span class="o">---</span><span class="n">gh</span><span class="o">--</span><span class="n">hgfe</span><span class="o">--</span><span class="n">de</span><span class="o">--</span><span class="n">e77</span><span class="o">---</span><span class="n">efg</span><span class="o">--</span><span class="n">fe</span><span class="o">--</span><span class="n">d</span><span class="o">---</span><span class="n">g</span><span class="o">--</span><span class="n">f</span><span class="o">---</span><span class="n">gh</span><span class="o">--</span><span class="n">gfe</span><span class="o">--</span><span class="n">dE</span><span class="o">---</span><span class="n">e</span><span class="o">--</span><span class="n">e</span><span class="o">---</span><span class="mi">4</span><span class="o">---</span><span class="n">h</span><span class="o">--</span><span class="n">g</span><span class="o">--</span><span class="n">h</span><span class="o">--</span><span class="n">k</span><span class="o">--</span><span class="n">g</span><span class="o">--</span><span class="n">e</span><span class="o">---</span><span class="mi">3</span><span class="p">,</span><span class="n">CD</span><span class="p">,</span><span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">www</span><span class="o">.</span><span class="n">e</span><span class="o">-</span><span class="n">codices</span><span class="o">.</span><span class="n">unifr</span><span class="o">.</span><span class="n">ch</span><span class="o">/</span><span class="n">en</span><span class="o">/</span><span class="n">sbe</span><span class="o">/</span><span class="mi">0611</span><span class="o">/</span><span class="mi">157</span><span class="n">v</span><span class="o">/</span><span class="n">small</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">sources.csv</span></code></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">title</span><span class="p">,</span><span class="n">siglum</span><span class="p">,</span><span class="n">century</span><span class="p">,</span><span class="n">provenance</span><span class="p">,</span><span class="n">srclink</span><span class="p">,</span><span class="n">cursus</span>
+<span class="n">F</span><span class="o">-</span><span class="n">Pn</span> <span class="p">:</span> <span class="n">Lat</span><span class="o">.</span> <span class="mi">17436</span><span class="p">,</span><span class="n">F</span><span class="o">-</span><span class="n">Pn</span> <span class="n">Lat</span><span class="o">.</span> <span class="mi">17436</span><span class="p">,</span><span class="mi">9</span><span class="n">th</span> <span class="n">century</span><span class="p">,</span><span class="n">Abbaye</span> <span class="n">Saint</span><span class="o">-</span><span class="n">Corneille</span> <span class="n">de</span> <span class="n">Compiègne</span><span class="p">,</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">musmed</span><span class="o">.</span><span class="n">eu</span><span class="o">/</span><span class="n">source</span><span class="o">/</span><span class="mi">13502</span><span class="p">,</span><span class="n">Romanum</span>
+</pre></div>
+</div>
+<p>With this pair of files reaction of PyCantus depends on parameters of initialization of <code class="docutils literal notranslate"><span class="pre">Corpus</span></code>:</p>
+<p>If <code class="docutils literal notranslate"><span class="pre">check_missing_sources</span></code> is set to <code class="docutils literal notranslate"><span class="pre">True</span></code>:<br />
+We will recieve Error saying:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>ValueError: 
+Source &#39;https://cantusdatabase.org/source/123606 : CH-E 611&#39; from chants does not have record in provided sources!
+</pre></div>
+</div>
+<p>If <code class="docutils literal notranslate"><span class="pre">check_missing_sources</span></code> is set to <code class="docutils literal notranslate"><span class="pre">False</span></code> and <code class="docutils literal notranslate"><span class="pre">create_missing_sources</span></code>is set to <code class="docutils literal notranslate"><span class="pre">True</span></code>:<br />
+PyCantus would not return Error and also will inform us, how many sources was created - that means how many  <code class="docutils literal notranslate"><span class="pre">Source</span></code> entry was constructed from <code class="docutils literal notranslate"><span class="pre">siglum</span></code> and <code class="docutils literal notranslate"><span class="pre">srclink</span></code> columns of <code class="docutils literal notranslate"><span class="pre">chants.csv</span></code> (where <code class="docutils literal notranslate"><span class="pre">title</span></code> is taken equal to <code class="docutils literal notranslate"><span class="pre">siglum</span></code>).</p>
+<p>PyCantus load works even without <code class="docutils literal notranslate"><span class="pre">sources.csv</span></code> file being passed.</p>
+</section>
+<section id="minimal-example">
+<h4>3. Minimal example<a class="headerlink" href="#minimal-example" title="Link to this heading"></a></h4>
+<p>Here is an example demonstrating how minimal validation is implemented in PyCantus (and so how minimal demands there are).</p>
+<p><code class="docutils literal notranslate"><span class="pre">chants.csv</span></code></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">chantlink</span><span class="p">,</span><span class="n">incipit</span><span class="p">,</span><span class="n">folio</span><span class="p">,</span><span class="n">cantus_id</span><span class="p">,</span><span class="n">siglum</span><span class="p">,</span><span class="n">srclink</span><span class="p">,</span><span class="n">db</span>
+<span class="n">hello</span><span class="o">.</span><span class="n">com</span><span class="p">,</span><span class="n">Carpe</span> <span class="n">Diem</span><span class="p">,</span><span class="mi">42</span><span class="p">,</span><span class="mi">754</span><span class="n">r</span><span class="p">,</span><span class="n">Siglum</span><span class="p">,</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">cantus</span><span class="o">.</span><span class="n">org</span><span class="o">/</span><span class="mi">911</span><span class="p">,</span><span class="n">CSK</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">sources.csv</span></code></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">title</span><span class="p">,</span><span class="n">siglum</span><span class="p">,</span><span class="n">srclink</span>
+<span class="n">Pride</span> <span class="ow">and</span> <span class="n">Prejudice</span><span class="p">,</span><span class="n">MaledivesLib</span><span class="o">-</span><span class="mi">22</span><span class="p">,</span><span class="n">www</span><span class="o">.</span><span class="n">howtouseinternet</span><span class="o">.</span><span class="n">io</span>
+</pre></div>
+</div>
+<p>With this file PyCantus will load everything happily.<br />
+No checking of existence of <code class="docutils literal notranslate"><span class="pre">chantlink</span></code>, <code class="docutils literal notranslate"><span class="pre">sourcelink</span></code> as well as <code class="docutils literal notranslate"><span class="pre">Cantus</span> <span class="pre">ID</span></code> is present in the library. Also these 7 and 3 are the minimal mandatory columns that has to be present in the files and filled for all lines for load to work in PyCantus.</p>
+<p>Totally minimal working example would be fine even without <code class="docutils literal notranslate"><span class="pre">sources.csv</span></code> file (possibly with <code class="docutils literal notranslate"><span class="pre">check_missing_sources</span></code> parameter of <code class="docutils literal notranslate"><span class="pre">Corupus</span></code> init set to <code class="docutils literal notranslate"><span class="pre">True</span></code> but not necessarily).</p>
+</section>
+<section id="problems">
+<h4>4. Problems<a class="headerlink" href="#problems" title="Link to this heading"></a></h4>
+<section id="missing-mandatory-columns">
+<h5>1. Missing mandatory columns<a class="headerlink" href="#missing-mandatory-columns" title="Link to this heading"></a></h5>
+<p>For example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="ne">Exception</span><span class="p">:</span> 
+<span class="n">Error</span> <span class="n">loading</span> <span class="n">CSV</span> <span class="n">sources</span><span class="o">.</span><span class="n">csv</span> <span class="n">file</span><span class="p">:</span> <span class="n">Missing</span> <span class="n">mandatory</span> <span class="n">fields</span> <span class="ow">in</span> <span class="n">CSV</span><span class="p">:</span> <span class="n">siglum</span>
+</pre></div>
+</div>
+</section>
+<section id="missing-value-in-mandatory-column">
+<h5>2. Missing value in mandatory column<a class="headerlink" href="#missing-value-in-mandatory-column" title="Link to this heading"></a></h5>
+<p>For example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="ne">Exception</span><span class="p">:</span> 
+<span class="n">Error</span> <span class="n">loading</span> <span class="n">CSV</span> <span class="n">chants</span><span class="o">.</span><span class="n">csv</span> <span class="n">file</span><span class="p">:</span> <span class="n">Missing</span> <span class="n">mandatory</span> <span class="n">field</span> <span class="s1">&#39;srclink&#39;</span> <span class="ow">in</span> <span class="n">chants</span> <span class="ow">in</span> <span class="n">row</span> <span class="mi">15</span>
+</pre></div>
+</div>
+</section>
+</section>
+</section>
+</section>
+<section id="filtering-preprocessing">
+<h2>Filtering &amp; preprocessing<a class="headerlink" href="#filtering-preprocessing" title="Link to this heading"></a></h2>
+<p>Preprocessing  besides filtering is implemented in functions of <code class="docutils literal notranslate"><span class="pre">Corpus</span></code> (such as <code class="docutils literal notranslate"><span class="pre">drop_empty_sources()</span></code> and similar ones).</p>
+<p>For filtering class <code class="docutils literal notranslate"><span class="pre">Filter</span></code> is introduced (implemented in <code class="docutils literal notranslate"><span class="pre">filtration/filter</span></code>). It stores values for each data field of <code class="docutils literal notranslate"><span class="pre">Chant</span></code> and <code class="docutils literal notranslate"><span class="pre">Source</span></code> that has to be included in or excluded from the resulting sub-corpus.</p>
+<p>Filtration is supposed to be called on <code class="docutils literal notranslate"><span class="pre">Corpus</span></code> with <code class="docutils literal notranslate"><span class="pre">apply_filter(Filter)</span></code> method, internally method <code class="docutils literal notranslate"><span class="pre">apply(chants,</span> <span class="pre">sources)</span></code> of the passed <code class="docutils literal notranslate"><span class="pre">Filter</span></code> is called. This methods iterates over passed <code class="docutils literal notranslate"><span class="pre">Chants</span></code> and <code class="docutils literal notranslate"><span class="pre">Sources</span></code> and keeps those meeting the filtration criteria (include and exclude values definitions).</p>
+<p>The setup can be stored in YAML file (simple string representation) with <code class="docutils literal notranslate"><span class="pre">export_yaml</span></code> and then loaded into <code class="docutils literal notranslate"><span class="pre">Filter</span></code> with <code class="docutils literal notranslate"><span class="pre">import_yaml(path)</span></code> or <code class="docutils literal notranslate"><span class="pre">import_string(yaml_string)</span></code> methods on <code class="docutils literal notranslate"><span class="pre">Filter</span></code> .</p>
+<section id="history-of-operations">
+<h3>History of operations<a class="headerlink" href="#history-of-operations" title="Link to this heading"></a></h3>
+<p>To support replicability we add sort of logging for selected operations so order of applied methods can be stored for later. For that there is <code class="docutils literal notranslate"><span class="pre">HistoryEntry</span></code> class, objects of whom are stored in a list that is a attribute of the <code class="docutils literal notranslate"><span class="pre">Corpus</span></code> class.</p>
+<p>The process is secured using a decorator <code class="docutils literal notranslate"><span class="pre">&#64;log_operation</span></code>, that has its implementation in <code class="docutils literal notranslate"><span class="pre">history/utils.py</span></code>.</p>
+<p>Methods that are saved into <code class="docutils literal notranslate"><span class="pre">self.operations_history</span></code> of <code class="docutils literal notranslate"><span class="pre">Corpus</span></code>:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">drop_duplicate_chants()</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">drop_duplicate_sources()</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">keep_melodic_chants()</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">drop_empty_sources()</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">drop_small_sources_data(int)</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">apply_filter(Filter)</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">drop_incomplete_chants()</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">drop_incomplete_chants()</span></code></p></li>
+<li><p>and also if <code class="docutils literal notranslate"><span class="pre">Corpus.create_missing_sources</span></code> is <code class="docutils literal notranslate"><span class="pre">True</span></code>, then that is noted to the history in <code class="docutils literal notranslate"><span class="pre">Corpus</span></code> initialization</p></li>
+</ul>
+<p>Whole history can be represented as one human-readable string via calling <code class="docutils literal notranslate"><span class="pre">get_operations_history_string()</span></code> method on <code class="docutils literal notranslate"><span class="pre">Corpus</span></code>. Besides the operations history it also returns paths to csv files used for intialization of the <code class="docutils literal notranslate"><span class="pre">Corpus</span></code> to emphasize the replicability.</p>
+</section>
+</section>
 </section>
 
 
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="pycantus.models.html" class="btn btn-neutral float-left" title="pycantus.models package" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="pycantus.history.html" class="btn btn-neutral float-left" title="pycantus.history package" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
         <a href="intro_to_chant.html" class="btn btn-neutral float-right" title="Intro to Gregorian Chant Data" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 

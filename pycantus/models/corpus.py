@@ -14,7 +14,7 @@ from pycantus.filtration.filter import Filter
 from pycantus.history.utils import log_operation
 from pycantus.history.history import HistoryEntry
 
-__version__ = "0.0.6"
+__version__ = "1.0.0"
 __author__ = "Anna Dvorakova"
 
 
@@ -36,6 +36,9 @@ class Corpus():
         _sources (list): list of Source objects in the corpus
     
     Only chants_filepath is mandatory.
+    The only way to initialize `Corpus` is via load from CSV files, 
+    it is not possible from chants and sources lists. 
+    That is due to the "good replicability practice" we wanted to emphasize.
     """
     def __init__(self,
                  chants_filepath,
@@ -151,6 +154,10 @@ class Corpus():
 
         If sources_filepath is not provided or sources are not in Corpus,
         only chants will be exported.
+
+        Args:
+            chants_filepath (str): Path to the output CSV file for chants.
+            sources_filepath (str): Path to the output CSV file for sources. (optional)
         """
         # Chants
         try:
@@ -221,6 +228,9 @@ class Corpus():
         """
         Discards all sources that have less than min_chants chants in corpus
         and discard their chants as well.
+
+        Args:
+            min_chants (int): minimum number of chants a source must have to be kept
         """
         source_chant_counts = Counter([ch.srclink for ch in self._chants])
         sources_to_keep = {s for s, count in source_chant_counts.items() if count >= min_chants}
@@ -239,6 +249,12 @@ class Corpus():
         """
         Applies the given filter on stored data in "in place" way.
         Stores filter setting into filtration_history.
+        
+        Args:
+            filter (Filter): filter to be applied
+            
+        Note:
+            In future we plan to add clone_and_apply_filter(filter) method as well.
         """
         self._chants, self._sources = filter.apply(self._chants, self._sources)
     

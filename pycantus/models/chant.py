@@ -12,7 +12,7 @@ import pycantus.static as static
 from pycantus.models.melody import Melody
 
 
-__version__ = "0.0.6"
+__version__ = "1.0.0"
 __author__ = "Anna Dvorakova"
 
 @staticmethod
@@ -52,7 +52,7 @@ class Chant():
         genre (str): Genre of the chant, such as antiphon (A), responsory (R), hymn (H), etc. (e.g., "V").
         office (str): The office in which the chant is used, such as Matins (M) or Lauds (L) (e.g., "M").
         position (str): Liturgical position of the chant in the office (e.g., "01").
-        cantus_id (str): The unique Cantus ID associated with the chant (e.g., "007129a").
+        cantus_id (str): \* The unique Cantus ID associated with the chant (e.g., "007129a").
         melody_id (str): The unique Melody ID associated with the chant (e.g., "001216m1").
         image (str): URL link to an image of the manuscript page, if available (e.g., "https://yourdatabase.org/image/12345").
         mode (str): Mode of the chant, if available (e.g., "1").

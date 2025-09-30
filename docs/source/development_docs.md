@@ -4,13 +4,18 @@ PyCantus is a lightweight Python library for loading
 and manipulating Gregorian chant data, e.g. the CantusCorpus v1.0 dataset.
 The “division of labour” between the library and dataset is shown in the schema bellow. 
 Most importantly, PyCantus implements a data model for CantusCorpus v1.0.
-However, the library is an independent component, so the data model can be re-used for datasets assembled
+However, the library is an independent component, so the data model can be reused for datasets assembled
 from other sources of chant data (e.g. Corpus Monodicum database).
   
   
 ![Schema of PyCantus and CCv1.0 contributions.](_static/img/pycantus_schema_cleaned.png)
   
-PyCantus functionality is introduced by a tutorial which guides the user through the steps required to prepare a sub-corpus for experiments. The library source code and documentation are available at [https://github.com/dact-chant/PyCantus](https://github.com/dact-chant/PyCantus).
+
+PyCantus functionality is introduced by a tutorials which guides the user through the steps required to prepare a sub-corpus for experiments. The library source code and documentation are available at [https://github.com/dact-chant/PyCantus](https://github.com/dact-chant/PyCantus).
+
+The design of the library is influenced by the idea of two different kinds of users: a group of programmers who are getting into Gregorian chant, and then (hopefully) a group of chant experts who are getting into its computer processing.  
+Therefore in design choices of some features one can observe an unusual inflexibility. That is motivated by attempts to do not let people shoot themselves into foot too easily. Also the data are kind of "alive" and so part of the responsibilities that would usually lie on such library is in this case "in the datasets" (this holds especially around validation).
+
 
 ## Content
 - [Data Model](#data-model)
@@ -47,7 +52,7 @@ Attributes in bold are primary keys (identifiers) - in case of Corpus it can be 
 Gray dashed lines signal foreign key relation.  
 The attribute *locked* is strictly functional attribute, that is initially set based on the value of `is_editable` attribute of `Corpus` class.
 
-More detailed lists of attributes and methods follow.  
+More details about data classes follow.
 
 
 ### Corpus
@@ -55,7 +60,7 @@ More detailed lists of attributes and methods follow.
 `Corpus` class represents a collection of chants and sources.
 It provides methods for loading, filtering, and exporting data related to the chants and sources.
 
-The only way to initialize `Corpus` is via load from CSV files, it is not possible from chants and sources lists. That is due to the "good replicability practice" we wanted to emphasize.
+The only way to initialize `Corpus` is via load from CSV files, it is not possible from chants and sources lists. That is due to the "good replicability practice" we wanted to emphasize. Good experiment 
 
 #### Attributes:
 - `chants_filepath (str)`: path to file with chants
@@ -78,28 +83,32 @@ In the initialization of `Corpus` object, argument `is_editable` is passed (with
 
 Then getters and setters of `Corpus` were overwritten so the 'I am a locked corpus' logic is controlled. 
 
-Value of the `is_editable` attribute is propagated into all Chants, Sources and Melodies in the Corpus with `Corpus._lock_chants()`, `Corpus._lock_sources()` and in `Chant.create_melody()`, where attribute `locked` is set to `True` if 'is not editable corpus'. In these objects it "operates" in the overwritten method `__settatr__`. You can set the value of the `locked` attribute freely -- because that makes the intervention in the data state explicit, but not impossible.
+Value of the `is_editable` attribute is propagated into all Chants, Sources and Melodies in the Corpus with `Corpus._lock_chants()`, `Corpus._lock_sources()` and in `Chant.create_melody()`, where attribute `locked` is set to `True` if 'is not editable corpus'. In these objects it "operates" in the overwritten method `__settatr__` and limits access to others then `locked` attributes based on the value of `locked`. You can set the value of the `locked` attribute freely -- because that makes the intervention in the data state explicit, but not impossible.
 
 #### Methods
 For easier work with the data few methods were implemented directly on `Corpus`.
 
-- `export_csv(chants_path, sources_path)` - saves `Corpus` data back to CSV files on give paths (`sources_path` can be omitted)
-- `drop_duplicate_chants()` - 
-- `drop_duplicate_sources()` - 
-- `keep_melodic_chants()` -
-- `drop_empty_sources()` -
-- `drop_small_sources_data(min_chants)` -
-- `drop_incomplete_chants()` -
-- `apply_filter()` -
-- `get_operations_history_string()` -
+- `export_csv(chants_path, sources_path)`
+- `drop_duplicate_chants()`
+- `drop_duplicate_sources()`
+- `keep_melodic_chants()`
+- `drop_empty_sources()`
+- `drop_small_sources_data(min_chants)`
+- `drop_incomplete_chants()`
+- `apply_filter()`
+- `get_operations_history_string()`
 
+Their description can be found in reference documentation.
 
 #### Property Methods
 Some of the methods of `Corpus` are decorated with `@property` so that they can be called as property (attribute) of the object, because that is the intuitive comprehension we have about them.  
 
 - `to_csv_row` - "returns" string value, method constructs the correct string representing the Chant record as a row of CSV file (used e.g. in `Corpus.export_to_csv` method)
-
-
+- `sources` - getter of `_sources`
+- `chants` - getter of `_chants`
+- `melody_objects` - returns list of `Melody` objects from chants
+- `csv_chants_header` - standardized CSV header string for chants
+- `csv_sources_header` - standardized CSV header string for sources
 
 
 -----
@@ -134,6 +143,9 @@ Non Cantus Index fields - not in export:
 - `_has_melody (bool)`: True if the chant has a melody, False otherwise.
 - `melody_object (Melody)`: If the chant has a melody, this should be an instance of the Melody class representing the chant's melody once created.
 
+The \* signals that such attribute always has some value (is not equal to `None` or empty string `''`).
+
+Here we would like to point out the inconsistency in filling the data fields among source databases.
 
 #### Functional attributes:
 - `locked (bool)`: Indicates whether the object is locked for editing. If True, no attributes can be modified.
@@ -175,6 +187,9 @@ It provides methods for creating, modifying, and exporting source data in a stan
 - `cursus (str)`: Secular (Cathedral, Roman) or Monastic cursus of the source. 
 
 The \* signals that such attribute always has some value (is not equal to `None` or empty string `''`).
+
+Here we would like to point out the inconsistency in filling the data fields among source databases, about sources this holds even more then about chants.
+
 
 #### Functional attributes:
 - `locked (bool)`: Indicates whether the object is locked for editing. If True, no attributes can be modified. (functional attribute)
@@ -230,6 +245,8 @@ These are mostly wrappers for methods from `volpiano.utils` being applied to `Me
 - `normalize_liquescents()`
 - `discard_differentia()`
 - `get_range()`
+
+Their description can be found in reference documentation of `Melody` and `volpiano.utils`.
 
 
 ## Loaders + validation

@@ -10,7 +10,7 @@ from collections import defaultdict
 from pycantus.models.source import EXPORT_SOURCES_FIELDS
 from pycantus.models.chant import EXPORT_CHANTS_FIELDS
 
-__version__ = "0.0.6"
+__version__ = "1.0.0"
 __author__ = "Anna Dvorakova"
 
 

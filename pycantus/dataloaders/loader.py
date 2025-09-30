@@ -14,7 +14,7 @@ from pycantus.models.source import Source, MANDATORY_SOURCES_FIELDS, OPTIONAL_SO
 import pycantus.dataset_files as dataset_files
 
 
-__version__ = "0.0.5"
+__version__ = "1.0.0"
 __author__ = "Anna Dvorakova"
 
 

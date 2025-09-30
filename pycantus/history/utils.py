@@ -5,7 +5,7 @@ This module provides utility functions for logging operations in the Corpus hist
 from functools import wraps
 from .history import HistoryEntry
 
-__version__ = "0.0.6"
+__version__ = "1.0.0"
 __author__ = "Anna Dvorakova"
 
 def log_operation(func):

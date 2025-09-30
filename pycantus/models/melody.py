@@ -15,7 +15,7 @@ For more detailed documentation of the methods, see the volpiano.utils module.
 from pycantus.volpiano.utils import clean_volpiano, normalize_volpiano, expand_accidentals, normalize_liquescents, discard_differentia, get_range
 
 
-__version__ = "0.0.6"
+__version__ = "1.0.0"
 __author__ = "Anna Dvorakova"
 
 

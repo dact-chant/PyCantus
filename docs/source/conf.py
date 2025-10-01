@@ -7,9 +7,9 @@
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#project-information
 
 project = 'PyCantus'
-copyright = '2025, [redacted for peer review]'
-author = '[redacted for peer review]'
-release = 'v0.0.4'
+copyright = '2025, MIT License'
+author = 'Anna Dvorakova'
+release = 'v1.0.0'
 
 # -- General configuration ---------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#general-configuration

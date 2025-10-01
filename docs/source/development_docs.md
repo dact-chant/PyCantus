@@ -2,7 +2,7 @@
 
 PyCantus is a lightweight Python library for loading 
 and manipulating Gregorian chant data, e.g. the CantusCorpus v1.0 dataset.
-The “division of labour” between the library and dataset is shown in the schema bellow. 
+The “division of labour” between the library and dataset is shown in the schema below. 
 Most importantly, PyCantus implements a data model for CantusCorpus v1.0.
 However, the library is an independent component, so the data model can be reused for datasets assembled
 from other sources of chant data (e.g. Corpus Monodicum database).
@@ -11,10 +11,10 @@ from other sources of chant data (e.g. Corpus Monodicum database).
 ![Schema of PyCantus and CCv1.0 contributions.](_static/img/pycantus_schema_cleaned.png)
   
 
-PyCantus functionality is introduced by a tutorials which guides the user through the steps required to prepare a sub-corpus for experiments. The library source code and documentation are available at [https://github.com/dact-chant/PyCantus](https://github.com/dact-chant/PyCantus).
+PyCantus functionality is introduced by tutorials which guides the user through the steps required to prepare a sub-corpus for experiments. The library source code and documentation are available at [https://github.com/dact-chant/PyCantus](https://github.com/dact-chant/PyCantus).
 
 The design of the library is influenced by the idea of two different kinds of users: a group of programmers who are getting into Gregorian chant, and then (hopefully) a group of chant experts who are getting into its computer processing.  
-Therefore in design choices of some features one can observe an unusual inflexibility. That is motivated by attempts to do not let people shoot themselves into foot too easily. Also the data are kind of "alive" and so part of the responsibilities that would usually lie on such library is in this case "in the datasets" (this holds especially around validation).
+Therefore, in the design choices of some features one can observe an unusual inflexibility. That is motivated by attempts not to et people shoot themselves into the foot too easily. Also the data are kind of "alive" and so part of the responsibilities that would usually lie on such library is in this case "in the datasets" (this holds especially around validation).
 
 
 ## Content
@@ -32,16 +32,16 @@ Therefore in design choices of some features one can observe an unusual inflexib
 
 
 ## Data Model
-The core of PyCantus is the data model the `Chant` and `Source` classes representing the corresponding items of the dataset,
+The core of PyCantus is the data model: `Chant` and `Source` classes representing the corresponding items of the dataset,
 a `Corpus` class to aggregate them, and a `Melody` class to support abstracting away from specific melody encodings in the future. (We are aware of the chant21 library, but we opted not to make music21 a core dependency of PyCantus.)
 
-Classes related to data model has its implementations in `models` folder.
+Classes related to data model have their implementations in `models` folder.
 
-For all four data classes we can divide their data attributes into to groups:
+For all four data classes holds, that we can divide their data attributes into two groups:
 - Data related (data fields based on CantusCorpus v1.0 structure)
 - Functional (quality-of-life fields such as locking or more flexible melody handling)
 
-Besides that, some of the data model classes has convenience methods described bellow.
+Besides that, some of the data model classes have convenience methods described below.
 
 
 Here is a schema of the data model:
@@ -49,7 +49,7 @@ Here is a schema of the data model:
 ![PyCantus data model simplified schema.](_static/img/data_model_pycantus.png)
 
 Attributes in bold are primary keys (identifiers) - in case of Corpus it can be a pair.  
-Gray dashed lines signal foreign key relation.  
+Grey dashed lines signal foreign key relation.  
 The attribute *locked* is strictly functional attribute, that is initially set based on the value of `is_editable` attribute of `Corpus` class.
 
 More details about data classes follow.
@@ -69,7 +69,7 @@ The only way to initialize `Corpus` is via load from CSV files, it is not possib
 - `sources_fallback_url (str)`: URL for sources file download, is used when loading from filepath fails
 - `other_download_parameters (dict)`: [not used yet]
 - `is_editable (bool)`: indicates whether objects in Corpus should be locked
-- `check_missing_sources (bool)`: indicates whether load should an raise exception if some chant refers to source that is not in sources
+- `check_missing_sources (bool)`: indicates whether load should raise an exception if some chant refers to source that is not in sources
 - `create_missing_sources (bool)`: indicates whether load should create Source entries for sources referred to in some of the chants and not being present in provided sources
 - `_chants (list)`: list of `Chant`s in the corpus
 - `_sources (list)`: list of `Source`s in the corpus 
@@ -77,16 +77,17 @@ The only way to initialize `Corpus` is via load from CSV files, it is not possib
 
 
 #### Locked attribute
-The 'locking logic' is quite simple. We don't want people to shoot themselves in the foot, so we tried to force them to make changes in the state of their data (in `Corpus`) explicit. Besides that, it is also part of the 'good replicability' strategy we want to emphasize.
+The 'locking logic' is quite simple. We don't want people to shoot themselves in the foot, so we tried to force them to make changes in the state of their data (in `Corpus`) explicit. This is also part of the 'good replicability' strategy we want to emphasize.
 
-In the initialization of `Corpus` object, argument `is_editable` is passed (with default value set to `False`). 
+In the initialization of the `Corpus` object, argument `is_editable` is passed (with a default value set to `False`). 
 
-Then getters and setters of `Corpus` were overwritten so the 'I am a locked corpus' logic is controlled. 
+Then getters and setters of `Corpus` were overwritten, so the 'I am a locked corpus' logic is controlled. 
 
-Value of the `is_editable` attribute is propagated into all Chants, Sources and Melodies in the Corpus with `Corpus._lock_chants()`, `Corpus._lock_sources()` and in `Chant.create_melody()`, where attribute `locked` is set to `True` if 'is not editable corpus'. In these objects it "operates" in the overwritten method `__settatr__` and limits access to others then `locked` attributes based on the value of `locked`. You can set the value of the `locked` attribute freely -- because that makes the intervention in the data state explicit, but not impossible.
+Value of the `is_editable` attribute is propagated into all Chants, Sources and Melodies in the Corpus with `Corpus._lock_chants()`, `Corpus._lock_sources()` and in `Chant.create_melody()`, where attribute `locked` is set to `True` if 'is not editable corpus'. In these objects it "operates" in the overwritten method `__settatr__` and limits access to others than `locked` attributes based on the value of `locked`. You can set the value of the `locked` attribute freely -- because that makes the intervention in the data state explicit, but not impossible.
+
 
 #### Methods
-For easier work with the data few methods were implemented directly on `Corpus`.
+For easier work with the data, a few methods were implemented directly on `Corpus`.
 
 - `export_csv(chants_path, sources_path)`
 - `drop_duplicate_chants()`
@@ -98,10 +99,10 @@ For easier work with the data few methods were implemented directly on `Corpus`.
 - `apply_filter()`
 - `get_operations_history_string()`
 
-Their description can be found in reference documentation.
+Their description can be found in the reference documentation.
 
 #### Property Methods
-Some of the methods of `Corpus` are decorated with `@property` so that they can be called as property (attribute) of the object, because that is the intuitive comprehension we have about them.  
+Some of the methods of `Corpus` are decorated with `@property` so that they can be called as properties (attribute) of the object, because that is the intuitive comprehension we have about them.  
 
 - `to_csv_row` - "returns" string value, method constructs the correct string representing the Chant record as a row of CSV file (used e.g. in `Corpus.export_to_csv` method)
 - `sources` - getter of `_sources`
@@ -143,7 +144,7 @@ Non Cantus Index fields - not in export:
 - `_has_melody (bool)`: True if the chant has a melody, False otherwise.
 - `melody_object (Melody)`: If the chant has a melody, this should be an instance of the Melody class representing the chant's melody once created.
 
-The \* signals that such attribute always has some value (is not equal to `None` or empty string `''`).
+The \* signals that such attribute always has some value (is not equal to `None` or an empty string `''`).
 
 Here we would like to point out the inconsistency in filling the data fields among source databases.
 
@@ -154,7 +155,7 @@ For more info about 'locking logic' refer to description of this in the [Corpus 
 
 
 #### Property methods
-Some of the methods of `Chant` are decorated with `@property` so that they can be called as property (attribute) of the object, because that is the intuitive comprehension we have about them.  
+Some of the methods of `Chant` are decorated with `@property` so that they can be called as properties (attribute) of the object, because that is the intuitive comprehension we have about them.  
 These are:
 - `is_complete_chant` - bool value (checks presence of full text and long enough melody)
 - `to_csv_row` - string value, method constructs the correct string representing the Chant record as a row of CSV file (used e.g. in `Corpus.export_to_csv` method)
@@ -166,10 +167,10 @@ if chant.is_complete_chant:
 ```
 
 #### Static methods
-Method decorated with `@static` here is a `Chant.header()`. It returns standardized CSV header string for chants. By standardized we mean compatible with what `Chant.to_csv_row` returns.
+The method decorated with `@static` here is a `Chant.header()`. It returns standardized CSV header string for chants. By standardized we mean compatible with what `Chant.to_csv_row` returns.
 
 #### Methods
-`Chant` has only one standard method which is `create_melody()`. It creates a object of `Melody` class for the chant if it has some melody. Expects volpiano to be provided.
+`Chant` has only one standard method which is `create_melody()`. It creates an object of `Melody` class for the chant if it has some melody. THis method expects volpiano to be provided in `Chant.melody`.
 
 -----
 ### Source
@@ -178,7 +179,7 @@ It provides methods for creating, modifying, and exporting source data in a stan
 
 
 #### Data related attributes:
-- `title (str)`: \* Name of the source (can be same as siglum)
+- `title (str)`: \* Name of the source (can be easily the same as siglum)
 - `srclink (str)`: \* URL link to the source in the external database (e.g., "https://yourdatabase.org/source/123").
 - `siglum (str)`: \* Abbreviation for the source manuscript or collection (e.g., "A-ABC Fragm. 1"). Use RISM whenever possible.
 - `numeric_century (int)`: Integer representing the value of century field.
@@ -186,9 +187,9 @@ It provides methods for creating, modifying, and exporting source data in a stan
 - `provenance (str)`: Name of the place of source origin.
 - `cursus (str)`: Secular (Cathedral, Roman) or Monastic cursus of the source. 
 
-The \* signals that such attribute always has some value (is not equal to `None` or empty string `''`).
+The \* signals that such an attribute always has some value (is not equal to `None` or an empty string `''`).
 
-Here we would like to point out the inconsistency in filling the data fields among source databases, about sources this holds even more then about chants.
+Here we would like to point out the inconsistency in filling the data fields among source databases, about sources this holds even more than about chants.
 
 
 #### Functional attributes:
@@ -198,22 +199,22 @@ For more info about 'locking logic' refer to description of this in the [Corpus 
 
 
 #### Property methods
-Some of the methods of `Source` are decorated with `@property` so that they can be called as property (attribute) of the object, because that is the intuitive comprehension we have about them.  
+Some of the methods of `Source` are decorated with `@property` so that they can be called as properties (attribute) of the object, because that is the intuitive comprehension we have about them.  
 These are:
 - `is_complete_chant` - bool value (checks presence of full text and long enough melody)
 - `to_csv_row` - string value, method constructs the correct string representing the Chant record as a row of CSV file (used e.g. in `Corpus.export_to_csv` method)
 
 #### Static methods
-Method decorated with `@static` here is a `Source.header()`. It returns standardized CSV header string for sources. By standardized we mean compatible with what `Source.to_csv_row` returns.
+The method decorated with `@static` here is a `Source.header()`. It returns standardized CSV header string for sources. By standardized we mean compatible with what `Source.to_csv_row` returns.
 
 ----
 
 ### Melody
 `Melody` class represents a single chant melody.
 
-It is linked to a specific chant record via `chantlink` as an unique chant record identifier and also by being stored in the corresponding  chant in `Chant.melody_object`.  
+It is linked to a specific chant record via `chantlink` as a unique chant record identifier and also by being stored in the corresponding  chant in `Chant.melody_object`.  
 
-Right now, it is designed in a volpiano-centric way, meaning it holds only the volpiano representation of the chant melody, if present. But it can be extended to hold other representations in the future (via new optional parameters).
+Right now, it is designed in a volpiano-centric way, meaning it holds only the volpiano representation of the chant melody, if present. However, it can be extended to hold other representations in the future (via new optional parameters).
 
 We take the `volpiano.utils` as already prepared methods (functions) for working with volpiano and just wrapped them into `Melody` class methods. 
 For more detailed documentation of the methods, see the `volpiano/utils.py` module.
@@ -221,7 +222,7 @@ For more detailed documentation of the methods, see the `volpiano/utils.py` modu
 
 #### Data related attributes
 `cantus_id`, `chantlink` and `raw_volpiano` are partly equal to those that were used in initialization of related `Chant` record (`Melody.raw_volpiano` == `Chant.melody`).  
-Having these here should just make things more convenient for working with melodies (e.g. when we want to take only list of melodies from corpus while not being interested in source information in such situation, while still being able to get it from `chantlink` when needed or when comparing what melody modifying operation did to the volpiano string).
+Having these here should just make things more convenient for working with melodies (e.g. when we want to take only list of melodies from the corpus without interest in source information in such situation, while still being able to get it from `chantlink` when needed or when comparing what melody modifying operation did to the volpiano string).
 
 - `volpiano (str)`: The melody encoded in volpiano notation (this is modified by melody related operations)
 - `chantlink (str)`: URL link directly to the chant entry in the external database.
@@ -246,28 +247,28 @@ These are mostly wrappers for methods from `volpiano.utils` being applied to `Me
 - `discard_differentia()`
 - `get_range()`
 
-Their description can be found in reference documentation of `Melody` and `volpiano.utils`.
+Their description can be found in the reference documentation of `Melody` and `volpiano.utils`.
 
 
 ## Loaders + validation
-The `data.load_dataset(...)` function from the `data` module (implemented in `data.py`) is used to load the dataset into the Corpus object and collect all needed parameters as well as .
+The `data.load_dataset(...)` function from the `data` module (implemented in `data.py`) loads the dataset into the Corpus object and collects all needed parameters as well as .
 
 
 Data are loaded into the `Corpus` class via a `CsvLoader` object (implemented in `dataloaders/loader.py`).
-The loader also handles the possible download of missing CSV files from provided fallback URL addresses and 
-validation. 
+The loader also handles the possible download of missing CSV files from provided fallback URL addresses and then
+validation (see below). 
 
-Given the lack of controlled vocabularies, currently it cannot do more than check whether mandatory fields and their values are present and also optionally check unavailable source records (arguments `check_missing_sources` and `create_missing_sources`).
+Given the lack of controlled vocabularies, currently it cannot do more than check whether mandatory fields and their values are present and optionally check unavailable source records (arguments `check_missing_sources` and `create_missing_sources`).
 
 As was just written, the only validation we implemented into PyCantus is checking if mandatory fields have some value present - but not what value it is... 
   
-As Cantus Index is growing quite quickly it can hardly be updated enough to e.g. check validity Cantus IDs. Also making these controlled  vocabularies for fields is not our decision to make in general. (To have an idea how difficult this can be refer to Harmonization issues report in CantusCorpus v1.0 and/or tutorial 02_intro_to_chant_data.ipynb.)
+As Cantus Index is growing quite quickly it can hardly be updated enough to e.g. check the validity Cantus IDs. Also making these controlled  vocabularies for fields is not our decision to make in general. (To have an idea how difficult this can be refer to Harmonization issues report in CantusCorpus v1.0 and/or tutorial 02_intro_to_chant_data.ipynb.)
   
 Another reason for not making validation strict part of the procedure of loading data into PyCantus is an accessibility of the library for people outside Cantus ecosystem. For data 'not from Cantus Index world' one can assign arbitrary values into non-relevant fields (e.g. Cantus ID) and still use the library for their work.
 
-While loading the data `CsvLoader` creates `Source.numeric_century` values from given `century` value (see `get_numerical_century(str)` function in `dataloaders/loader.py`).
+While loading the data `CsvLoader` creates `Source.numeric_century` values from the given `century` value (see `get_numerical_century(str)` function in `dataloaders/loader.py`).
 
-Overall with preparing your own CSV files take care of formatting the file as a correct CSV. The Python library PyCantus is using for this is `pandas`. It can save some troubles but is not a magician, so especially `\n` characters inside lines can cause troubles with loading your data correctly.
+Overall, while preparing your own CSV files, format the file as a correct CSV. The Python library PyCantus is using for this is `pandas`. It can save some trouble, but is not a magician, so especially `\n` characters inside lines can cause trouble with loading your data correctly.
 
 
 ### Examples of CSV files to be loaded 
@@ -307,7 +308,7 @@ https://cantusdatabase.org/chant/231265,Omnibus se invocantibus benignus adest,0
 title,siglum,century,provenance,srclink,cursus
 F-Pn : Lat. 17436,F-Pn Lat. 17436,9th century,Abbaye Saint-Corneille de Compiègne,https://musmed.eu/source/13502,Romanum
 ```
-With this pair of files reaction of PyCantus depends on parameters of initialization of `Corpus`:  
+With this pair of files, the reaction of PyCantus depends on the parameters of initialization of `Corpus`:  
 
 If `check_missing_sources` is set to `True`:  
 We will recieve Error saying:
@@ -336,10 +337,10 @@ hello.com,Carpe Diem,42,754r,Siglum,https://cantus.org/911,CSK
 title,siglum,srclink
 Pride and Prejudice,MaledivesLib-22,www.howtouseinternet.io
 ```
-With this file PyCantus will load everything happily.  
-No checking of existence of `chantlink`, `sourcelink` as well as `Cantus ID` is present in the library. Also these 7 and 3 are the minimal mandatory columns that has to be present in the files and filled for all lines for load to work in PyCantus.
+With this file, PyCantus will load everything happily.  
+No checking of existence of `chantlink`, `sourcelink` as well as `Cantus ID` is present in the library. Also these 7 and 3 are the minimal mandatory columns that have to be present in the files and filled for all lines for load to work in PyCantus.
 
-Totally minimal working example would be fine even without `sources.csv` file (possibly with `check_missing_sources` parameter of `Corupus` init set to `True` but not necessarily).
+A totally minimal working example would be fine even without `sources.csv` file (possibly with `check_missing_sources` parameter of `Corupus` init set to `True` but not necessarily).
 
 
 #### 4. Problems
@@ -359,21 +360,21 @@ Error loading CSV chants.csv file: Missing mandatory field 'srclink' in chants i
 
 ## Filtering & preprocessing
 
-Preprocessing  besides filtering is implemented in functions of `Corpus` (such as `drop_empty_sources()` and similar ones).
+Preprocessing other than filtering is implemented in functions of `Corpus` (such as `drop_empty_sources()` and similar ones).
 
-For filtering class `Filter` is introduced (implemented in `filtration/filter`). It stores values for each data field of `Chant` and `Source` that has to be included in or excluded from the resulting sub-corpus.
+For filtering the class `Filter` is introduced (implemented in `filtration/filter`). It stores values for each data field of `Chant` and `Source` that have to be included in or excluded from the resulting sub-corpus.
 
-Filtration is supposed to be called on `Corpus` with `apply_filter(Filter)` method, internally method `apply(chants, sources)` of the passed `Filter` is called. This methods iterates over passed `Chants` and `Sources` and keeps those meeting the filtration criteria (include and exclude values definitions).
+Filtration is supposed to be called on `Corpus` with `apply_filter(Filter)` method. Internally method `apply(chants, sources)` of the passed `Filter` is called. This methods iterates over passed `Chants` and `Sources` and keeps those meeting the filtration criteria (include and exclude values definitions).
 
-The setup can be stored in YAML file (simple string representation) with `export_yaml` and then loaded into `Filter` with `import_yaml(path)` or `import_string(yaml_string)` methods on `Filter` .
+The setup can be stored in a YAML file (simple string representation) with `export_yaml` and then loaded into `Filter` with `import_yaml(path)` or `import_string(yaml_string)` methods on `Filter` .
 
 
 
 ### History of operations
 
-To support replicability we add sort of logging for selected operations so order of applied methods can be stored for later. For that there is `HistoryEntry` class, objects of whom are stored in a list that is a attribute of the `Corpus` class.
+To support replicability we add sort of logging for selected operations so order of applied methods can be stored for later. For that there is `HistoryEntry` class, objects of whom are stored in a list that is an attribute of the `Corpus` class.
 
-The process is secured using a decorator `@log_operation`, that has its implementation in `history/utils.py`.
+The process is secured using a decorator `@log_operation`, which is implemented in `history/utils.py`.
 
 Methods that are saved into `self.operations_history` of `Corpus`:
 - `drop_duplicate_chants()`
@@ -386,5 +387,5 @@ Methods that are saved into `self.operations_history` of `Corpus`:
 - `drop_incomplete_chants()`
 - and also if `Corpus.create_missing_sources` is `True`, then that is noted to the history in `Corpus` initialization
 
-Whole history can be represented as one human-readable string via calling `get_operations_history_string()` method on `Corpus`. Besides the operations history it also returns paths to csv files used for intialization of the `Corpus` to emphasize the replicability.
+The whole history can be represented as one human-readable string by calling the `get_operations_history_string()` method on `Corpus`. In addition to the operations history, the method also returns paths to CSV files used for initializing the `Corpus` to emphasize replicability.
 

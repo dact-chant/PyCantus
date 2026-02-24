@@ -17,6 +17,10 @@ There are two further important classes in the data model: `Melody`, and `Corpus
 * A `Melody` contains the chant's melody at various levels of representation.
 * A `Corpus` contains a dataset composed of sources and chants (that may have melodies). Filtering is done on `Corpus` objects.
 
+Here we have full UML schema of the data model:  
+
+![Full UML PyCantus data model schema.](tutorials/img/data_model_pycantus_full_uml.png).
+
 ## User documentation
 
 We realize that two types of users come together at a library of this type – a group of programmers who are getting into Gregorian chant, and then (hopefully) a group of chant experts who are getting into its computer processing. Therefore, be warned that, quite inevitably, when examining the user documentation, each group will encounter things that are obvious to them, but that is fine, as these parts are there precisely for "the others."

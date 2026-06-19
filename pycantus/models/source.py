@@ -4,13 +4,13 @@ This module contains Source class, which represents a single source entry from s
 It provides methods for creating, modifying, and exporting source data in a standardized format.
 """
 
-__version__ = "1.0.0"
+__version__ = "1.2.0"
 __author__ = "Anna Dvorakova"
 
 
 MANDATORY_SOURCES_FIELDS = {'title', 'srclink', 'siglum'}
-OPTIONAL_SOURCES_FIELDS = {'century', 'provenance', 'numeric_century', 'cursus'}
-EXPORT_SOURCES_FIELDS = ['title', 'siglum','century', 'provenance', 'srclink', 'numeric_century', 'cursus']
+OPTIONAL_SOURCES_FIELDS = {'century', 'provenance', 'numeric_century', 'cursus', 'order', 'not_before', 'not_after'}
+EXPORT_SOURCES_FIELDS = ['title', 'siglum', 'century', 'not_before', 'not_after', 'provenance', 'srclink', 'numeric_century', 'cursus', 'order']
 NON_EXPORT_SOURCES_FIELDS = ['locked']
 
 
@@ -26,6 +26,9 @@ class Source():
         century (str): Century of source origin.
         provenance (str): Name of the place of source origin.
         cursus (str): Secular (Cathedral, Roman) or Monastic cursus of the source. 
+        order (str): Monastic order of the source (e.g., "Benedictine", "Cistercian", "Franciscan").
+        not_before (int): Earliest possible date of source origin (e.g., "1200").
+        not_after (int): Latest possible date of source origin (e.g., "1250").
 
         locked (bool): Indicates whether the object is locked for editing. If True, no attributes can be modified. (functional attribute)
     """
@@ -37,7 +40,10 @@ class Source():
                  numeric_century=None,
                  century=None,
                  provenance=None,
-                 cursus=None):
+                 cursus=None,
+                 order=None,
+                 not_before=None,
+                 not_after=None):
         """
         Initialize the Source. 
         Args corresponds to class non-functional attributes.
@@ -50,6 +56,9 @@ class Source():
         self.century = century
         self.provenance = provenance
         self.cursus = cursus
+        self.order = order
+        self.not_before = not_before
+        self.not_after = not_after
     
     # setter
     def __setattr__(self, name, value):

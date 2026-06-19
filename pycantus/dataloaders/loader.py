@@ -14,7 +14,7 @@ from pycantus.models.source import Source, MANDATORY_SOURCES_FIELDS, OPTIONAL_SO
 import pycantus.dataset_files as dataset_files
 
 
-__version__ = "1.0.0"
+__version__ = "1.2.0"
 __author__ = "Anna Dvorakova"
 
 
@@ -61,6 +61,40 @@ def get_numerical_century(century : str) -> int:
             print('PROBLEM:', century)
     except: # probably nan coming
         return None
+    
+def get_numerical_century_plus(century : str) -> tuple[int, int, int]:
+    """
+    Extracts the numerical century from a string representation of a century.
+    Return also not_before and not_after values if asked for.
+    """
+    try:
+        # Go for years first
+        four_digits_pattern = r'(?<!\d)\d{4}(?!\d)'
+        four_digits_match = re.findall(four_digits_pattern, century)
+        if four_digits_match is not None:
+            if len(four_digits_match) == 1:
+                return int(four_digits_match[0][0:2])+1, four_digits_match[0], four_digits_match[0]
+            elif len(four_digits_match) > 1: 
+                # take first founded number anyway
+                return int(four_digits_match[0][0:2])+1, four_digits_match[0], four_digits_match[1]
+        # Ideally catches cases like "12th century" or "08th century"
+        two_digits_pattern = r'(?<!\d)\d{2}(?!\d)'
+        two_digits_match = re.findall(two_digits_pattern, century)
+        if len(two_digits_match) == 1:
+            return int(two_digits_match[0]), int(str(int(two_digits_match[0]) -1) + '00'), int(str(int(two_digits_match[0])) + '99')
+        elif len(two_digits_match) > 1: 
+            # take first anyway
+            return int(two_digits_match[0]), int(str(int(two_digits_match[0]) -1) + '00'), int(str(int(two_digits_match[1])) + '99')
+        # For the case of single digit centuries like "9th century"
+        one_digit_pattern = r'(?<!\d)\d{1}(?!\d)'
+        one_digit_match = re.findall(one_digit_pattern, century)
+        if len(one_digit_match) == 1:
+            return int(one_digit_match[0]), int(str(int(one_digit_match[0]) -1) + '00'), int(str(int(one_digit_match[0])) + '99')
+    
+        # If we reach here, we did not find a century - REPORT
+        print('PROBLEM:', century)
+    except: # probably nan coming
+        return '', 0, 0
     
 
 class CsvLoader():
@@ -255,6 +289,20 @@ class CsvLoader():
                         optional_params['numeric_century'] = get_numerical_century(row['century'])
                     else:
                         optional_params['numeric_century'] = None
+                # Handle not_before and not_after if needed
+                if 'not_before' not in row.index or pd.isna(row['not_before']):
+                    if 'century' in row.index and pd.notna(row['century']):
+                        numeric_century, not_before, not_after = get_numerical_century_plus(row['century'])
+                        optional_params['not_before'] = not_before
+                    else:
+                        optional_params['not_before'] = None
+                if 'not_after' not in row.index or pd.isna(row['not_after']):
+                    if 'century' in row.index and pd.notna(row['century']):
+                        numeric_century, not_before, not_after = get_numerical_century_plus(row['century'])
+                        optional_params['not_after'] = not_after
+                    else:
+                        optional_params['not_after'] = None
+            
                 # Create Chant object and add to list
                 source = Source(**mandatory_params, **optional_params)
                 sources.append(source)

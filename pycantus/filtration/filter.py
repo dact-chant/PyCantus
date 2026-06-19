@@ -10,7 +10,7 @@ from collections import defaultdict
 from pycantus.models.source import EXPORT_SOURCES_FIELDS
 from pycantus.models.chant import EXPORT_CHANTS_FIELDS
 
-__version__ = "1.0.0"
+__version__ = "1.2.0"
 __author__ = "Anna Dvorakova"
 
 
@@ -103,8 +103,37 @@ class Filter:
         filtered_sources= []
         discarded_srclinks = set() # keep track of srclinks for excluded sources
         source_filter_fields = set(EXPORT_SOURCES_FIELDS).intersection(filter_fields)
+        # Special handling for not_before and not_after fields: if they are present in the filter,
+        # we need to check them separately as they are technically interval not particular value filters
+        # e.g. include(not_before, 1250) -> return only sources with not_before >= 1250
+        # e.g. include(not_after, 1250) -> return only sources with not_after <= 1250
+        # e.g. exclude(not_before, 1250) -> return only sources with not_before < 1250
+        # e.g. exclude(not_after, 1250) -> return only sources with not_after > 1250
+        # Unknown or None values for not_before and not_after are always excluded from the results.
+        if 'not_before' in source_filter_fields:
+            source_filter_fields.remove('not_before')
+            include_values = self.filters_include.get('not_before', [])
+            exclude_values = self.filters_exclude.get('not_before', [])
+            for source in sources:
+                if source.not_before is None or type(source.not_before) == str:
+                    discarded_srclinks.add(source.srclink)
+                elif include_values and getattr(source, 'not_before', None) is not None and getattr(source, 'not_before') < min(include_values):
+                    discarded_srclinks.add(source.srclink)
+                elif exclude_values and getattr(source, 'not_before', None) is not None and getattr(source, 'not_before') >= min(exclude_values):
+                    discarded_srclinks.add(source.srclink)
+        if 'not_after' in source_filter_fields:
+            source_filter_fields.remove('not_after')
+            include_values = self.filters_include.get('not_after', [])
+            exclude_values = self.filters_exclude.get('not_after', [])
+            for source in sources:
+                if source.not_after is None or type(source.not_after) == str:
+                    discarded_srclinks.add(source.srclink)
+                elif include_values and getattr(source, 'not_after', None) is not None and getattr(source, 'not_after') > max(include_values):
+                    discarded_srclinks.add(source.srclink)
+                elif exclude_values and getattr(source, 'not_after', None) is not None and getattr(source, 'not_after') <= max(exclude_values):
+                    discarded_srclinks.add(source.srclink)
+            
         if source_filter_fields:
-            # Iterate through all sources and check if they pass include/exclude rules
             for source in sources:
                 # Pass if either no include filter defined (first two parts of expression) OR value is in include list
                 include_pass = all(
@@ -124,8 +153,7 @@ class Filter:
                 else:
                     # Otherwise, mark its srclink to filter out chants from that source
                     discarded_srclinks.add(source.srclink)
-
-            sources = filtered_sources    
+        sources = [source for source in sources if source.srclink not in discarded_srclinks] #filtered_sources    
             
         # Chants
         filtered_chants = []

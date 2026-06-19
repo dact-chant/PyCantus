@@ -19,7 +19,7 @@ There are two further important classes in the data model: `Melody`, and `Corpus
 
 Here we have full UML schema of the data model:  
 
-![Full UML PyCantus data model schema.](tutorials/img/data_model_pycantus_full_uml.png).
+![Full UML PyCantus data model schema.](docs/source/_static/img/data_model_pycantus_full_uml.png).
 
 ## User documentation
 

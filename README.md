@@ -3,7 +3,7 @@
   
 The [CantusCorpus v1.0](https://github.com/DvorakovaA/CantusCorpus) dataset, containing data from the [Cantus Index](https://cantusindex.org/), can be used with the PyCantus library easily.
 
-Finally, Django template of web API providing easier creation of YAML filtration setups called [Filter for PyCantus](https://github.com/DvorakovaA/filterforpycantus) was implemented  while also being deployed at [https://filterforpycantus.owx.cz](https://filterforpycantus.owx.cz).
+Finally, Django template of web API providing easier creation of YAML filtration setups called [Filter for PyCantus](https://github.com/DvorakovaA/filterforpycantus) was implemented, while also being deployed at [https://dvorakovaa.github.io/filterforpycantus.github.io/](https://dvorakovaa.github.io/filterforpycantus.github.io/).
 
 ## Data model
 
